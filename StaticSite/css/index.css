@@ -1,4 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@font-face {
+  font-family: Xenogears;
+  src: url("/StaticSite/fonts/Xenogears.woff") format("woff");
+}
+
 html {
   font-family: 'Roboto', Arial, Helvetica, sans-serif;
   font-size: 0.9em;
@@ -40,6 +45,11 @@ header {
 
 header #title {
   font-size: 1.5em;
+  font-family: Xenogears;
+}
+
+header #title a {
+  color: #ffffff;
 }
 
 header #menu-options {
@@ -81,10 +91,11 @@ footer .footer-section {
 .nav-button {
   width: 100px;
   margin: 0 30px;
+  padding: 3px;
   border-radius: 0;
   color: #ffffff;
   background-color: transparent;
-  border: 2px solid #ffffff;
+  border: 1px solid #ffffff;
 }
 
 .nav-button:hover {
@@ -124,7 +135,7 @@ header {
 }
 
 header h1 {
-  font-size: 7em;
+  font-size: 3em;
   font-weight: bold;
 }
 

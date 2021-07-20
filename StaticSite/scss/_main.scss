@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+@font-face {
+	font-family: Xenogears;
+	src: url("/StaticSite/fonts/Xenogears.woff") format("woff");
+}
 
 $main-text-color: #ffffff;
 $link-color: #f84848;
@@ -26,7 +30,6 @@ body {
 	color: $main-text-color;
 	
 }
-
 ul {
 	list-style-type: none;
 	padding: 0;
@@ -46,14 +49,21 @@ a:hover{
 	color: $hover-link-color;
 }
 
-
 header{
 	grid-area: header;
 	//background-color: yellow;
 
-	#title{
+	#title {
 		font-size: 1.5em;
+		font-family: Xenogears;
+
+		a{
+			color: $main-text-color;
+		}
+		
+	
 	}
+
 
 	#menu{
 		//background-color: rgb(194, 194, 7);
@@ -86,4 +96,6 @@ footer{
     }
   //background-color: cyan;
 }
+
+
 

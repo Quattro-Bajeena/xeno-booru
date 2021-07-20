@@ -51,7 +51,7 @@ function init(){
 
 
     const loader = new GLTFLoader( loadingManager);
-    const map_url = `/Maps/Converted/level${level}.glb`;
+    const map_url = `/StaticSite/level${level}.glb`;
     //const map_url = `https://xmvstorage.blob.core.windows.net/maps/${level}.glb`
     loader.load(map_url, function(gltf){
         //console.log(gltf);
