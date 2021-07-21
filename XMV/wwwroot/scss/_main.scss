@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+@font-face {
+	font-family: Xenogears;
+	src: url("/fonts/Xenogears.woff") format("woff");
+}
+
+$main-text-color: #ffffff;
+$link-color: #f84848;
+$hover-link-color: #ffcdcd;
+$background-color: #272626;
+$secondary-color: #aaa;
+
+
+html{
+	font-family:'Roboto', Arial, Helvetica, sans-serif;
+	font-size: 0.9em;
+	height: 100%;
+	margin: 0;
+	 
+}
+
+body {
+    background-color: $background-color;
+	display: grid;
+	
+	
+	padding: 1em 3em;
+
+	color: $main-text-color;
+	
+}
+ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+h1, h2,h3,h4, h5{
+	margin: 0;
+	
+}
+
+a{
+	text-decoration: none;
+	color: $link-color;
+}
+
+a:hover{
+	color: $hover-link-color;
+}
+
+header{
+	grid-area: header;
+	//background-color: yellow;
+
+	#title {
+		font-size: 1.5em;
+		font-family: Xenogears;
+
+		a{
+			color: $main-text-color;
+		}
+		
+	
+	}
+
+
+	#menu{
+		//background-color: rgb(194, 194, 7);
+
+		&-options{
+			//background-color: rgb(240, 240, 109);
+			display: flex;
+			justify-content: flex-start;
+			width: max-content;
+
+			li{
+				margin: 0 5px;
+			}
+	
+		}	
+	}
+
+}
+
+
+footer{
+	grid-area: footer;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+    margin: 10px;
+
+    .footer-section{
+        margin: 0 10px;
+    }
+  //background-color: cyan;
+}
+
+
+

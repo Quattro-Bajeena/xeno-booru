@@ -1,0 +1,14 @@
+﻿[
+    {
+    "outputFile": "wwwroot/css/index.css",
+    "inputFile": "wwwroot/scss/index.scss"
+    },
+    {
+        "outputFile": "wwwroot/css/map_view.css",
+        "inputFile": "wwwroot/scss/map_view.scss"
+    },
+    {
+        "outputFile": "wwwroot/css/collection_view.css",
+        "inputFile": "wwwroot/scss/collection_view.scss"
+    }
+]

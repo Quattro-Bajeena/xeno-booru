@@ -21,9 +21,11 @@ What if I were to create XenoBooru? A website aggregating every piece of in-game
 
 ## Page mockups
 *work in progress*
-Index page
-![Index](/Info/Screenshot_index.jpg)
-Posts
-![Posts](/Info/Screenshot_posts.jpg)
-Map viewer
-![Map](/Info/Screenshot_map.jpg)
+### Index page
+![Index](Info/Screenshot_index.jpg)
+
+### Posts
+![Posts](Info/Screenshot_posts.jpg)
+
+### Map viewer
+![Map](Info/Screenshot_map.jpg)

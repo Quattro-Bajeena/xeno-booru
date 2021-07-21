@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] | XMV</title>
+	@RenderSection("Stylesheets", required: false)
+
+</head>
+<body>
+	<header>
+		<div id="title">
+			<a href=""><h1>Xenogears Map Viewer</h1></a>
+		</div>
+
+		<nav id="menu">
+			<ul id="menu-options">
+				<li><a href="">Maps</a></li>
+				<li><a href="">Tags</a></li>
+				<li><a href="">Comments</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<div class="sidebar">
+		@RenderSection("Sidebar", required: false)
+	</div>
+
+	<main id="content">
+		@RenderBody()
+	</main>
+	
+
+	<footer>
+		<div class="footer-section">
+			Made by:&nbsp;Paraon, 2021
+		</div>
+		<div class="footer-section">
+			Find me on:&nbsp;
+			<a href="https://www.youtube.com/channel/UCINPzzjxRzGOq4Pex5r3EKg" target="_blank">YouTube</a>/
+			<a href="https://twitter.com/turtle_guy_" target="_blank">Twitter</a>/
+			<a href="https://github.com/Quattro-Bajeena" target="_blank">GitHub</a>
+		</div>
+		<div class="footer-section">
+			Thanks to:&nbsp;
+			<a href="https://github.com/Akari1982" target="_blank">Akari</a>/
+			<a href="https://twitter.com/prozacchiwawa" target="_blank">Prozacchiwa</a>
+		</div>
+
+	</footer>
+
+	@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
