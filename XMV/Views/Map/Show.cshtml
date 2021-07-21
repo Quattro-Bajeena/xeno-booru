@@ -1,0 +1,118 @@
+﻿@{
+	ViewData["Title"] = "Map!";
+	
+}
+
+@model XMV.Models.Map
+
+@section Stylesheets{
+	<link rel="stylesheet" href="~/css/map_view.css" />
+}
+
+@section Sidebar{
+	<form class="sidebar-section" id="search"><h4>Search</h4><input class="search-bar" type="text"></form>
+	<div class="sidebar-section" id="tags">
+		<h4>Tags</h4>
+		<ul>
+			<li><a href="">tag_1</a>&nbsp;<span>182</span></li>
+			<li><a href="">tag_2</a>&nbsp;<span>32</span></li>
+			<li><a href="">tag_3</a>&nbsp;<span>45</span></li>
+			<li><a href="">tag_4</a>&nbsp;<span>6</span></li>
+		</ul>
+	</div>
+	<div class="sidebar-section" id="name">
+		<h4>Name</h4>
+		<span>Citan's house</span>
+	</div>
+	<div class="sidebar-section" id="decription">
+		<h4>Description</h4>
+		<p>
+			Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem quae est esse dolor praesentium architecto ea neque voluptates, distinctio itaque. Laborum repellendus dolor, unde amet commodi consequatur iusto similique explicabo.
+		</p>
+	</div>
+	<div class="sidebar-section" id="statistics">
+		<h4>Statistics</h4>
+		<ul>
+			<li>Source: zx</li>
+			<li>Glitched: true</li>
+			<li>Rating: Safe</li>
+			<li>Likes: 1</li>
+		</ul>
+	</div>
+	<div class="sidebar-section" id="options">
+		<h4>Options</h4>
+		<ul>
+			<li><a href="">Edit</a></li>
+			<li><a href="">Add tag</a></li>
+			<li><a href="">Download</a></li>
+		</ul>
+	</div>
+}
+
+<div id="map-navigator">
+	<button class="nav-button">PREVIOUS</button>
+	<input type="text">
+	<button class="nav-button">NEXT</button>
+</div>
+
+<div id="render">
+	<div id="render-controls">
+		<ul>
+			<li>
+				<label for="fullscreen">Fullscreen&nbsp;<span>Esc</span></label>
+				<input type="checkbox" name="fullscreen" id="fullscreen-checkbox">
+			</li>
+			<li>
+				<label for="texture-filtering">Texture filtering</label>
+				<input type="checkbox" name="texture-filtering" id="texture-filtering-checkbox">
+			</li>
+			<li>
+				<label for="controls">Controls</label>
+				<select name="controls" id="controls-list">
+					<option value="orbit">Orbit</option>
+					<option value="map">Map</option>
+				</select>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<div id="comments">
+	<form id="comments-post" method="POST">
+		<textarea id="comment-area" name="comment"></textarea>
+		<button>Post</button>
+	</form>
+	<ul>
+		<li class="comment">
+			<div class="comment-author">
+				<h4>Ken</h4><span class="comment-date">18 days ago</span>
+			</div>
+			<div class="comment-content">
+				This is the culmination of just a couple of nobody freelancers kicking off CM with some fantastic animation preview. It's not like they're some of the best at their craft or anything!
+			</div>
+		</li>
+		<li class="comment">
+			<div class="comment-author">
+				<h4>KoHorizon</h4><span class="comment-date">19 days ago</span>
+			</div>
+			<div class="comment-content">
+				is it preanimated ?
+			</div>
+		</li>
+		<li class="comment">
+			<div class="comment-author">
+				<h4>Inaru</h4><span class="comment-date">3 days ago</span>
+			</div>
+			<div class="comment-content">
+				I think the start is keiichiro saito? don't wanna say "the lineless drawings are a dead giveaway" if im wrong though....
+			</div>
+		</li>
+	</ul>
+</div>
+
+@section Scripts{ 
+	<script>
+		const map_url = "@ViewData["MapUrl"]";
+	</script>
+	<script src="~/js/map_display.js" type="module"></script>
+}

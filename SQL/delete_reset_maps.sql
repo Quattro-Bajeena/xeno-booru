@@ -1,0 +1,2 @@
+DELETE FROM dbo.Maps;
+DBCC CHECKIDENT('dbo.Maps', RESEED, 0);

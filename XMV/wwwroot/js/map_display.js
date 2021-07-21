@@ -1,11 +1,11 @@
-/// <reference path='three/src/Three.js' />
+/// <reference path='../lib/three/src/Three.js' />
 // import * as THREE from "https://threejs.org/build/three.module.js";
 // import { OrbitControls } from "https://threejs.org/examples/jsm/controls/OrbitControls.js";
 // import { GLTFLoader } from "https://threejs.org/examples/jsm/loaders/GLTFLoader.js";
 
-import * as THREE from "./three/build/three.module.js";
-import { MapControls, OrbitControls } from "./three/examples/jsm/controls/OrbitControls.js";
-import { GLTFLoader } from "./three/examples/jsm/loaders/GLTFLoader.js";
+import * as THREE from "/lib/three/build/three.module.js";
+import { MapControls, OrbitControls } from "/lib/three/examples/jsm/controls/OrbitControls.js";
+import { GLTFLoader } from "/lib/three/examples/jsm/loaders/GLTFLoader.js";
 
 let level = 729;
 let camera, scene, renderer, map, controls;
@@ -16,17 +16,20 @@ const texture_filtering_checkbox = document.getElementById("texture-filtering-ch
 const fullscreen_checkbox = document.getElementById("fullscreen-checkbox");
 const controls_list = document.getElementById("controls-list");
 
-texture_filtering_checkbox.addEventListener('change', toggleTextureFiltering);
-fullscreen_checkbox.addEventListener('change', fullScreenToggle);
-document.addEventListener("keydown", fullScreenToggle);
-controls_list.addEventListener("change", changeControls);
 
+console.log(map_url);
 
 let minDistance = 1000;
 let maxDistance = 7000;
 
-init();
-render();
+if (init()) {
+    render();
+}
+else {
+    console.log("Couldn't initialize 3D viewer");
+}
+
+
 
 function init(){
 
@@ -49,10 +52,7 @@ function init(){
         scene.add(map);
     })
 
-
     const loader = new GLTFLoader( loadingManager);
-    const map_url = `/StaticSite/level${level}.glb`;
-    //const map_url = `https://xmvstorage.blob.core.windows.net/maps/${level}.glb`
     loader.load(map_url, function(gltf){
         //console.log(gltf);
         
@@ -80,12 +80,17 @@ function init(){
     controls.target.set( 0, 0, 0 );
     controls.update();
 
-    
-
+   
 
     window.addEventListener( 'resize', onWindowResize );
-    
+    texture_filtering_checkbox.addEventListener('change', toggleTextureFiltering);
+    fullscreen_checkbox.addEventListener('change', fullScreenToggle);
+    document.addEventListener("keydown", fullScreenToggle);
+    controls_list.addEventListener("change", changeControls);
+
+
     render();
+    return true;
 }
 
 
