@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace XenoBooru.Web.Models
+namespace XenoBooru.Core.DTO
 {
-	public class DbPost
+	public enum TagType { normal }
+	public class Tag
 	{
 		public int Id { get; set; }
-		[Required]
 		public string Name { get; set; }
-		public string Category { get; set; }
-		public string FileName { get; set; }
 		public string Description { get; set; }
+		public TagType Type { get; set; }
 	}
 }

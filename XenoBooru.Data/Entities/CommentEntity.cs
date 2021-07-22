@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace XenoBooru.Web.Models
+namespace XenoBooru.Data.Entities
 {
-	public class DbComment
+	public class CommentEntity
 	{
 		public int Id { get; set; }
 		[StringLength(50)]

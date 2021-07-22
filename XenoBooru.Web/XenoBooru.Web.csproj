@@ -30,4 +30,10 @@
     <None Include="compilerconfig.json" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\XenoBooru.Core\XenoBooru.Core.csproj" />
+    <ProjectReference Include="..\XenoBooru.Data\XenoBooru.Data.csproj" />
+    <ProjectReference Include="..\XenoBooru.Services\XenoBooru.Services.csproj" />
+  </ItemGroup>
+
 </Project>

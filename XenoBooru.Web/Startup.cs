@@ -9,6 +9,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using XenoBooru.Data.Repositories;
+using XenoBooru.Data.Repositories.Interfaces;
+using XenoBooru.Services;
 using XenoBooru.Web.Services;
 
 namespace XenoBooru.Web
@@ -28,10 +31,12 @@ namespace XenoBooru.Web
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddDbContext<Data.ApplicationDbContext>(options =>
-				options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+			services.AddDbContext<Data.AppDbContext>(options =>
+				options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("XenoBooru.Data"))
 			);
 
+			services.AddScoped<IPostRepository, SQLPostRepository>();
+			services.AddScoped<PostService>();
 
 			services.AddCors(options =>
 			{

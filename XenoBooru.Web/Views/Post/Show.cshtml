@@ -3,7 +3,7 @@
 	
 }
 
-@model XenoBooru.Web.Models.Map
+@model XenoBooru.Core.DTO.Post
 
 @section Stylesheets{
 	<link rel="stylesheet" href="~/css/map_view.css" />
@@ -112,7 +112,7 @@
 
 @section Scripts{ 
 	<script>
-		const map_url = "@ViewData["MapUrl"]";
+		const map_url = "@ViewData["PostUrl"]";
 	</script>
 	<script src="~/js/map_display.js" type="module"></script>
 }

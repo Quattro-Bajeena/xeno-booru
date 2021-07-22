@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XenoBooru.Core", "XenoBooru
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XenoBooru.Web", "XenoBooru.Web\XenoBooru.Web.csproj", "{0B8D017F-2BD6-43F3-A608-E65BADBC1AB0}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XenoBooru.Data", "XenoBooru.Data\XenoBooru.Data.csproj", "{BEDB41B6-D9DD-4E47-8C53-DE1B54A32380}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XenoBooru.Services", "XenoBooru.Services\XenoBooru.Services.csproj", "{0A5B072F-585B-473B-9830-621259958F7D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{0B8D017F-2BD6-43F3-A608-E65BADBC1AB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B8D017F-2BD6-43F3-A608-E65BADBC1AB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B8D017F-2BD6-43F3-A608-E65BADBC1AB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEDB41B6-D9DD-4E47-8C53-DE1B54A32380}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEDB41B6-D9DD-4E47-8C53-DE1B54A32380}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEDB41B6-D9DD-4E47-8C53-DE1B54A32380}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEDB41B6-D9DD-4E47-8C53-DE1B54A32380}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A5B072F-585B-473B-9830-621259958F7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A5B072F-585B-473B-9830-621259958F7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A5B072F-585B-473B-9830-621259958F7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A5B072F-585B-473B-9830-621259958F7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
