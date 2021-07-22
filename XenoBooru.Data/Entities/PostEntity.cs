@@ -10,11 +10,12 @@ namespace XenoBooru.Data.Entities
 	{
 		public int Id { get; set; }
 		public string Type { get; set; }
-		public int? TypeId { get; set; }
 		public string FileName { get; set; }
 		public string Name { get; set; }
 		public string Description { get; set; }
 		public string Credits { get; set; }
 		public int Likes { get; set; }
+
+		//public virtual ICollection<TagEntity> Tags { get; set; }
 	}
 }

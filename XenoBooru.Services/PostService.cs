@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,15 +12,20 @@ namespace XenoBooru.Services
 	public class PostService
 	{
 		private readonly IPostRepository _repository;
-		public PostService(IPostRepository repository)
+		private readonly IMapper _mapper;
+
+		public PostService(IPostRepository repository, IMapper mapper)
 		{
 			_repository = repository;
+			_mapper = mapper;
 		}
 
 		public Post GetPost(int id)
 		{
 			var dbPost = _repository.GetPost(id);
-			return new Post{ Id = 1, FileName = "level1.glb" };
+			var post = _mapper.Map<Post>(dbPost);
+			return post;
+			//return new Post{ Id = 1, FileName = "level1.glb" };
 		}
 
 		public IEnumerable<Post> GetAllPosts()

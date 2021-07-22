@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -38,23 +39,17 @@ namespace XenoBooru.Web
 			services.AddScoped<IPostRepository, SQLPostRepository>();
 			services.AddScoped<PostService>();
 
-			services.AddCors(options =>
-			{
-				options.AddDefaultPolicy(
-									builder =>
-									{
-										//builder.WithOrigins("https://xmvstorage.blob.core.windows.net");
-										builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-									});
-									
-			});
-
-			// services.AddResponseCaching();
-			services.AddControllersWithViews().AddRazorRuntimeCompilation();
-
 			
 			services.Configure<AppConfig>(Configuration.GetSection("AppConfig"));
 			services.AddOptions();
+
+			//var configuration = new MapperConfiguration(cfg =>
+			//	cfg.AddProfile<MappingProfile>()
+			//);
+
+			services.AddAutoMapper(typeof(PostService));
+
+			services.AddControllersWithViews().AddRazorRuntimeCompilation();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,7 +69,6 @@ namespace XenoBooru.Web
 			app.UseStaticFiles();
 
 			app.UseRouting();
-			app.UseCors();
 
 			// app.UseResponseCaching(); after cors
 

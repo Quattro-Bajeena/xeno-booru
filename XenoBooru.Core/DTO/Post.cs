@@ -15,14 +15,15 @@ namespace XenoBooru.Core.DTO
 	public class Post
 	{
 		public int Id { get; set; }
-		public PostType Type { get; set; }
-		public int? TypeId { get; set; }
-		public virtual string FileName { get; set; }
+		public string Type { get; set; }
+		public string FileName { get; set; }
 		public string Name { get; set; }
 		public string Description { get; set; }
 		public string Source { get; set; }
+		public string Credits { get; set; }
 		public int Likes { get; set; }
+		public  ICollection<Tag> Tags { get; set; }
 
-		
+
 	}
 }
