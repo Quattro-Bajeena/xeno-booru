@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
+    <AssemblyName>XenoBooru.Web</AssemblyName>
+    <RootNamespace>XenoBooru.Web</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

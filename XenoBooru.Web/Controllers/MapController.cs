@@ -5,11 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using XMV.Data;
-using XMV.Models;
-using XMV.Services;
+using XenoBooru.Web.Data;
+using XenoBooru.Web.Models;
+using XenoBooru.Web.Services;
 
-namespace XMV.Controllers
+namespace XenoBooru.Web.Controllers
 {
 	public class MapController : Controller
 	{
@@ -41,7 +41,6 @@ namespace XMV.Controllers
 			Map map = _db.Maps.Find(id);
 			ViewData["MapUrl"] = $"{_config.Value.MapStorageUrl}/level{id}.glb";
 
-			//Response.Headers.Add("Access-Control-Allow-Origin", "*");
 			return View(map);
 			
 		}

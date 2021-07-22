@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using XMV.Models;
+using XenoBooru.Web.Models;
 
-namespace XMV.Controllers
+namespace XenoBooru.Web.Controllers
 {
 	public class HomeController : Controller
 	{

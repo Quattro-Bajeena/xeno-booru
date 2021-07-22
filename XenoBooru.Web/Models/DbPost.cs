@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace XMV.Models
+namespace XenoBooru.Web.Models
 {
-	public class Post
+	public class DbPost
 	{
 		public int Id { get; set; }
 		[Required]

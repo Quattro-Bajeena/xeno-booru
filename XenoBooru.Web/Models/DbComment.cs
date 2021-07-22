@@ -4,13 +4,14 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace XMV.Models
+namespace XenoBooru.Web.Models
 {
-	public class Map
+	public class DbComment
 	{
-		
 		public int Id { get; set; }
-		public string Name { get; set; }
-		public string Description { get; set; }
+		[StringLength(50)]
+		public string Author { get; set; }
+		[StringLength(10000)]
+		public string Content { get; set; }
 	}
 }

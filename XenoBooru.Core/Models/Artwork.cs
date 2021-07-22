@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace XenoBooru.Core.Models
 {
-
-
-	public class Level : Post
+	class Artwork
 	{
-		public int LevelId { get; set; }
-		public override string FileName => $"Level{LevelId}.glb";
-
+		public string Artist { get; set; }
 	}
 }

@@ -1,6 +1,6 @@
 using System;
 
-namespace XMV.Models
+namespace XenoBooru.Web.Models
 {
 	public class ErrorViewModel
 	{

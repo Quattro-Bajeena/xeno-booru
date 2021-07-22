@@ -3,8 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using XMV.Models;
-namespace XMV.Data
+using XenoBooru.Web.Models;
+namespace XenoBooru.Web.Data
 {
 	public class ApplicationDbContext : DbContext
 	{
@@ -14,8 +14,8 @@ namespace XMV.Data
 
 		}
 
-		public DbSet<Map> Maps { get; set; }
-		public DbSet<Comment> Comments { get; set; }
-		public DbSet<Tag> Tags { get; set; }
+		public DbSet<DbPost> Maps { get; set; }
+		public DbSet<DbComment> Comments { get; set; }
+		public DbSet<DbTag> Tags { get; set; }
 	}
 }

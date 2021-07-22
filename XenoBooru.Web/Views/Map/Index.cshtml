@@ -1,10 +1,14 @@
-﻿@{
+﻿@model IEnumerable<XenoBooru.Web.Models.Map>
+
+@{
 	ViewData["Title"] = "Maps";
 }
 
 @section Stylesheets{
 	<link rel="stylesheet" href="~/css/collection_view.css" />
 }
+
+
 
 @section Sidebar{
 	<form class="sidebar-section" id="search"><h4>Search</h4><input class="search-bar" type="text"></form>
@@ -28,22 +32,12 @@
 }
 
 <ul id="posts">
-	<li class="post-preview"></li>
-	<li class="post-preview"></li>
-	<li class="post-preview"></li>
-	<li class="post-preview"></li>
-	<li class="post-preview"></li>
-	<li class="post-preview"></li>
-	<li class="post-preview"></li>
-	<li class="post-preview"></li>
-	<li class="post-preview"></li>
-	<li class="post-preview"></li>
-	<li class="post-preview"></li>
-	<li class="post-preview"></li>
-	<li class="post-preview"></li>
-	<li class="post-preview"></li>
-	<li class="post-preview"></li>
-
+	@foreach (Map post in Model)
+	{
+		<li class="post-preview">
+			<a asp-controller="Map" asp-action="Show" asp-route-id="@post.Id">POST id is @post.Id</a>
+		</li>
+	}
 </ul>
 <div id="paginator">
 	<a class="nav-button">PREVIOUS</a>

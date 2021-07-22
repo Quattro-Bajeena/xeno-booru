@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace XMV.Models
+namespace XenoBooru.Web.Models
 {
-	public class Tag
+	public class DbTag
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }
