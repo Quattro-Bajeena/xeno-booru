@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using XenoBooru.Core.DTO;
+using XenoBooru.Core.Models;
 using XenoBooru.Data.Repositories.Interfaces;
 
 namespace XenoBooru.Services
@@ -20,18 +20,19 @@ namespace XenoBooru.Services
 			_mapper = mapper;
 		}
 
-		public Post GetPost(int id)
+		public Post Get(int id)
 		{
-			var dbPost = _repository.GetPost(id);
+			var dbPost = _repository.Get(id);
 			var post = _mapper.Map<Post>(dbPost);
 			return post;
 			//return new Post{ Id = 1, FileName = "level1.glb" };
 		}
 
-		public IEnumerable<Post> GetAllPosts()
+		public IEnumerable<Post> GetAll()
 		{
-			var dbPosts = _repository.GetAllPosts();
-			return new List<Post> { new Post { Id = 1 }, new Post { Id = 2 } };
+			var dbPosts = _repository.GetAll();
+			var posts = _mapper.Map<IEnumerable<Post>>(dbPosts);
+			return posts;
 		}
 
 

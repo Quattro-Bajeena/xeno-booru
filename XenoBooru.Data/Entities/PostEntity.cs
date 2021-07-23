@@ -9,7 +9,9 @@ namespace XenoBooru.Data.Entities
 	public class PostEntity
 	{
 		public int Id { get; set; }
+		[Required]
 		public string Type { get; set; }
+		[Required]
 		public string FileName { get; set; }
 		public string Name { get; set; }
 		public string Description { get; set; }
@@ -17,5 +19,6 @@ namespace XenoBooru.Data.Entities
 		public int Likes { get; set; }
 
 		//public virtual ICollection<TagEntity> Tags { get; set; }
+		public ICollection<CommentEntity> Comments { get; set; } 
 	}
 }

@@ -7,13 +7,12 @@ using XenoBooru.Data.Entities;
 
 namespace XenoBooru.Data.Repositories.Interfaces
 {
-	public interface IPostRepository
+	public interface ICommentRepository
 	{
-		PostEntity Get(int id);
-		IEnumerable<PostEntity> GetAll();
-		public void Add(PostEntity post);
+		public IEnumerable<CommentEntity> GetAll();
+		public IEnumerable<CommentEntity> GetFromPost(int postId);
+		public void Add(CommentEntity comment);
 		public void Remove(int id);
-		public void Update(PostEntity post);
 
 	}
 }

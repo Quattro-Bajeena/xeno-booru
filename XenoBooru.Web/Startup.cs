@@ -36,16 +36,14 @@ namespace XenoBooru.Web
 				options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("XenoBooru.Data"))
 			);
 
-			services.AddScoped<IPostRepository, SQLPostRepository>();
-			services.AddScoped<PostService>();
-
-			
 			services.Configure<AppConfig>(Configuration.GetSection("AppConfig"));
 			services.AddOptions();
 
-			//var configuration = new MapperConfiguration(cfg =>
-			//	cfg.AddProfile<MappingProfile>()
-			//);
+			services.AddScoped<IPostRepository, SQLPostRepository>();
+			services.AddScoped<ICommentRepository, SQLCommentRepository>();
+
+			services.AddScoped<PostService>();
+			services.AddScoped<CommentService>();
 
 			services.AddAutoMapper(typeof(PostService));
 

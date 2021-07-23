@@ -10,12 +10,12 @@
 <body>
 	<header>
 		<div id="title">
-			<a href=""><h1>Xenogears Map Viewer</h1></a>
+			<a asp-controller="Home" asp-action="Index"><h1>Xenogears Map Viewer</h1></a>
 		</div>
 
 		<nav id="menu">
 			<ul id="menu-options">
-				<li><a asp-controller="Post">Posts</a></li>
+				<li><a asp-controller="Post" asp-action="Index">Posts</a></li>
 				<li><a href="">Tags</a></li>
 				<li><a href="">Comments</a></li>
 			</ul>
@@ -29,7 +29,7 @@
 	<main id="content">
 		@RenderBody()
 	</main>
-	
+
 
 	<footer>
 		<div class="footer-section">
@@ -50,5 +50,7 @@
 	</footer>
 
 	@await RenderSectionAsync("Scripts", required: false)
+	@Html.PageScripts()
+
 </body>
 </html>

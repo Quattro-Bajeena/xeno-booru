@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using XenoBooru.Core.DTO;
+using XenoBooru.Core.Models;
 using XenoBooru.Data.Entities;
 
 namespace XenoBooru.Services
@@ -13,8 +13,9 @@ namespace XenoBooru.Services
 	{
 		public MappingProfile()
 		{
-			CreateMap<PostEntity, Post>();
-			CreateMap<Post, PostEntity>();
+			CreateMap<PostEntity, Post>().ReverseMap();
+			CreateMap<TagEntity, Tag>().ReverseMap();
+			CreateMap<CommentEntity, Comment>().ReverseMap();
 		}
 	}
 }

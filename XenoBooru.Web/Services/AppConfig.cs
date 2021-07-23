@@ -7,6 +7,6 @@ namespace XenoBooru.Web.Services
 {
 	public class AppConfig
 	{
-		public string MapStorageUrl { get; set; }
+		public string StorageUrl { get; set; }
 	}
 }

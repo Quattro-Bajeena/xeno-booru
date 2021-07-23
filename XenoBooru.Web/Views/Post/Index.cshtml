@@ -1,4 +1,4 @@
-﻿@model IEnumerable<XenoBooru.Core.DTO.Post>
+﻿@model IEnumerable<XenoBooru.Core.Models.Post>
 
 @{
 	ViewData["Title"] = "Maps";
@@ -7,7 +7,6 @@
 @section Stylesheets{
 	<link rel="stylesheet" href="~/css/collection_view.css" />
 }
-
 
 
 @section Sidebar{
@@ -30,6 +29,8 @@
 		</ul>
 	</div>
 }
+
+
 
 <ul id="posts">
 	@foreach (Post post in Model)

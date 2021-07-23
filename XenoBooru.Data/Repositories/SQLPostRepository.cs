@@ -17,14 +17,32 @@ namespace XenoBooru.Data.Repositories
 
 		
 
-		public PostEntity GetPost(int id)
+		public PostEntity Get(int id)
 		{
 			return _context.Posts.Find(id);
 		}
 
-		public IEnumerable<PostEntity> GetAllPosts()
+		public IEnumerable<PostEntity> GetAll()
 		{
 			return _context.Posts;
+		}
+
+		public void Add(PostEntity post)
+		{
+			_context.Posts.Add(post);
+			_context.SaveChanges();
+		}
+
+		public void Remove(int id)
+		{
+			var post = _context.Posts.Find(id);
+			_context.Posts.Remove(post);
+		}
+
+		public void Update(PostEntity post)
+		{
+			_context.Posts.Update(post);
+			_context.SaveChanges();
 		}
 	}
 }

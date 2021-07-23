@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XenoBooru.Core.DTO
+namespace XenoBooru.Core.Models
 {
-	public enum TagType { normal }
+	public enum TagType { Normal, Location, PostType }
 	public class Tag
 	{
 		public int Id { get; set; }

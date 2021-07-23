@@ -1,9 +1,10 @@
-﻿@{
+﻿@model XenoBooru.Web.ViewModels.PostViewModel
+
+@{
 	ViewData["Title"] = "Map!";
-	
 }
 
-@model XenoBooru.Core.DTO.Post
+
 
 @section Stylesheets{
 	<link rel="stylesheet" href="~/css/map_view.css" />
@@ -22,19 +23,20 @@
 	</div>
 	<div class="sidebar-section" id="name">
 		<h4>Name</h4>
-		<span>@Model.Name</span>
+		<span>@Model.Post.Name</span>
 	</div>
 	<div class="sidebar-section" id="decription">
 		<h4>Description</h4>
 		<p>
-			@Model.Description;
+			@Model.Post.Description;
 		</p>
 	</div>
 	<div class="sidebar-section" id="statistics">
 		<h4>Statistics</h4>
 		<ul>
-			<li>Credits: @Model.Credits</li>
-			<li>Likes: @Model.Likes</li>
+			<li>Type: @Model.Post.Type</li>
+			<li>Credits: @Model.Post.Credits</li>
+			<li>Likes: @Model.Post.Likes</li>
 			<li>Glitched: true</li>
 			<li>Rating: Safe</li>
 		</ul>
@@ -55,27 +57,9 @@
 	<button class="nav-button">NEXT</button>
 </div>
 
-<div id="render">
-	<div id="render-controls">
-		<ul>
-			<li>
-				<label for="fullscreen">Fullscreen&nbsp;<span>Esc</span></label>
-				<input type="checkbox" name="fullscreen" id="fullscreen-checkbox">
-			</li>
-			<li>
-				<label for="texture-filtering">Texture filtering</label>
-				<input type="checkbox" name="texture-filtering" id="texture-filtering-checkbox">
-			</li>
-			<li>
-				<label for="controls">Controls</label>
-				<select name="controls" id="controls-list">
-					<option value="orbit">Orbit</option>
-					<option value="map">Map</option>
-				</select>
-			</li>
-		</ul>
-	</div>
-</div>
+
+@await Html.PartialAsync("_LevelPartial.cshtml", Model.DataUrl)
+
 
 <div id="comments">
 	<form id="comments-post" method="POST">
@@ -83,36 +67,21 @@
 		<button>Post</button>
 	</form>
 	<ul>
-		<li class="comment">
-			<div class="comment-author">
-				<h4>Ken</h4><span class="comment-date">18 days ago</span>
-			</div>
-			<div class="comment-content">
-				This is the culmination of just a couple of nobody freelancers kicking off CM with some fantastic animation preview. It's not like they're some of the best at their craft or anything!
-			</div>
-		</li>
-		<li class="comment">
-			<div class="comment-author">
-				<h4>KoHorizon</h4><span class="comment-date">19 days ago</span>
-			</div>
-			<div class="comment-content">
-				is it preanimated ?
-			</div>
-		</li>
-		<li class="comment">
-			<div class="comment-author">
-				<h4>Inaru</h4><span class="comment-date">3 days ago</span>
-			</div>
-			<div class="comment-content">
-				I think the start is keiichiro saito? don't wanna say "the lineless drawings are a dead giveaway" if im wrong though....
-			</div>
-		</li>
+		@foreach (var comment in Model.Comments)
+		{
+			<li class="comment">
+				<div class="comment-author">
+					<h4>@comment.Author</h4><span class="comment-date">@comment.Date</span>
+				</div>
+				<div class="comment-content">
+					@comment.Content
+				</div>
+			</li>
+		}
 	</ul>
 </div>
 
-@section Scripts{ 
-	<script>
-		const map_url = "@ViewData["PostUrl"]";
-	</script>
-	<script src="~/js/map_display.js" type="module"></script>
+
+@section Scripts{
+
 }

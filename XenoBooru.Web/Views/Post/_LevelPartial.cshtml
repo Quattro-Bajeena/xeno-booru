@@ -1,0 +1,41 @@
+﻿@{
+
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model string
+
+<div id="render">
+	<div id="render-controls">
+		<ul>
+			<li>
+				<label for="fullscreen">Fullscreen&nbsp;<span>Esc</span></label>
+				<input type="checkbox" name="fullscreen" id="fullscreen-checkbox">
+			</li>
+			<li>
+				<label for="texture-filtering">Texture filtering</label>
+				<input type="checkbox" name="texture-filtering" id="texture-filtering-checkbox">
+			</li>
+			<li>
+				<label for="controls">Controls</label>
+				<select name="controls" id="controls-list">
+					<option value="orbit">Orbit</option>
+					<option value="map">Map</option>
+				</select>
+			</li>
+		</ul>
+	</div>
+</div>
+
+
+
+
+@using (Html.BeginScripts())
+{
+	<script>
+		const map_url = "@Model";
+	</script>
+	<script src="~/js/map_display.js" type="module"></script>
+}
+
+
+

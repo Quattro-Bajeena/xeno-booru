@@ -1,6 +1,6 @@
 using System;
 
-namespace XenoBooru.Web.Models
+namespace XenoBooru.Web.ViewModels
 {
 	public class ErrorViewModel
 	{
