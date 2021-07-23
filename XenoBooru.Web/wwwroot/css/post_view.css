@@ -84,7 +84,10 @@ body {
   #content #comments {
     margin-bottom: 50px; }
     #content #comments-post {
-      display: flex; }
+      display: flex;
+      flex-direction: column; }
+      #content #comments-post input {
+        width: 150px; }
       #content #comments-post textarea {
         width: 40%;
         height: 50px;
@@ -92,8 +95,10 @@ body {
         font-size: 1.2em;
         margin: 0; }
       #content #comments-post button {
-        width: 100px;
-        height: 50px; }
+        font-size: 1.1em;
+        font-weight: bold;
+        width: 80px;
+        height: 30px; }
     #content #comments .comment {
       display: flex;
       flex-flow: row;

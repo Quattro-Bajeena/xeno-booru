@@ -1,27 +1,24 @@
-@import 'main';
-@import 'content_page';
-@import 'buttons';
+﻿
 
-
-#map-navigator{
+#map-navigator {
 	display: flex;
 	justify-content: center;
 	padding: 10px;
 
-	input{
+	input {
 		width: 40px;
 		text-align: center;
 	}
 }
 
-#render{
+#render {
 	//background-color: green;
 	height: 600px;
 	border-style: dashed;
 	margin-bottom: 50px;
 	position: relative;
 
-	&-controls{
+	&-controls {
 		position: absolute;
 		right: 10px;
 		top: 10px;
@@ -29,27 +26,24 @@
 		padding: 10px 15px;
 		color: $background-color;
 		background-color: $main-text-color;
-
 		min-width: 200px;
 
-		span{
+		span {
 			color: $secondary-color;
 			font-size: 0.9em;
 		}
 
-		input:checked{
+		input:checked {
 			background: red;
 		}
 
-		ul{
+		ul {
 			margin: 0;
 		}
 
-		li{
+		li {
 			display: flex;
 			justify-content: space-between;
 		}
 	}
-
-	
 }

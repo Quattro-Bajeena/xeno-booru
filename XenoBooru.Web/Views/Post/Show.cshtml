@@ -7,7 +7,7 @@
 
 
 @section Stylesheets{
-	<link rel="stylesheet" href="~/css/map_view.css" />
+	<link rel="stylesheet" href="~/css/post_show_view.css" />
 }
 
 @section Sidebar{
@@ -51,19 +51,30 @@
 	</div>
 }
 
-<div id="map-navigator">
-	<button class="nav-button">PREVIOUS</button>
-	<input type="text">
-	<button class="nav-button">NEXT</button>
-</div>
 
 
-@await Html.PartialAsync("_LevelPartial.cshtml", Model.DataUrl)
+
+@switch (Model.Post.Type)
+{
+	case PostType.Level:
+		@await Html.PartialAsync("_LevelPartial.cshtml", Model.DataUrl);
+		break;
+	case PostType.Artwork:
+		@await Html.PartialAsync("_ArtworkPartial.cshtml", Model.DataUrl);
+		break;
+	case PostType.Music:
+		@await Html.PartialAsync("_MusicPartial.cshtml", Model.DataUrl);
+		break;
+	default:
+		break;
+}
+
 
 
 <div id="comments">
 	<form id="comments-post" method="POST">
-		<textarea id="comment-area" name="comment"></textarea>
+		<input type="text" id="comment-author" name="author" placeholder="Name"/>
+		<textarea id="comment-area" name="content"></textarea>
 		<button>Post</button>
 	</form>
 	<ul>
