@@ -1,4 +1,4 @@
-﻿@model IEnumerable<XenoBooru.Core.Models.Post>
+﻿@model XenoBooru.Web.ViewModels.PostSearchViewModel
 
 @{
 	ViewData["Title"] = "Maps";
@@ -10,32 +10,32 @@
 
 
 @section Sidebar{
-	<form class="sidebar-section" id="search"><h4>Search</h4><input class="search-bar" type="text"></form>
+	<form class="sidebar-section" id="search" asp-controller="Post" asp-action="Index" method="get">
+		<h4>Search</h4>
+		<input class="search-bar" type="text" name="tags" autocomplete="off" value="@Model.SearchedTagsStr">
+	</form>
 	<div class="sidebar-section" id="tags">
 		<h4>Tags</h4>
 		<ul>
-			<li><a href="">tag_1</a>&nbsp;<span>182</span></li>
-			<li><a href="">tag_2</a>&nbsp;<span>32</span></li>
-			<li><a href="">tag_3</a>&nbsp;<span>45</span></li>
-			<li><a href="">tag_4</a>&nbsp;<span>54</span></li>
-			<li><a href="">tag_5</a>&nbsp;<span>6</span></li>
-			<li><a href="">tag_6</a>&nbsp;<span>3</span></li>
-			<li><a href="">tag_7</a>&nbsp;<span>3</span></li>
-			<li><a href="">tag_8</a>&nbsp;<span>2</span></li>
-			<li><a href="">tag_9</a>&nbsp;<span>1</span></li>
-			<li><a href="">tag_10</a>&nbsp;<span>1</span></li>
-			<li><a href="">tag_11</a>&nbsp;<span>1</span></li>
-			<li><a href="">tag_12</a>&nbsp;<span>1</span></li>
+			@foreach (Tag tag in Model.Tags)
+			{
+				<li><a asp-route-tags="@tag.Name" class="@tag.Type">@tag.Name</a>&nbsp;<span class="tag-count">@tag.PostCount</span></li>
+			}
 		</ul>
 	</div>
 }
 
 
-
+@if (Model.Posts.Count == 0)
+{
+	<h4>It's okay not to feel `whole'. Even if you feel only partly complete, if you repeat that enough, it'll eventually be `whole'. A part... is better than zero</h4>
+}
 <ul id="posts">
-	@foreach (Post post in Model)
+
+
+	@foreach (Post post in Model.Posts)
 	{
-		<li >
+		<li>
 			<a asp-controller="Post" asp-action="Show" asp-route-id="@post.Id">
 				<div class="post-preview">POST id is @post.Id</div>
 			</a>

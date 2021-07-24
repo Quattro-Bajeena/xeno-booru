@@ -9,13 +9,14 @@ namespace XenoBooru.Data
 {
 	public class AppDbContext : DbContext
 	{
-		private readonly string _connectionString;
 
 		public AppDbContext(DbContextOptions<AppDbContext> options) :
 			base(options)
 		{
 
 		}
+
+
 
 		public DbSet<Entities.PostEntity> Posts { get; set; }
 		public DbSet<Entities.CommentEntity> Comments { get; set; }

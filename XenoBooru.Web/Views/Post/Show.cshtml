@@ -15,10 +15,10 @@
 	<div class="sidebar-section" id="tags">
 		<h4>Tags</h4>
 		<ul>
-			<li><a href="">tag_1</a>&nbsp;<span>182</span></li>
-			<li><a href="">tag_2</a>&nbsp;<span>32</span></li>
-			<li><a href="">tag_3</a>&nbsp;<span>45</span></li>
-			<li><a href="">tag_4</a>&nbsp;<span>6</span></li>
+			@foreach (Tag tag in Model.Tags)
+			{
+				<li><a href="" class="@tag.Type">@tag.Name</a>&nbsp;<span class="tag-count">@tag.PostCount</span></li>
+			}
 		</ul>
 	</div>
 	<div class="sidebar-section" id="name">
@@ -78,7 +78,7 @@
 		<button>Post</button>
 	</form>
 	<ul>
-		@foreach (var comment in Model.Comments)
+		@foreach (Comment comment in Model.Comments)
 		{
 			<li class="comment">
 				<div class="comment-author">

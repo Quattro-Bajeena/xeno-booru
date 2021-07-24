@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,8 @@ namespace XenoBooru.Data.Repositories
 		public PostEntity Get(int id)
 		{
 			return _context.Posts.Find(id);
+			//return _context.Posts.SingleOrDefault(post => post.Id == id);
+			//return _context.Posts.Include(post => post.Tags).Include(post => post.Comments).Where(post => post.Id == id).First();
 		}
 
 		public IEnumerable<PostEntity> GetAll()
@@ -43,6 +46,17 @@ namespace XenoBooru.Data.Repositories
 		{
 			_context.Posts.Update(post);
 			_context.SaveChanges();
+		}
+
+		public IEnumerable<PostEntity> GetByTags(ICollection<string> tags)
+		{
+			var posts = _context.Posts
+				.Include(post => post.Tags)
+				.Where(post => post.Tags.Where(tag => tags.Contains(tag.Name)).Count() == tags.Count)
+				.ToList();
+				
+			return posts;
+
 		}
 	}
 }

@@ -76,7 +76,7 @@ body {
     max-width: 150px; }
   .sidebar #tags {
     line-height: normal; }
-    .sidebar #tags span {
+    .sidebar #tags .tag-count {
       color: #aaa; }
 
 #content {

@@ -14,21 +14,36 @@ namespace XenoBooru.Web.Controllers
 	public class PostController : Controller
 	{
 		private readonly PostService _posts;
+		private readonly TagService _tags;
 		private readonly CommentService _comments;
 		private readonly IOptions<AppConfig> _config;
 
-		public PostController(PostService posts, CommentService comments, IOptions<AppConfig> config)
+		public PostController(PostService posts, TagService tags, CommentService comments,  IOptions<AppConfig> config)
 		{
 			_posts = posts;
+			_tags = tags;
 			_comments = comments;
 			_config = config;
 
 		}
 
-		public IActionResult Index()
+		public IActionResult Index(string tags)
 		{
-			IEnumerable<Post> postList = _posts.GetAll();
-			return View(postList);
+			string[] tagsArr;
+			if (tags != null)
+				tagsArr = tags.Split(' ');
+			else
+				tagsArr = new string[0];
+
+			var posts = _posts.GetFiltered(tagsArr);
+			var tagsDisplayed = _tags.GetFromPosts(posts);
+
+			var viewModel = new PostSearchViewModel();
+			viewModel.Posts = posts.ToList();
+			viewModel.Tags = tagsDisplayed;
+			viewModel.SearchedTagsStr = tags;
+
+			return View(viewModel);
 		}
 
 
@@ -39,14 +54,13 @@ namespace XenoBooru.Web.Controllers
 			{
 				return NotFound();
 			}
-			IEnumerable<Comment> comments = _comments.GetFromPost((int)id);
+
 
 			PostViewModel viewModel = new PostViewModel();
 			viewModel.Post = post;
-			viewModel.Comments = comments;
+			viewModel.Comments = _comments.GetFromPost(post.Id);
+			viewModel.Tags = _tags.GetFromPost(post.Id);
 			viewModel.DataUrl = $"{_config.Value.StorageUrl}/{post.FileName}";
-			viewModel.Tags = null;
-
 
 			return View(viewModel);
 

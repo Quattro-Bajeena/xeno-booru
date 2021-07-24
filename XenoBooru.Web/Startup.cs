@@ -35,15 +35,18 @@ namespace XenoBooru.Web
 			services.AddDbContext<Data.AppDbContext>(options =>
 				options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("XenoBooru.Data"))
 			);
+			//options.UseLazyLoadingProxies(). to enable lazy laoding + make prop virtual
 
 			services.Configure<AppConfig>(Configuration.GetSection("AppConfig"));
 			services.AddOptions();
 
 			services.AddScoped<IPostRepository, SQLPostRepository>();
 			services.AddScoped<ICommentRepository, SQLCommentRepository>();
+			services.AddScoped<ITagRepository, SQLTagRepository>();
 
 			services.AddScoped<PostService>();
 			services.AddScoped<CommentService>();
+			services.AddScoped<TagService>();
 
 			services.AddAutoMapper(typeof(PostService));
 
@@ -74,6 +77,7 @@ namespace XenoBooru.Web
 
 			app.UseEndpoints(endpoints =>
 			{
+				
 				endpoints.MapControllerRoute(
 					name: "default",
 					pattern: "{controller=Home}/{action=Index}/{id?}");

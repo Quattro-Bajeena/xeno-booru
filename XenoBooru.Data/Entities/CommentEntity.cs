@@ -15,6 +15,7 @@ namespace XenoBooru.Data.Entities
 		[StringLength(10000)]
 		public string Content { get; set; }
 		public DateTime Date { get; set; }
+		public int PostId { get; set; }
 		public PostEntity Post { get; set; }
 	}
 }

@@ -22,7 +22,7 @@ namespace XenoBooru.Core.Models
 		public string Source { get; set; }
 		public string Credits { get; set; }
 		public int Likes { get; set; }
-		//public  ICollection<Tag> Tags { get; set; }
+		public ICollection<Tag> Tags { get; set; }
 		public ICollection<Comment> Comments { get; set; }
 
 

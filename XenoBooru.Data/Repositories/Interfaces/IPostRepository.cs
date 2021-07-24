@@ -14,6 +14,6 @@ namespace XenoBooru.Data.Repositories.Interfaces
 		public void Add(PostEntity post);
 		public void Remove(int id);
 		public void Update(PostEntity post);
-
+		public IEnumerable<PostEntity> GetByTags(ICollection<string> tags);
 	}
 }

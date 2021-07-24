@@ -1,0 +1,11 @@
+- adding, updating, deleting posts backend
+	- backed
+	- frontend
+- adding, updaing, deleting tags
+	- backed
+	- frontend
+- adding, deleting comments
+	- backed
+	- frontend
+- tag searching
+- showing tags based on collection of posts
