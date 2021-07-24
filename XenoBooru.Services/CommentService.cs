@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using XenoBooru.Core.Models;
+using XenoBooru.Data.Entities;
 using XenoBooru.Data.Repositories.Interfaces;
 
 namespace XenoBooru.Services
@@ -23,9 +24,15 @@ namespace XenoBooru.Services
 		public IEnumerable<Comment> GetFromPost(int postId)
 		{
 			var commentsDb = _repository.GetFromPost(postId);
-			var comments = _mapper.Map<IEnumerable<Comment>>(commentsDb).OrderBy(comment => comment.Date);
+			var comments = _mapper.Map<IEnumerable<Comment>>(commentsDb).OrderByDescending(comment => comment.Date);
 			return comments;
 
+		}
+
+		public void Add(Comment comment)
+		{
+			var commentDb = _mapper.Map<CommentEntity>(comment);
+			_repository.Add(commentDb);
 		}
 	}
 }

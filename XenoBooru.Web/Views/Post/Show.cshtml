@@ -37,8 +37,6 @@
 			<li>Type: @Model.Post.Type</li>
 			<li>Credits: @Model.Post.Credits</li>
 			<li>Likes: @Model.Post.Likes</li>
-			<li>Glitched: true</li>
-			<li>Rating: Safe</li>
 		</ul>
 	</div>
 	<div class="sidebar-section" id="options">
@@ -46,7 +44,7 @@
 		<ul>
 			<li><a href="">Edit</a></li>
 			<li><a href="">Add tag</a></li>
-			<li><a href="">Download</a></li>
+			<li><a href="@Model.DataUrl" download>Download</a></li>
 		</ul>
 	</div>
 }
@@ -72,8 +70,9 @@
 
 
 <div id="comments">
-	<form id="comments-post" method="POST">
-		<input type="text" id="comment-author" name="author" placeholder="Name"/>
+	<form id="comments-post" method="POST" asp-controller="Comment" asp-action="Add">
+		<input type="hidden" name="PostId" value="@Model.Post.Id" />
+		<input type="text" autocomplete="off" id="comment-author" name="author" placeholder="Name"/>
 		<textarea id="comment-area" name="content"></textarea>
 		<button>Post</button>
 	</form>
@@ -82,7 +81,7 @@
 		{
 			<li class="comment">
 				<div class="comment-author">
-					<h4>@comment.Author</h4><span class="comment-date">@comment.Date</span>
+					<h4>@comment.Author</h4><span class="comment-date">@comment.Date.ToString("dd/MM/yyyy")</span>
 				</div>
 				<div class="comment-content">
 					@comment.Content

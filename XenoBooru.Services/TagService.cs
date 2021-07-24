@@ -47,7 +47,7 @@ namespace XenoBooru.Services
 			return tags;
 		}
 
-		public IEnumerable<Tag> GetFromPosts(IEnumerable<Post> posts)
+		public IEnumerable<Tag> GetFromPosts(IEnumerable<Post> posts, int limit = 20)
 		{
 			var tags = new Dictionary<int, Tag>();
 
@@ -66,13 +66,9 @@ namespace XenoBooru.Services
 						tags[tag.Id] = tag;
 						tags[tag.Id].PostCount = 1;
 					}
-						
-
-					
 				}
 			}
-
-			return tags.Values.OrderByDescending(tag => tag.PostCount);
+			return tags.Values.OrderByDescending(tag => tag.PostCount).Take(limit);
 		}
 	}
 }

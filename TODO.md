@@ -9,3 +9,4 @@
 	- frontend
 - tag searching
 - showing tags based on collection of posts
+- ordering tags by categories
