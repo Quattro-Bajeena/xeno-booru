@@ -9,12 +9,13 @@ namespace XenoBooru.Data.Repositories.Interfaces
 {
 	public interface ITagRepository
 	{
-		public IEnumerable<TagEntity> GetAll();
-		public IEnumerable<TagEntity> GetFromPost(int postId);
-		public void Add(TagEntity tag);
-		public void Remove(int id);
-		public void Update(TagEntity tag);
-		public int GetTagPostCount(int tagId);
-		public IEnumerable<TagEntity> GetFromStr(IEnumerable<string> tagsStr);
+		TagEntity Get(string name);
+		IEnumerable<TagEntity> GetAll();
+		IEnumerable<TagEntity> GetFromPost(int postId);
+		void Add(TagEntity tag);
+		void Remove(int id);
+		void Update(TagEntity tag);
+		int GetTagPostCount(int tagId);
+		ICollection<TagEntity> GetFromStr(string tagsStr);
 	}
 }

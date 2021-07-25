@@ -38,3 +38,11 @@
 .nav-button:active{
     background-color: darken($link-color, 30%);
 }
+
+
+.status-notice {
+    background-color: $dark-color;
+    border: 2px solid $secondary-color;
+    margin: 1em;
+    padding: 1em;
+}

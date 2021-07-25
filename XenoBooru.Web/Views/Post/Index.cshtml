@@ -5,7 +5,7 @@
 }
 
 @section Stylesheets{
-	<link rel="stylesheet" href="~/css/post_view.css" />
+	<link rel="stylesheet" href="~/css/post_index.css" />
 }
 
 
@@ -19,9 +19,13 @@
 		<ul>
 			@foreach (Tag tag in Model.Tags)
 			{
-				<li><a asp-route-tags="@tag.Name" class="@tag.Type">@tag.Name</a>&nbsp;<span class="tag-count">@tag.PostCount</span></li>
+				<li><a asp-route-tags="@tag.Name" class="tag-@tag.Type">@tag.Name</a>&nbsp;<span class="tag-count">@tag.PostCount</span></li>
 			}
 		</ul>
+	</div>
+	<div class="sidebar-section" id="options">
+		<h4>Options</h4>
+		<a asp-action="Upload">Upload</a>
 	</div>
 }
 

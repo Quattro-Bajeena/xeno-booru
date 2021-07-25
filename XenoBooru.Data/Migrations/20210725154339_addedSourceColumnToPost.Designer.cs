@@ -3,36 +3,23 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using XenoBooru.Data;
 
 namespace XenoBooru.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210725154339_addedSourceColumnToPost")]
+    partial class addedSourceColumnToPost
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.8")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("PoolEntityPostEntity", b =>
-                {
-                    b.Property<int>("PoolsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PostsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PoolsId", "PostsId");
-
-                    b.HasIndex("PostsId");
-
-                    b.ToTable("PoolEntityPostEntity");
-                });
 
             modelBuilder.Entity("PostEntityTagEntity", b =>
                 {
@@ -77,29 +64,6 @@ namespace XenoBooru.Data.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("XenoBooru.Data.Entities.PoolEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Creator")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Pools");
-                });
-
             modelBuilder.Entity("XenoBooru.Data.Entities.PostEntity", b =>
                 {
                     b.Property<int>("Id")
@@ -122,9 +86,6 @@ namespace XenoBooru.Data.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Pending")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Source")
                         .HasColumnType("nvarchar(max)");
@@ -149,8 +110,8 @@ namespace XenoBooru.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
@@ -158,21 +119,6 @@ namespace XenoBooru.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tags");
-                });
-
-            modelBuilder.Entity("PoolEntityPostEntity", b =>
-                {
-                    b.HasOne("XenoBooru.Data.Entities.PoolEntity", null)
-                        .WithMany()
-                        .HasForeignKey("PoolsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("XenoBooru.Data.Entities.PostEntity", null)
-                        .WithMany()
-                        .HasForeignKey("PostsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("PostEntityTagEntity", b =>

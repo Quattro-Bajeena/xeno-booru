@@ -9,10 +9,10 @@ namespace XenoBooru.Data.Repositories.Interfaces
 {
 	public interface ICommentRepository
 	{
-		public IEnumerable<CommentEntity> GetAll();
-		public IEnumerable<CommentEntity> GetFromPost(int postId);
-		public void Add(CommentEntity comment);
-		public void Remove(int id);
+		IEnumerable<CommentEntity> GetAll();
+		IEnumerable<CommentEntity> GetFromPost(int postId);
+		void Add(CommentEntity comment);
+		void Remove(int id);
 
 	}
 }

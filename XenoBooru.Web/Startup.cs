@@ -50,7 +50,7 @@ namespace XenoBooru.Web
 
 			services.AddAutoMapper(typeof(PostService));
 
-			services.AddControllersWithViews().AddRazorRuntimeCompilation();
+			services.AddControllersWithViews().AddNewtonsoftJson().AddRazorRuntimeCompilation();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

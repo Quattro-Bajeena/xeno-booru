@@ -21,5 +21,6 @@ namespace XenoBooru.Data
 		public DbSet<Entities.PostEntity> Posts { get; set; }
 		public DbSet<Entities.CommentEntity> Comments { get; set; }
 		public DbSet<Entities.TagEntity> Tags { get; set; }
+		public DbSet<Entities.PoolEntity> Pools { get; set; }
 	}
 }

@@ -95,28 +95,26 @@ footer {
   padding: 1em; }
 
 body {
-  grid-template-areas: "header" "content" "footer";
+  grid-template-areas: "header"  "content"  "footer";
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr auto;
-  justify-items: center; }
+  grid-template-rows: auto 1fr auto; }
 
-header {
-  grid-area: header;
-  margin-top: 100px;
-  display: flex;
-  flex-direction: column;
-  align-items: center; }
-  header h1 {
-    font-size: 3em;
-    font-weight: bold; }
-    header h1 span {
-      font-style: oblique; }
+#content {
+  grid-area: content; }
 
-main {
-  grid-area: content;
-  margin-bottom: 20px; }
+#upload th {
+  background-color: #413f3f;
+  min-width: 100px;
+  max-width: 200px;
+  padding: 0 10px;
+  text-align: end; }
 
-footer {
-  width: 50%;
-  min-width: fit-content;
-  justify-content: space-around; }
+#upload p {
+  font-weight: normal;
+  font-size: 0.9em; }
+
+#upload input {
+  width: 300px; }
+
+#upload textarea {
+  width: 500px; }

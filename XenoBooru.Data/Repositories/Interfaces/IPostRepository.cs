@@ -10,10 +10,10 @@ namespace XenoBooru.Data.Repositories.Interfaces
 	public interface IPostRepository
 	{
 		PostEntity Get(int id);
-		IEnumerable<PostEntity> GetAll();
-		public void Add(PostEntity post);
-		public void Remove(int id);
-		public void Update(PostEntity post);
-		public IEnumerable<PostEntity> GetByTags(ICollection<string> tags);
+		int Add(PostEntity post);
+		void Remove(int id);
+		void Update(PostEntity updatedPost);
+		IEnumerable<PostEntity> GetByTags(ICollection<string> tags, bool includePending);
+		IEnumerable<PostEntity> GetFromPool(int poolId);
 	}
 }

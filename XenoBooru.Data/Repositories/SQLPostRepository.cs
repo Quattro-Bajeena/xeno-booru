@@ -25,15 +25,13 @@ namespace XenoBooru.Data.Repositories
 			//return _context.Posts.Include(post => post.Tags).Include(post => post.Comments).Where(post => post.Id == id).First();
 		}
 
-		public IEnumerable<PostEntity> GetAll()
-		{
-			return _context.Posts;
-		}
+		
 
-		public void Add(PostEntity post)
+		public int Add(PostEntity post)
 		{
 			_context.Posts.Add(post);
 			_context.SaveChanges();
+			return post.Id;
 		}
 
 		public void Remove(int id)
@@ -42,21 +40,48 @@ namespace XenoBooru.Data.Repositories
 			_context.Posts.Remove(post);
 		}
 
-		public void Update(PostEntity post)
+		public void Update(PostEntity updatedPost)
 		{
-			_context.Posts.Update(post);
+			var originalPost = _context.Posts.Where( post => post.Id == updatedPost.Id).Include(post => post.Tags).Single();
+
+			originalPost.Name = updatedPost.Name;
+			originalPost.Source = updatedPost.Source;
+			originalPost.Credits = updatedPost.Credits;
+			originalPost.Description = updatedPost.Description;
+			originalPost.Tags = updatedPost.Tags;
+
+			_context.Posts.Update(originalPost);
 			_context.SaveChanges();
 		}
 
-		public IEnumerable<PostEntity> GetByTags(ICollection<string> tags)
+		private IQueryable<PostEntity> GetAll(bool includePending)
 		{
-			var posts = _context.Posts
+
+			if (includePending)
+			{
+				return _context.Posts;
+			}
+			else
+			{
+				return _context.Posts.Where(post => post.Pending == false);
+			}
+		}
+
+		public IEnumerable<PostEntity> GetByTags(ICollection<string> tags, bool includePending)
+		{
+			var posts = GetAll(includePending)
 				.Include(post => post.Tags)
 				.Where(post => post.Tags.Where(tag => tags.Contains(tag.Name)).Count() == tags.Count)
 				.ToList();
 				
 			return posts;
 
+		}
+
+		public IList<PostEntity> GetFromPool(int poolId)
+		{
+			var pool = _context.Pools.Where(pool => pool.Id == poolId).Include(pool => pool.Posts).Single();
+			return pool.Posts.ToList();
 		}
 	}
 }

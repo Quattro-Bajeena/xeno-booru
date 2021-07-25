@@ -18,18 +18,17 @@ namespace XenoBooru.Web.Controllers
 			_comments = comments;
 		}
 
-
-		public IActionResult Index()
-		{
-			return View();
-		}
+		//public IActionResult Index()
+		//{
+		//	return View();
+		//}
 
 		[HttpPost]
 		public IActionResult Add(Comment comment)
 		{
-			if (ModelState.IsValid)
+			if (ModelState.IsValid && comment.Author != null && comment.Content != null)
 			{
-				//_comments.Add(comment);
+				_comments.Add(comment);
 			}
 
 			return RedirectToAction("Show", "Post", new { id = comment.PostId});

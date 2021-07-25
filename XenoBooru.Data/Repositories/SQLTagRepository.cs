@@ -17,6 +17,11 @@ namespace XenoBooru.Data.Repositories
 			_context = context;
 		}
 
+		public TagEntity Get(string name)
+		{
+			return _context.Tags.Where(tag => tag.Name == name).FirstOrDefault();
+		}
+
 		public IEnumerable<TagEntity> GetAll()
 		{
 			return _context.Tags;
@@ -53,9 +58,12 @@ namespace XenoBooru.Data.Repositories
 			return posts.Count;
 		}
 
-		public IEnumerable<TagEntity> GetFromStr(IEnumerable<string> tagsStr)
+		public ICollection<TagEntity> GetFromStr(string tagsStr)
 		{
-			return _context.Tags.Where(tag => tagsStr.Contains(tag.Name));
+			var tagsStrLst = tagsStr.Split(' ');
+			return _context.Tags.Where(tag => tagsStrLst.Contains(tag.Name)).ToList();
 		}
+
+		 
 	}
 }

@@ -30,12 +30,19 @@ namespace XenoBooru.Web.Controllers
 		public IActionResult Index(string tags)
 		{
 			string[] tagsArr;
+			bool includePending;
 			if (tags != null)
+			{
 				tagsArr = tags.Split(' ');
+				includePending = false;
+			}
 			else
+			{
 				tagsArr = new string[0];
-
-			var posts = _posts.GetFiltered(tagsArr);
+				includePending = true;
+			}
+				
+			var posts = _posts.GetFiltered(tagsArr, includePending);
 			var tagsDisplayed = _tags.GetFromPosts(posts);
 
 			var viewModel = new PostSearchViewModel();
@@ -59,11 +66,46 @@ namespace XenoBooru.Web.Controllers
 			PostViewModel viewModel = new PostViewModel();
 			viewModel.Post = post;
 			viewModel.Comments = _comments.GetFromPost(post.Id);
-			viewModel.Tags = _tags.GetFromPost(post.Id);
+			viewModel.Tags = _tags.GetFromPost(post.Id).ToList();
 			viewModel.DataUrl = $"{_config.Value.StorageUrl}/{post.FileName}";
+
 
 			return View(viewModel);
 
+		}
+
+		public IActionResult Upload()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		public IActionResult Upload(Post post, string tags)
+		{
+			if (ModelState.IsValid == false)
+			{
+				return RedirectToAction("Index");
+			}
+
+			//var tagsLst = _tags.GetFromString(tags);
+			int id = _posts.Add(post, tags);
+
+			return RedirectToAction("Show", new {id = id });
+		}
+
+		[HttpPost]
+		public IActionResult Update(int id, Post post, string tags)
+		{
+			post.Id = id;
+			_posts.Update(post, tags);
+			return RedirectToAction("Show", new { id = post.Id });
+		}
+
+		
+		public IActionResult Delete(int id)
+		{
+			_posts.Remove(id);
+			return RedirectToAction("Show");
 		}
 	}
 }

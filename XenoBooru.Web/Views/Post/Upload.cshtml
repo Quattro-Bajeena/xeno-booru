@@ -1,0 +1,63 @@
+﻿@model XenoBooru.Web.ViewModels.PostSearchViewModel
+@using XenoBooru.Core.Utilities
+@{
+	ViewData["Title"] = "Upload";
+}
+
+@section Stylesheets{
+	<link rel="stylesheet" href="~/css/post_upload.css" />
+}
+
+
+
+<form id="upload" method="post" asp-controller="Post" asp-action="Upload">
+	<table>
+		<tbody>
+			<tr>
+				<th><label for="upload-name">Name</label></th>
+				<td><input type="text" id="upload-name" name="Name" autocomplete="off"/></td>
+			</tr>
+			<tr>
+				<th><label for="upload-description">Description</label></th>
+				<td><textarea id="upload-description" name="Description"></textarea></td>
+			</tr>
+			<tr>
+				<th><label for="upload-filename">File name</label></th>
+				<td><input type="text" id="upload-filename" name="FileName" autocomplete="off"/></td>
+			</tr>
+			<tr>
+				<th><label for="upload-type">Type</label></th>
+				<td>
+					<select id="upload-type" name="Type">
+						@foreach (var type in PostUtilities.PostTypesToString())
+						{
+							<option value="@type">@type</option>
+						}
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="upload-source">Source</label><p>In-game, artbook, CD, etc.</p></th>
+				<td><input id="upload-source" type="text" name="Source" autocomplete="off"/></td>
+			</tr>
+			<tr>
+				<th>
+					<label for="upload-credits">Credits</label>
+					<p>Of course the true credit goes to the original authors, but here ackwnologe the person who ripped the in-game asset, scanned the artbook, etc.</p>
+				</th>
+				<td><input id="upload-credits" type="text" name="Credits" autocomplete="off"/></td>
+			</tr>
+			<tr>
+				<th><label for="upload-tags">Tags</label><p>Separate tags with spaces</p></th>
+				<td><textarea id="upload-tags" name="tags"></textarea></td>
+			</tr>
+
+		</tbody>
+		<tfoot>
+			<tr>
+				<td></td>
+				<td><button>Upload</button></td>
+			</tr>
+		</tfoot>
+	</table>
+</form>

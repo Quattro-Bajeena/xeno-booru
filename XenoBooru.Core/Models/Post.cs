@@ -9,11 +9,17 @@ namespace XenoBooru.Core.Models
 
 	public enum PostType
 	{
-		Level, Artwork, Music
+		Default, Level, Artwork, Music
 	}
 
 	public class Post
 	{
+
+		public Post()
+		{
+			Pending = true;
+		}
+
 		public int Id { get; set; }
 		public PostType Type { get; set; }
 		public string FileName { get; set; }
@@ -22,9 +28,11 @@ namespace XenoBooru.Core.Models
 		public string Source { get; set; }
 		public string Credits { get; set; }
 		public int Likes { get; set; }
+		public bool Pending { get; set; }
 		public ICollection<Tag> Tags { get; set; }
 		public ICollection<Comment> Comments { get; set; }
+		public ICollection<Pool> Pools { get; set; }
 
-
+		
 	}
 }

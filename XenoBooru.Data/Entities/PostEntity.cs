@@ -14,11 +14,14 @@ namespace XenoBooru.Data.Entities
 		[Required]
 		public string FileName { get; set; }
 		public string Name { get; set; }
+		public string Source { get; set; }
 		public string Description { get; set; }
 		public string Credits { get; set; }
 		public int Likes { get; set; }
+		public bool Pending { get; set; }
 
 		public ICollection<TagEntity> Tags { get; set; }
-		public ICollection<CommentEntity> Comments { get; set; } 
+		public ICollection<CommentEntity> Comments { get; set; }
+		public ICollection<PoolEntity> Pools { get; set; }
 	}
 }

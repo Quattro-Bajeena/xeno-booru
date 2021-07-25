@@ -1,0 +1,31 @@
+﻿@model IEnumerable<XenoBooru.Core.Models.Tag> 
+
+@{
+	ViewData["Title"] = "Tags";
+}
+
+
+@section Stylesheets{
+	<link rel="stylesheet" href="~/css/tag_index.css" />
+}
+
+<table>
+	<thead>
+		<tr>
+			<th id="posts-col">Posts</th>
+			<th id="name-col">Name</th>
+			<th id="type-col">Type</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (Tag tag in Model)
+		{
+		<tr>
+			<td>@tag.PostCount</td>
+			<td><a asp-controller="Post" asp-route-tags="@tag.Name">@tag.Name</a></td>
+			<td>@tag.Type.ToString()</td>
+		</tr>
+		}
+	</tbody>
+</table>
+

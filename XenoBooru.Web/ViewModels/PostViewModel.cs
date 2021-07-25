@@ -11,6 +11,7 @@ namespace XenoBooru.Web.ViewModels
 		public string DataUrl { get; set; }
 		public Post Post { get; set; }
 		public IEnumerable<Comment> Comments { get; set; }
-		public IEnumerable<Tag> Tags { get; set; }
+		public ICollection<Tag> Tags { get; set; }
+		public IEnumerable<Pool> Pools { get; set; }
 	}
 }

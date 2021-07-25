@@ -30,19 +30,37 @@ namespace XenoBooru.Services
 			return post;
 		}
 
-		public IEnumerable<Post> GetAll()
+		public IEnumerable<Post> GetFiltered(ICollection<string> tagsStr, bool includePending)
 		{
-			var dbPosts = _postRepository.GetAll();
-			var posts = _mapper.Map<IEnumerable<Post>>(dbPosts);
-			return posts;
-		}
-
-		public IEnumerable<Post> GetFiltered(ICollection<string> tagsStr)
-		{
-			var postsDb = _postRepository.GetByTags(tagsStr);
+			var postsDb = _postRepository.GetByTags(tagsStr, includePending);
 			var posts = _mapper.Map<IEnumerable<Post>>(postsDb);
 
 			return posts;
+		}
+
+
+		public int Add(Post post, string tagsStr)
+		{
+			var postDb = _mapper.Map<PostEntity>(post);
+
+			postDb.Tags = _tagRepository.GetFromStr(tagsStr);
+
+			int id = _postRepository.Add(postDb);
+			return id;
+		}
+
+		public void Update(Post post, string tagsStr)
+		{
+			var updatedPostEntity = _mapper.Map<PostEntity>(post);
+			updatedPostEntity.Tags = _tagRepository.GetFromStr(tagsStr);
+
+			_postRepository.Update(updatedPostEntity);
+
+		}
+
+		public void Remove(int id)
+		{
+			_postRepository.Remove(id);
 		}
 
 	}
