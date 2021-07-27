@@ -9,46 +9,43 @@ body{
     grid-template-rows: auto 1fr auto;
 }
 
-.sidebar{
+.sidebar {
 	grid-area: sidebar;
-  //background-color: red;
-	
+	//background-color: red;
+
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: stretch;
-
 	margin-right: 40px;
-
 	max-width: 500px;
 
-	p{
+	p {
 		margin: 5px 0;
 	}
 
-	ul{
+	ul {
 		margin: 5px 0;
 	}
 
-	&-section{
+	&-section {
 		margin: 10px 0;
 	}
 
 
-	.search-bar{
+	.search-bar {
 		width: 100%;
 		max-width: 150px;
 	}
-	
-	#tags{
+
+	#tags {
 		//background-color: crimson;
 		line-height: normal;
 
-		span{
-			color:$secondary-color
+		.tag-count {
+			color: $secondary-color
 		}
 	}
-	
 }
 
 
@@ -63,7 +60,12 @@ body{
 
 		&-post{
 			display: flex;
+			flex-direction: column;
 			
+			input{
+				width: 150px;
+			}
+
 			textarea{
 
 				width: 40%;
@@ -76,8 +78,10 @@ body{
 				
 			}
 			button{
-				width: 100px;
-				height: 50px;
+				font-size: 1.1em;
+				font-weight: bold;
+				width: 80px;
+				height: 30px;
 				
 			}
 		}

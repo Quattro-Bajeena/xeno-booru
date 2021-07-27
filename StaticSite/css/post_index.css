@@ -261,57 +261,43 @@ body {
   background-color: #a10606;
 }
 
-#map-navigator {
+.status-notice {
+  background-color: #201f1f;
+  border: 2px solid #aaa;
+  margin: 1em;
+  padding: 1em;
+}
+
+#posts {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+#posts .post-preview {
+  height: 150px;
+  width: 150px;
+  border: 1px solid #f84848;
+  margin: 2px;
+  background-color: #aaa;
+}
+
+#paginator {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  padding: 10px;
-}
-
-#map-navigator input {
-  width: 40px;
+  margin: 20px;
   text-align: center;
 }
 
-#render {
-  height: 600px;
-  border-style: dashed;
-  margin-bottom: 50px;
-  position: relative;
-}
-
-#render-controls {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  border: 3px solid #272626;
-  padding: 10px 15px;
-  color: #272626;
-  background-color: #ffffff;
-  min-width: 200px;
-}
-
-#render-controls span {
-  color: #aaa;
-  font-size: 0.9em;
-}
-
-#render-controls input:checked {
-  background: red;
-}
-
-#render-controls ul {
-  margin: 0;
-}
-
-#render-controls li {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+#paginator .nav-button {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0 5px;
 }

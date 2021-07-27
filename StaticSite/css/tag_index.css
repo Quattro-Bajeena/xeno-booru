@@ -147,52 +147,40 @@ footer .footer-section {
 }
 
 body {
-      grid-template-areas: "header" "content" "footer";
+      grid-template-areas: "header" "content" "footer";
   -ms-grid-columns: 1fr;
       grid-template-columns: 1fr;
-  -ms-grid-rows: 1fr auto;
-      grid-template-rows: 1fr auto;
-  justify-items: center;
+  -ms-grid-rows: auto 1fr auto;
+      grid-template-rows: auto 1fr auto;
 }
 
-header {
-  -ms-grid-row: 1;
-  -ms-grid-column: 1;
-  grid-area: header;
-  margin-top: 100px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-header h1 {
-  font-size: 3em;
-  font-weight: bold;
-}
-
-header h1 span {
-  font-style: oblique;
-}
-
-main {
+#content {
   -ms-grid-row: 2;
   -ms-grid-column: 1;
   grid-area: content;
-  margin-bottom: 20px;
 }
 
-footer {
-  width: 50%;
-  min-width: -webkit-fit-content;
-  min-width: -moz-fit-content;
-  min-width: fit-content;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+table {
+  width: 100%;
+}
+
+table #posts-col {
+  width: 60px;
+}
+
+table #type-col {
+  width: 200px;
+}
+
+table th {
+  text-align: left;
+}
+
+table td {
+  padding: 1px 4px;
+  background-color: #413f3f;
+}
+
+table tr:nth-child(even) td {
+  background-color: #5b5858;
 }

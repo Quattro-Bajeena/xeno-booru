@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] | XMV</title>
+	<link rel="stylesheet" href="css/post_show.css">
+
+</head>
+<body>
+	<header>
+		<div id="title">
+			<a asp-controller="Home" asp-action="Index"><h1>Xenogears Map Viewer</h1></a>
+		</div>
+
+		<nav id="menu">
+			<ul id="menu-options">
+				<li><a asp-controller="Post">Posts</a></li>
+				<li><a asp-controller="Tag">Tags</a></li>
+				<li><a href="">Comments</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<div class="sidebar">
+		<form class="sidebar-section" id="search"><h4>Search</h4><input class="search-bar" type="text"></form>
+	<div class="sidebar-section" id="tags">
+		<h4>Tags</h4>
+		<ul>
+			@foreach (Tag tag in Model.Tags)
+			{
+				<li><a asp-action="Index" asp-route-tags="@tag.Name" class="tag-@tag.Type">@tag.Name</a>&nbsp;<span class="tag-count">@tag.PostCount</span></li>
+			}
+		</ul>
+	</div>
+	<div class="sidebar-section" id="name">
+		<h4>Name</h4>
+		<span>@Model.Post.Name</span>
+	</div>
+	<div class="sidebar-section" id="decription">
+		<h4>Description</h4>
+		<p>
+			@Model.Post.Description;
+		</p>
+	</div>
+	<div class="sidebar-section" id="statistics">
+		<h4>Statistics</h4>
+		<ul>
+			<li>Type: @Model.Post.Type</li>
+			<li>Credits: @Model.Post.Credits</li>
+			<li>Likes: @Model.Post.Likes</li>
+		</ul>
+	</div>
+	<div class="sidebar-section" id="options">
+		<h4>Options</h4>
+		<ul>
+            <li><button class="link-button">Like</button></li>
+			<li><button class="link-button switch-button edit-post-button">Edit</button></li>
+			<li><a href="@Model.DataUrl" download>Download</a></li>
+		</ul>
+	</div>
+	</div>
+
+	<main id="content">
+		<div id="pending-notice" class="status-notice">
+            This post is pending moderator approval.
+        </div>
+
+
+        <div id="render">
+            <div id="render-controls">
+                <ul>
+                    <li>
+                        <label for="fullscreen">Fullscreen&nbsp;<span>Esc</span></label>
+                        <input type="checkbox" name="fullscreen" id="fullscreen-checkbox">
+                    </li>
+                    <li>
+                        <label for="texture-filtering">Texture filtering</label>
+                        <input type="checkbox" name="texture-filtering" id="texture-filtering-checkbox">
+                    </li>
+                    <li>
+                        <label for="wirefrane">Wireframe</label>
+                        <input type="checkbox" name="wirefrane" id="wireframe-checkbox">
+                    </li>
+                    <li>
+                        <label for="controls">Controls</label>
+                        <select name="controls" id="controls-list">
+                            <option value="orbit">Orbit</option>
+                            <option value="map">Map</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="edit-comment-switch">
+            <h3>
+                <button class="link-button switch-button edit-post-button">Edit</button>
+                &nbsp;|&nbsp; 
+                <button class="link-button switch-button comments-post-button">Comments</button>
+            </h3>
+        </div>
+
+        <form id="edit" method="post" asp-action="Update" asp-route-id="@Model.Post.Id" style="display: none;">
+            <h3>Edit</h3>
+            <table>
+                <tbody>
+                    <tr>
+                        <th><label for="upload-name">Name</label></th>
+                        <td><input type="text" id="upload-name" name="Name" value="@Model.Post.Name" /></td>
+                    </tr>
+                    <tr>
+                        <th><label for="upload-description">Description</label></th>
+                        <td><textarea id="upload-description" name="Description">@Model.Post.Description</textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="upload-source">Source</label></th>
+                        <td><input id="upload-source" type="text" name="Source" value="@Model.Post.Source" /></td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="upload-credits">Credits</label>
+                        </th>
+                        <td><input id="upload-credits" type="text" name="Credits" value="@Model.Post.Credits" /></td>
+                    </tr>
+                    <tr>
+                        <th><label for="upload-tags">Tags</label></th>
+                        <td><textarea id="upload-tags" name="tags">@TagUtilities.ToString(Model.Tags)</textarea></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td><button>Edit</button></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </form>
+        
+        <div id="comments">
+            <h3>Comments</h3>
+            <form id="comments-post" method="POST" asp-controller="Comment" asp-action="Add">
+                <input type="hidden" name="PostId" value="@Model.Post.Id" />
+                <input type="text" autocomplete="off" id="comment-author" name="author" placeholder="Name" />
+                <textarea id="comment-area" name="content"></textarea>
+                <button>Post</button>
+            </form>
+            <ul>
+                @foreach (Comment comment in Model.Comments)
+                {
+                    <li class="comment">
+                        <div class="comment-author">
+                            <h4>@comment.Author</h4><span class="comment-date">@comment.Date.ToString("dd/MM/yyyy")</span>
+                        </div>
+                        <div class="comment-content">
+                            @comment.Content
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+	</main>
+
+
+	<footer>
+		<div class="footer-section">
+			Made by:&nbsp;Paraon, 2021
+		</div>
+		<div class="footer-section">
+			Find me on:&nbsp;
+			<a href="https://www.youtube.com/channel/UCINPzzjxRzGOq4Pex5r3EKg" target="_blank">YouTube</a>/
+			<a href="https://twitter.com/turtle_guy_" target="_blank">Twitter</a>/
+			<a href="https://github.com/Quattro-Bajeena" target="_blank">GitHub</a>
+		</div>
+		<div class="footer-section">
+			Thanks to:&nbsp;
+			<a href="https://github.com/Akari1982" target="_blank">Akari</a>/
+			<a href="https://twitter.com/prozacchiwawa" target="_blank">Prozacchiwa</a>
+		</div>
+
+	</footer>
+
+	<script>
+		const map_url = "./level729.glb";
+	</script>
+	<script src="js/map_display.js" type="module"></script>
+    <script src="js/option_switching.js" type="module"></script>
+
+</body>
+</html>

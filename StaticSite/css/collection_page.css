@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 @font-face {
   font-family: Xenogears;
-  src: url("/StaticSite/fonts/Xenogears.woff") format("woff");
+  src: url("../fonts/Xenogears.woff") format("woff");
 }
 
 html {
@@ -28,13 +28,46 @@ h1, h2, h3, h4, h5 {
   margin: 0;
 }
 
-a {
+a, .link-button {
   text-decoration: none;
   color: #f84848;
 }
 
-a:hover {
+a:hover, .link-button:hover {
+  cursor: pointer;
   color: #ffcdcd;
+}
+
+.tag-Normal {
+  color: #f84848;
+}
+
+.tag-Normal:hover {
+  color: white;
+}
+
+.tag-PostType {
+  color: #ffe96c;
+}
+
+.tag-PostType:hover {
+  color: white;
+}
+
+.tag-Location {
+  color: #ff3da4;
+}
+
+.tag-Location:hover {
+  color: white;
+}
+
+.tag-Character {
+  color: #9bb359;
+}
+
+.tag-Character:hover {
+  color: #eff3e5;
 }
 
 header {
@@ -140,7 +173,7 @@ body {
   line-height: normal;
 }
 
-.sidebar #tags span {
+.sidebar #tags .tag-count {
   color: #aaa;
 }
 
@@ -158,6 +191,14 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+#content #comments-post input {
+  width: 150px;
 }
 
 #content #comments-post textarea {
@@ -169,8 +210,10 @@ body {
 }
 
 #content #comments-post button {
-  width: 100px;
-  height: 50px;
+  font-size: 1.1em;
+  font-weight: bold;
+  width: 80px;
+  height: 30px;
 }
 
 #content #comments .comment {

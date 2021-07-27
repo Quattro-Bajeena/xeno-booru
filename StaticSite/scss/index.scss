@@ -1,13 +1,12 @@
 @import 'main';
-@import 'buttons';
+@import 'classes';
 
 
-body{
-
-    grid-template-areas: 
-    "header"
-    "footer";
-
+body {
+    grid-template-areas:
+        "header"
+        "content"
+        "footer";
     grid-template-columns: 1fr;
     grid-template-rows: 1fr auto;
     justify-items: center;
@@ -16,7 +15,7 @@ body{
 header{
     grid-area: header;
     margin-top: 100px;
-    margin-bottom: 20px;
+    
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -30,6 +29,11 @@ header{
         }
         
     }
+}
+
+main {
+    grid-area: content;
+    margin-bottom: 20px;
 }
 
 footer{
