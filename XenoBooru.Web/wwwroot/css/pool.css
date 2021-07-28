@@ -135,15 +135,19 @@ footer {
     background-color: #5b5858; }
 
 body {
-  grid-template-areas: "header"  "content"  "footer";
+  grid-template-areas: "header" "content" "footer";
   grid-template-columns: 1fr;
   grid-template-rows: auto 1fr auto; }
 
 #content {
   grid-area: content; }
 
-#upload input {
-  width: 300px; }
-
-#upload textarea {
-  width: 500px; }
+#pool-entries {
+  display: flex;
+  flex-wrap: wrap; }
+  #pool-entries .entry-preview {
+    height: 150px;
+    width: 200px;
+    border: 1px solid #f84848;
+    margin: 2px;
+    background-color: #aaa; }

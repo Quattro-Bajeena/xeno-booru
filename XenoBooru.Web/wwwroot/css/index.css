@@ -22,12 +22,11 @@ ul {
 h1, h2, h3, h4, h5 {
   margin: 0; }
 
-a {
+a, .link-button {
   text-decoration: none;
   color: #f84848; }
-
-a:hover {
-  color: #ffcdcd; }
+  a:hover, .link-button:hover {
+    color: #ffcdcd; }
 
 .tag-Normal {
   color: #f84848; }
@@ -88,11 +87,52 @@ footer {
 .nav-button:active {
   background-color: #a10606; }
 
+.link-button {
+  background-color: transparent;
+  text-decoration: none;
+  color: #f84848;
+  color: turquoise; }
+  .link-button:hover {
+    color: #ffcdcd; }
+
 .status-notice {
-  background-color: #201f1f;
+  background-color: #121010;
   border: 2px solid #aaa;
   margin: 1em;
   padding: 1em; }
+
+.link-button {
+  padding: 0;
+  cursor: pointer;
+  font-size: 1em;
+  border: none;
+  display: inline;
+  background-color: transparent;
+  text-decoration: none;
+  color: #f84848; }
+  .link-button:hover {
+    color: #ffcdcd; }
+
+.form-table th {
+  background-color: #413f3f;
+  min-width: 100px;
+  max-width: 200px;
+  padding: 0 10px;
+  text-align: end; }
+
+.form-table p {
+  font-weight: normal;
+  font-size: 0.9em; }
+
+.list-table {
+  width: 100%; }
+  .list-table th {
+    text-align: left; }
+  .list-table td {
+    padding: 1px 4px;
+    background-color: #413f3f; }
+  .list-table tr:nth-child(even) td {
+    background-color: #5b5858; }
 
 body {
   grid-template-areas: "header" "content" "footer";

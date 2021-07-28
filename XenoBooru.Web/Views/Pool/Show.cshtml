@@ -1,0 +1,33 @@
+﻿@model XenoBooru.Core.Models.Pool
+
+@{
+	ViewData["Title"] = "Pool id:";
+}
+
+@section Stylesheets{
+	<link rel="stylesheet" href="~/css/pool.css" />
+}
+
+
+@if (Model.Entires.Count == 0)
+{
+	<h4>It's okay not to feel `whole'. Even if you feel only partly complete, if you repeat that enough, it'll eventually be `whole'. A part... is better than zero</h4>
+}
+
+<div id="pool-info">
+	<h3>@Model.Name</h3>
+	<h5>Creator: @Model.Creator</h5>
+</div>
+
+<ul id="pool-entries">
+
+	@foreach (PoolEntry entry in Model.Entires)
+	{
+		<li>
+			<a asp-controller="Post" asp-action="Show" asp-route-id="@entry.Post.Id">
+				<div class="entry-preview">POST id is @entry.Post.Id</div>
+			</a>
+		</li>
+	}
+</ul>
+

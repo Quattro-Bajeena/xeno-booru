@@ -16,58 +16,51 @@ namespace XenoBooru.Web.Controllers
 		private readonly PostService _posts;
 		private readonly TagService _tags;
 		private readonly CommentService _comments;
+		private readonly PoolService _pools;
 		private readonly IOptions<AppConfig> _config;
 
-		public PostController(PostService posts, TagService tags, CommentService comments,  IOptions<AppConfig> config)
+		public PostController(PostService posts, TagService tags, CommentService comments, PoolService pools, IOptions<AppConfig> config)
 		{
 			_posts = posts;
 			_tags = tags;
 			_comments = comments;
-			_config = config;
+			_pools = pools;
 
+			_config = config;
 		}
 
 		public IActionResult Index(string tags)
 		{
-			string[] tagsArr;
-			bool includePending;
-			if (tags != null)
-			{
-				tagsArr = tags.Split(' ');
-				includePending = false;
-			}
-			else
-			{
-				tagsArr = new string[0];
-				includePending = true;
-			}
-				
-			var posts = _posts.GetFiltered(tagsArr, includePending);
+			var posts = _posts.GetFiltered(tags);
 			var tagsDisplayed = _tags.GetFromPosts(posts);
 
-			var viewModel = new PostSearchViewModel();
-			viewModel.Posts = posts.ToList();
-			viewModel.Tags = tagsDisplayed;
-			viewModel.SearchedTagsStr = tags;
-
+			var viewModel = new PostSearchViewModel
+			{
+				Posts = posts.ToList(),
+				Tags = tagsDisplayed,
+				SearchedTagsStr = tags
+			};
 			return View(viewModel);
 		}
 
 
 		public IActionResult Show(int? id)
 		{
-			Post post = null;
+			Post post;
 			if (id == null || id < 1 || (post = _posts.Get((int)id)) == null)
 			{
 				return NotFound();
 			}
 
 
-			PostViewModel viewModel = new PostViewModel();
-			viewModel.Post = post;
-			viewModel.Comments = _comments.GetFromPost(post.Id);
-			viewModel.Tags = _tags.GetFromPost(post.Id).ToList();
-			viewModel.DataUrl = $"{_config.Value.StorageUrl}/{post.FileName}";
+			var viewModel = new PostViewModel
+			{
+				Post = post,
+				Comments = _comments.GetFromPost(post.Id),
+				Tags = _tags.GetFromPost(post.Id).ToList(),
+				PoolEntries = _pools.GetPostEntries(post.Id),
+				DataUrl = $"{_config.Value.StorageUrl}/{post.FileName}"
+			};
 
 
 			return View(viewModel);
@@ -90,7 +83,7 @@ namespace XenoBooru.Web.Controllers
 			//var tagsLst = _tags.GetFromString(tags);
 			int id = _posts.Add(post, tags);
 
-			return RedirectToAction("Show", new {id = id });
+			return RedirectToAction("Show", new { id });
 		}
 
 		[HttpPost]

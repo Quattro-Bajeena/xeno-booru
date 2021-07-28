@@ -19,7 +19,7 @@
 	//background-color: green;
 	height: 600px;
 	border-style: dashed;
-	margin-bottom: 50px;
+	margin-bottom: 20px;
 	position: relative;
 
 	&-controls {
@@ -62,6 +62,13 @@
 	min-width: 500px;
 	max-width: 1000px;
 	margin: 50px 0;
+}
+
+
+
+#edit-comment-switch{
+	margin: 10px 0;
+	
 }
 
 #edit {

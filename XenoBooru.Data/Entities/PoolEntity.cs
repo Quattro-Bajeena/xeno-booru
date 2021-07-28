@@ -15,6 +15,6 @@ namespace XenoBooru.Data.Entities
 		[StringLength(50)]
 		public string Creator { get; set; }
 		public DateTime Created { get; set; }
-		public ICollection<PostEntity> Posts { get; set; }
+		public ICollection<PoolEntryEntity> Entires { get; set; }
 	}
 }

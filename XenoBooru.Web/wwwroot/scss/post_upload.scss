@@ -17,18 +17,7 @@ body {
 }
 
 #upload {
-	th {
-		background-color: lighten($background-color, 10%);
-		min-width: 100px;
-		max-width: 200px;
-		padding: 0 10px;
-		text-align: end;
-	}
-
-	p {
-		font-weight: normal;
-		font-size: 0.9em;
-	}
+	
 
 	input {
 		width: 300px;

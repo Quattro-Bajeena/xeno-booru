@@ -14,6 +14,7 @@ const parent = document.getElementById("render");
 const render_controls = document.getElementById("render-controls");
 const texture_filtering_checkbox = document.getElementById("texture-filtering-checkbox");
 const fullscreen_checkbox = document.getElementById("fullscreen-checkbox");
+const wireframe_checkbox = document.getElementById("wireframe-checkbox");
 const controls_list = document.getElementById("controls-list");
 
 
@@ -22,10 +23,11 @@ console.log(map_url);
 let minDistance = 1000;
 let maxDistance = 7000;
 
-if (init()) {
+try {
+    init();
     render();
-}
-else {
+} catch (error) {
+    console.error(error);
     console.log("Couldn't initialize 3D viewer");
 }
 
@@ -85,6 +87,7 @@ function init(){
     window.addEventListener( 'resize', onWindowResize );
     texture_filtering_checkbox.addEventListener('change', toggleTextureFiltering);
     fullscreen_checkbox.addEventListener('change', fullScreenToggle);
+    wireframe_checkbox.addEventListener("change", toggleWireframe);
     document.addEventListener("keydown", fullScreenToggle);
     controls_list.addEventListener("change", changeControls);
 
@@ -203,7 +206,26 @@ function toggleTextureFiltering(event){
     }
 }
 
+function toggleWireframe(event) {
+    for (const object of map.children) {
+        object.traverse(function (child) {
+            if (child.isMesh && child.material.map != null) {
 
+                if (event.currentTarget.checked) {
+                    child.material.wireframe = true;
+                }
+                else {
+                    child.material.wireframe = false;
+                }
+
+                child.material.map.needsUpdate = true;
+                child.material.needsUpdate = true;
+
+            }
+        });
+
+    }
+}
 
 function fullScreenToggle(event) {
     

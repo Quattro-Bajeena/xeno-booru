@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using XenoBooru.Data.Entities;
 
 namespace XenoBooru.Data
 {
@@ -18,9 +19,11 @@ namespace XenoBooru.Data
 
 
 
-		public DbSet<Entities.PostEntity> Posts { get; set; }
-		public DbSet<Entities.CommentEntity> Comments { get; set; }
-		public DbSet<Entities.TagEntity> Tags { get; set; }
-		public DbSet<Entities.PoolEntity> Pools { get; set; }
+		public DbSet<PostEntity> Posts { get; set; }
+		public DbSet<CommentEntity> Comments { get; set; }
+		public DbSet<TagEntity> Tags { get; set; }
+		public DbSet<PoolEntity> Pools { get; set; }
+		public DbSet<PoolEntryEntity> PoolEntries { get; set; }
+
 	}
 }

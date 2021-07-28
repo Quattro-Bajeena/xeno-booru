@@ -16,6 +16,8 @@ namespace XenoBooru.Services
 			CreateMap<PostEntity, Post>().ReverseMap();
 			CreateMap<TagEntity, Tag>().ReverseMap();
 			CreateMap<CommentEntity, Comment>().ReverseMap();
+			CreateMap<PoolEntity, Pool>().ReverseMap();
+			CreateMap<PoolEntryEntity, PoolEntry>().ReverseMap();
 		}
 	}
 }

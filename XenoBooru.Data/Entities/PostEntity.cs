@@ -22,6 +22,6 @@ namespace XenoBooru.Data.Entities
 
 		public ICollection<TagEntity> Tags { get; set; }
 		public ICollection<CommentEntity> Comments { get; set; }
-		public ICollection<PoolEntity> Pools { get; set; }
+		public ICollection<PoolEntryEntity> PoolsEntries { get; set; }
 	}
 }

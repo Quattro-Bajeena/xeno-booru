@@ -14,6 +14,12 @@
 - checking file extesion with the post type
 
 - pools
+	- show all pools
+	- show all posts belonging to pool
+	- show next and previous on posts that are in a pool
+	- adding posts to pool
+	- changing post order in pool
+
 - sending files
 - post minatures
 
@@ -21,6 +27,9 @@
 - js highlight tags when creating new post to indicate type or the fact that it doesnt exists
 
 # DONE
+- pools
+	- show next and previous on posts that are in a pool
+
 - pending posts
 
 - adding, updating, deleting posts backend

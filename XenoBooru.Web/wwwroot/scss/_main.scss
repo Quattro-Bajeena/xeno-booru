@@ -10,7 +10,7 @@ $link-color: #f84848;
 $hover-link-color: #ffcdcd;
 $background-color: #272626;
 $secondary-color: #aaa;
-$dark-color: #201f1f;
+$dark-color: #121010;
 
 $normal-tag-color: $link-color;
 $post-type-tag-color: #ffe96c;
@@ -46,14 +46,15 @@ h1, h2,h3,h4, h5{
 	
 }
 
-a{
+a, .link-button{
 	text-decoration: none;
 	color: $link-color;
+
+	&:hover{
+		color: $hover-link-color;
+	}
 }
 
-a:hover{
-	color: $hover-link-color;
-}
 
 .tag-Normal {
 	color: $normal-tag-color;

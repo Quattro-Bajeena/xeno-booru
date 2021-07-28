@@ -43,10 +43,12 @@ namespace XenoBooru.Web
 			services.AddScoped<IPostRepository, SQLPostRepository>();
 			services.AddScoped<ICommentRepository, SQLCommentRepository>();
 			services.AddScoped<ITagRepository, SQLTagRepository>();
+			services.AddScoped<IPoolRepository, SQLPoolRepository>();
 
 			services.AddScoped<PostService>();
 			services.AddScoped<CommentService>();
 			services.AddScoped<TagService>();
+			services.AddScoped<PoolService>();
 
 			services.AddAutoMapper(typeof(PostService));
 

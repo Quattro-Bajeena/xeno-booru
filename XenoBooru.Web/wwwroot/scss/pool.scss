@@ -1,6 +1,7 @@
 ﻿@import 'main';
 @import 'classes';
 
+
 body {
 	grid-template-areas: "header" "content" "footer";
 	grid-template-columns: 1fr;
@@ -11,18 +12,16 @@ body {
 	grid-area: content;
 }
 
-#tags {
 
-	#posts-col{
-		width: 60px;
-	}
+#pool-entries {
+	display: flex;
+	flex-wrap: wrap;
 
-	#name-col{
-
-	}
-
-	#type-col{
+	.entry-preview {
+		height: 150px;
 		width: 200px;
+		border: 1px solid $link-color;
+		margin: 2px;
+		background-color: $secondary-color;
 	}
-
 }

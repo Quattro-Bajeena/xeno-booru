@@ -1,0 +1,1 @@
+DBCC CHECKIDENT ('[Pools]', RESEED, 0);

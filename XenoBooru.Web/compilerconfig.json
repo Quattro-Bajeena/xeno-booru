@@ -1,22 +1,26 @@
 ﻿[
-    {
-        "outputFile": "wwwroot/css/index.css",
-        "inputFile": "wwwroot/scss/index.scss"
-    },
-    {
-        "outputFile": "wwwroot/css/post_index.css",
-        "inputFile": "wwwroot/scss/post_index.scss"
-    },
-    {
-        "outputFile": "wwwroot/css/post_show.css",
-        "inputFile": "wwwroot/scss/post_show.scss"
-    },
-    {
-        "outputFile": "wwwroot/css/post_upload.css",
-        "inputFile": "wwwroot/scss/post_upload.scss"
-    },
-    {
-        "outputFile": "wwwroot/css/tag_index.css",
-        "inputFile": "wwwroot/scss/tag_index.scss"
-    }
+  {
+    "outputFile": "wwwroot/css/index.css",
+    "inputFile": "wwwroot/scss/index.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/post_index.css",
+    "inputFile": "wwwroot/scss/post_index.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/post_show.css",
+    "inputFile": "wwwroot/scss/post_show.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/post_upload.css",
+    "inputFile": "wwwroot/scss/post_upload.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/tag_index.css",
+    "inputFile": "wwwroot/scss/tag_index.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/pool.css",
+    "inputFile": "wwwroot/scss/pool.scss"
+  }
 ]

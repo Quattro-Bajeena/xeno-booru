@@ -12,6 +12,7 @@ namespace XenoBooru.Web.ViewModels
 		public Post Post { get; set; }
 		public IEnumerable<Comment> Comments { get; set; }
 		public ICollection<Tag> Tags { get; set; }
-		public IEnumerable<Pool> Pools { get; set; }
+		public IEnumerable<PoolEntry> PoolEntries { get; set; }
+		
 	}
 }

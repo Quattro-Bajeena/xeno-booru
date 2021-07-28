@@ -1,0 +1,32 @@
+﻿@model IEnumerable<XenoBooru.Core.Models.Pool>
+
+@{
+	ViewData["Title"] = "Pools";
+}
+
+
+@section Stylesheets{
+	<link rel="stylesheet" href="~/css/pool.css" />
+}
+
+<table id="pools" class="list-table">
+	<thead>
+		<tr>
+			<th id="name-col">Name</th>
+			<th id="creator-col">Creator</th>
+			<th id="posts-col">Posts</th>
+			<th id="created-col">Created</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (Pool pool in Model)
+		{
+		<tr>
+			<td><a asp-action="Show" asp-route-id="@pool.Id">@pool.Name</a></td>
+			<td>@pool.Creator</td>
+			<td>@pool.Entires.Count</td>
+			<td>@pool.Created.ToString("dd/MM/yyyy")</td>
+		</tr>
+		}
+	</tbody>
+</table>

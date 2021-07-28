@@ -43,10 +43,24 @@
 	<div class="sidebar-section" id="options">
 		<h4>Options</h4>
 		<ul>
-			<li><a href="">Edit</a></li>
-			<li><a href="">Add tag</a></li>
+			<li><button class="link-button">Like</button></li>
+			<li><button class="link-button switch-button edit-post-button">Edit</button></li>
 			<li><a href="@Model.DataUrl" download>Download</a></li>
 		</ul>
+	</div>
+}
+
+
+@foreach (PoolEntry entry in Model.PoolEntries)
+{
+	<div class="status-notice">
+		@if (entry.PreviousPostId != null)
+		{<a asp-route-id="@entry.PreviousPostId">🡨Previous</a>}
+		&nbsp;
+		@if (entry.NextPostId != null)
+		{<a asp-route-id="@entry.NextPostId">Next🡪</a>}
+		&nbsp;|&nbsp;
+		This post is #@entry.Position in the <a asp-controller="Pool" asp-action="Show" asp-route-id="@entry.Pool.Id">@entry.Pool.Name</a> pool
 	</div>
 }
 
@@ -73,7 +87,15 @@
 		break;
 }
 
-<form id="edit" method="post" asp-action="Update" asp-route-id="@Model.Post.Id">
+<div id="edit-comment-switch">
+	<h3>
+		<button class="link-button switch-button edit-post-button">Edit</button>
+		&nbsp;|&nbsp;
+		<button class="link-button switch-button comments-post-button">Comments</button>
+	</h3>
+</div>
+
+<form id="edit" method="post" asp-action="Update" asp-route-id="@Model.Post.Id" style="display:none">
 	<h3>Edit</h3>
 	<table>
 		<tbody>
@@ -134,5 +156,5 @@
 
 
 @section Scripts{
-
+	<script src="/js/option_switching.js" type="module"></script>
 }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using XenoBooru.Data;
 
 namespace XenoBooru.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210726134236_AddedPoolEntries")]
+    partial class AddedPoolEntries
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -80,7 +82,12 @@ namespace XenoBooru.Data.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<int?>("PostEntityId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("PostEntityId");
 
                     b.ToTable("Pools");
                 });
@@ -196,6 +203,13 @@ namespace XenoBooru.Data.Migrations
                     b.Navigation("Post");
                 });
 
+            modelBuilder.Entity("XenoBooru.Data.Entities.PoolEntity", b =>
+                {
+                    b.HasOne("XenoBooru.Data.Entities.PostEntity", null)
+                        .WithMany("Pools")
+                        .HasForeignKey("PostEntityId");
+                });
+
             modelBuilder.Entity("XenoBooru.Data.Entities.PoolEntryEntity", b =>
                 {
                     b.HasOne("XenoBooru.Data.Entities.PoolEntity", "Pool")
@@ -205,7 +219,7 @@ namespace XenoBooru.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("XenoBooru.Data.Entities.PostEntity", "Post")
-                        .WithMany("PoolsEntries")
+                        .WithMany()
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -224,7 +238,7 @@ namespace XenoBooru.Data.Migrations
                 {
                     b.Navigation("Comments");
 
-                    b.Navigation("PoolsEntries");
+                    b.Navigation("Pools");
                 });
 #pragma warning restore 612, 618
         }

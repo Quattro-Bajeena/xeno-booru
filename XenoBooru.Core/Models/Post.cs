@@ -31,7 +31,7 @@ namespace XenoBooru.Core.Models
 		public bool Pending { get; set; }
 		public ICollection<Tag> Tags { get; set; }
 		public ICollection<Comment> Comments { get; set; }
-		public ICollection<Pool> Pools { get; set; }
+		public ICollection<PoolEntry> PoolsEntries { get; set; }
 
 		
 	}
