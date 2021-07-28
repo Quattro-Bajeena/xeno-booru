@@ -1,12 +1,14 @@
 # TODO
 ## Important
-- post minatures
+- creating miatures for levels
 - admin authentication
 - js highlight tags when creating new post to indicate type or the fact that it doesnt exists
 - likes
+- highlining posts hwen you hover over a tag
 
 ## Less important
 
+- post minatures
 - adding, updaing, deleting tags
 	- backed
 	- frontend

@@ -13,6 +13,7 @@ namespace XenoBooru.Data.Entities
 		public string Type { get; set; }
 		[Required]
 		public string FileName { get; set; }
+		public string ThumbnailFileName { get; set; }
 		public string Name { get; set; }
 		public string Source { get; set; }
 		public string Description { get; set; }

@@ -3,18 +3,22 @@
 @import 'classes';
 
 
-#posts{
+#posts {
+	display: flex;
+	flex-wrap: wrap;
 
-    display: flex;
-    flex-wrap: wrap;
+	.post-preview {
+		box-sizing: border-box;
+		height: 150px;
+		width: 150px;
+		object-fit: cover;
+		margin: 4px;
+		background-color: $secondary-color;
 
-    .post-preview{
-        height: 150px;
-        width: 150px;
-        border: 1px solid $link-color;
-        margin: 2px;
-        background-color: $secondary-color;
-    }
+		&:hover {
+			border: 3px solid $link-color;
+		}
+	}
 }
 
 
@@ -27,7 +31,6 @@
     text-align: center;
 
     .nav-button{
-        width: fit-content;
         margin: 0 5px;
     }
 }

@@ -11,5 +11,7 @@ namespace XenoBooru.Web.ViewModels
 		public string SearchedTagsStr { get; set; }
 		public ICollection<Post> Posts { get; set; }
 		public IEnumerable<Tag> Tags { get; set; }
+		public string ContainerUrl { get; set; }
+		public string AudioThumbnailFileName { get; set; }
 	}
 }

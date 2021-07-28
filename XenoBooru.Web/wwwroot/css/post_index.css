@@ -198,11 +198,14 @@ body {
   display: flex;
   flex-wrap: wrap; }
   #posts .post-preview {
+    box-sizing: border-box;
     height: 150px;
     width: 150px;
-    border: 1px solid #f84848;
-    margin: 2px;
+    object-fit: cover;
+    margin: 4px;
     background-color: #aaa; }
+    #posts .post-preview:hover {
+      border: 3px solid #f84848; }
 
 #paginator {
   display: flex;
@@ -210,5 +213,4 @@ body {
   margin: 20px;
   text-align: center; }
   #paginator .nav-button {
-    width: fit-content;
     margin: 0 5px; }

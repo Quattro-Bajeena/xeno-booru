@@ -40,7 +40,9 @@ namespace XenoBooru.Web.Controllers
 			{
 				Posts = posts.ToList(),
 				Tags = tagsDisplayed,
-				SearchedTagsStr = tags
+				SearchedTagsStr = tags,
+				ContainerUrl = $"{_config.Value.StorageUrl}/{_config.Value.StorageContainer}",
+				AudioThumbnailFileName = _config.Value.AudioThumbnailFileName
 			};
 			return View(viewModel);
 		}
@@ -61,7 +63,7 @@ namespace XenoBooru.Web.Controllers
 				Comments = _comments.GetFromPost(post.Id),
 				Tags = _tags.GetFromPost(post.Id).ToList(),
 				PoolEntries = _pools.GetPostEntries(post.Id),
-				DataUrl = $"{_config.Value.StorageUrl}/{post.FileName}"
+				DataUrl = $"{_config.Value.StorageUrl}/{_config.Value.StorageContainer}/{post.FileName}"
 			};
 
 

@@ -1,5 +1,5 @@
 ﻿@model XenoBooru.Web.ViewModels.PostSearchViewModel
-
+@using XenoBooru.Core.Utilities
 @{
 	ViewData["Title"] = "Maps";
 }
@@ -41,7 +41,7 @@
 	{
 		<li>
 			<a asp-controller="Post" asp-action="Show" asp-route-id="@post.Id">
-				<div class="post-preview">POST id is @post.Id</div>
+				<img class="post-preview" src="@PostUtilities.ThumbnailUrl(Model.ContainerUrl, Model.AudioThumbnailFileName, post)">
 			</a>
 		</li>
 	}

@@ -8,5 +8,8 @@ namespace XenoBooru.Web.Services
 	public class AppConfig
 	{
 		public string StorageUrl { get; set; }
+		public string StorageContainer { get; set; }
+		public string AudioThumbnailFileName { get; set; }
+		public string Password { get; set; }
 	}
 }
