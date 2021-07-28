@@ -37,9 +37,10 @@ namespace XenoBooru.Web.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult AddPoolEntry(PoolEntry entry)
+		public IActionResult AddPoolEntry(int id, int postId)
 		{
-			return null;
+			_pools.AddPoolEntry(id, postId);
+			return RedirectToAction("Show", new { id });
 		}
 	}
 }

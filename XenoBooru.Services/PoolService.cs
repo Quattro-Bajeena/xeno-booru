@@ -59,5 +59,10 @@ namespace XenoBooru.Services
 			var entries = _mapper.Map<IEnumerable<PoolEntry>>(entriesDb);
 			return entries;
 		}
+
+		public void AddPoolEntry(int poolId, int postId)
+		{
+			_poolRepository.AddPoolEntry(poolId, postId);
+		}
 	}
 }

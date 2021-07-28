@@ -14,7 +14,7 @@ namespace XenoBooru.Data.Repositories.Interfaces
 		IEnumerable<PoolEntity> GetAll();
 		IEnumerable<PoolEntity> GetFiltered(string query);
 		int Add(PoolEntity pool);
-		void AddPost(int id, PostEntity post);
+		void AddPoolEntry(int poolId, int postID);
 		void RemovePost(int id, int postId);
 		IEnumerable<PoolEntryEntity> GetByPost(int postId);
 		(int?, int?) AdjacmentPostId(PoolEntryEntity entry);

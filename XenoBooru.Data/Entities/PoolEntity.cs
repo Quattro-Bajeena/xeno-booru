@@ -14,6 +14,7 @@ namespace XenoBooru.Data.Entities
 		public string Name { get; set; }
 		[StringLength(50)]
 		public string Creator { get; set; }
+		public string Description { get; set; }
 		public DateTime Created { get; set; }
 		public ICollection<PoolEntryEntity> Entires { get; set; }
 	}

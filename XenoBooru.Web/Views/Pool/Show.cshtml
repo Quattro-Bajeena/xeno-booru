@@ -17,7 +17,26 @@
 <div id="pool-info">
 	<h3>@Model.Name</h3>
 	<h5>Creator: @Model.Creator</h5>
+	<p>@Model.Description</p>
 </div>
+
+<form id="pool-add" method="post" asp-action="AddPoolEntry" asp-route-id="@Model.Id">
+	<h4>Add post to pool</h4>
+	<table class="form-table">
+		<tbody>
+			<tr>
+				<th><label for="post-id">Post ID</label></th>
+				<td><input type="text" id="post-id" name="postId" autocomplete="off" /></td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td></td>
+				<td><button>Add</button></td>
+			</tr>
+		</tfoot>
+	</table>
+</form>
 
 <ul id="pool-entries">
 

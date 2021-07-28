@@ -10,7 +10,7 @@
 
 
 
-<form id="upload" method="post" asp-controller="Post" asp-action="Upload">
+<form id="upload" method="post" enctype="multipart/form-data" asp-controller="Post" asp-action="Upload">
 	<table class="form-table">
 		<tbody>
 			<tr>
@@ -22,8 +22,8 @@
 				<td><textarea id="upload-description" name="Description"></textarea></td>
 			</tr>
 			<tr>
-				<th><label for="upload-filename">File name</label></th>
-				<td><input type="text" id="upload-filename" name="FileName" autocomplete="off"/></td>
+				<th><label for="upload-file">File</label></th>
+				<td><input type="file" id="upload-file" name="file"/></td>
 			</tr>
 			<tr>
 				<th><label for="upload-type">Type</label></th>

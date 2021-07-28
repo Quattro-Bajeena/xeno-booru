@@ -1,0 +1,14 @@
+﻿@{
+	ViewData["Title"] = "Testing";
+}
+
+
+@section Stylesheets{
+	<link rel="stylesheet" href="~/css/index.css" />
+}
+
+
+<form asp-action="UploadFile" enctype="multipart/form-data" method="post">
+	<input type="file" name="file" />
+	<button type="submit">Upload</button>
+</form>

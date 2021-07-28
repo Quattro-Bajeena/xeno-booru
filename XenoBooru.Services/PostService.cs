@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Azure.Storage.Blobs;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,12 +17,14 @@ namespace XenoBooru.Services
 		private readonly IPostRepository _postRepository;
 		private readonly ITagRepository _tagRepository;
 		private readonly IMapper _mapper;
+		private readonly BlobContainerClient _blobContainer;
 
-		public PostService(IPostRepository postRepository, ITagRepository tagRepository, IMapper mapper)
+		public PostService(IPostRepository postRepository, ITagRepository tagRepository, IMapper mapper, BlobContainerClient blobContainer)
 		{
 			_postRepository = postRepository;
 			_tagRepository = tagRepository;
 			_mapper = mapper;
+			_blobContainer = blobContainer;
 		}
 
 		public Post Get(int id)
@@ -52,8 +56,17 @@ namespace XenoBooru.Services
 		}
 
 
-		public int Add(Post post, string tagsStr)
+		public int Add(Post post, string tagsStr, Stream fileStream)
 		{
+
+			var filename = Path.GetFileNameWithoutExtension(post.FileName);
+			var extension = Path.GetExtension(post.FileName);
+
+			post.FileName = $"{filename}_{Guid.NewGuid()}{extension}";
+
+			BlobClient blobClient = _blobContainer.GetBlobClient(post.FileName);
+			blobClient.Upload(fileStream);
+
 			var postDb = _mapper.Map<PostEntity>(post);
 
 			postDb.Tags = _tagRepository.GetFromStr(tagsStr);

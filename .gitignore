@@ -1,6 +1,10 @@
+# My ignores
 XenoBooru.Web/wwwroot/lib/
-
 three/
+appsettings*.json
+FeatureTesting/
+
+# Visual studio
 
 .vscode/*
 !.vscode/settings.json

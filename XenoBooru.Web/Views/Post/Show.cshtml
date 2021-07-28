@@ -29,12 +29,13 @@
 	<div class="sidebar-section" id="decription">
 		<h4>Description</h4>
 		<p>
-			@Model.Post.Description;
+			@Model.Post.Description
 		</p>
 	</div>
 	<div class="sidebar-section" id="statistics">
 		<h4>Statistics</h4>
 		<ul>
+			<li>Id: @Model.Post.Id</li>
 			<li>Type: @Model.Post.Type</li>
 			<li>Credits: @Model.Post.Credits</li>
 			<li>Likes: @Model.Post.Likes</li>
@@ -74,8 +75,8 @@
 
 @switch (Model.Post.Type)
 {
-	case PostType.Level:
-		@await Html.PartialAsync("_LevelPartial.cshtml", Model.DataUrl);
+	case PostType.Model:
+		@await Html.PartialAsync("_ModelPartial.cshtml", Model.DataUrl);
 		break;
 	case PostType.Artwork:
 		@await Html.PartialAsync("_ArtworkPartial.cshtml", Model.DataUrl);

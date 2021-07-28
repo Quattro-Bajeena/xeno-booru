@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XenoBooru.Web", "XenoBooru.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XenoBooru.Data", "XenoBooru.Data\XenoBooru.Data.csproj", "{BEDB41B6-D9DD-4E47-8C53-DE1B54A32380}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XenoBooru.Services", "XenoBooru.Services\XenoBooru.Services.csproj", "{0A5B072F-585B-473B-9830-621259958F7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XenoBooru.Services", "XenoBooru.Services\XenoBooru.Services.csproj", "{0A5B072F-585B-473B-9830-621259958F7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeatureTesting", "FeatureTesting\FeatureTesting.csproj", "{3B69CC81-B9AE-40CF-A5CE-1516D4B44BC8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{0A5B072F-585B-473B-9830-621259958F7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A5B072F-585B-473B-9830-621259958F7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A5B072F-585B-473B-9830-621259958F7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B69CC81-B9AE-40CF-A5CE-1516D4B44BC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B69CC81-B9AE-40CF-A5CE-1516D4B44BC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B69CC81-B9AE-40CF-A5CE-1516D4B44BC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B69CC81-B9AE-40CF-A5CE-1516D4B44BC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

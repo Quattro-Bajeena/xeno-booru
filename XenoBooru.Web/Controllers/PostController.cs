@@ -8,6 +8,8 @@ using XenoBooru.Core.Models;
 using XenoBooru.Services;
 using XenoBooru.Web.ViewModels;
 using XenoBooru.Web.Services;
+using Azure.Storage.Blobs;
+using Microsoft.AspNetCore.Http;
 
 namespace XenoBooru.Web.Controllers
 {
@@ -73,15 +75,16 @@ namespace XenoBooru.Web.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult Upload(Post post, string tags)
+		public IActionResult Upload(Post post, string tags, IFormFile file)
 		{
 			if (ModelState.IsValid == false)
 			{
 				return RedirectToAction("Index");
 			}
 
-			//var tagsLst = _tags.GetFromString(tags);
-			int id = _posts.Add(post, tags);
+			
+			post.FileName = file.FileName;
+			int id = _posts.Add(post, tags, file.OpenReadStream());
 
 			return RedirectToAction("Show", new { id });
 		}
@@ -94,11 +97,11 @@ namespace XenoBooru.Web.Controllers
 			return RedirectToAction("Show", new { id = post.Id });
 		}
 
-		
+		[HttpDelete]
 		public IActionResult Delete(int id)
 		{
 			_posts.Remove(id);
-			return RedirectToAction("Show");
+			return RedirectToAction("Index");
 		}
 	}
 }

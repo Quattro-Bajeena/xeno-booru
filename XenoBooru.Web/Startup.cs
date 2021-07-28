@@ -1,4 +1,5 @@
 using AutoMapper;
+using Azure.Storage.Blobs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -22,7 +23,6 @@ namespace XenoBooru.Web
 
 		public Startup(IConfiguration configuration)
 		{
-
 			Configuration = configuration;	 
 		}
 
@@ -40,6 +40,10 @@ namespace XenoBooru.Web
 			services.Configure<AppConfig>(Configuration.GetSection("AppConfig"));
 			services.AddOptions();
 
+			services.AddScoped(x =>
+				new BlobContainerClient(Configuration.GetConnectionString("AzureStorage"), Configuration.GetSection("AppConfig")["StorageContainer"])
+			);
+
 			services.AddScoped<IPostRepository, SQLPostRepository>();
 			services.AddScoped<ICommentRepository, SQLCommentRepository>();
 			services.AddScoped<ITagRepository, SQLTagRepository>();
@@ -52,6 +56,10 @@ namespace XenoBooru.Web
 
 			services.AddAutoMapper(typeof(PostService));
 
+
+			
+
+		
 			services.AddControllersWithViews().AddNewtonsoftJson().AddRazorRuntimeCompilation();
 		}
 

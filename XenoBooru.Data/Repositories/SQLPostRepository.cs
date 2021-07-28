@@ -37,8 +37,9 @@ namespace XenoBooru.Data.Repositories
 
 		public void Remove(int id)
 		{
-			var post = _context.Posts.Find(id);
+			var post = _context.Posts.Include(post => post.Comments).Where(post => post.Id == id).FirstOrDefault();
 			_context.Posts.Remove(post);
+			_context.SaveChanges();
 		}
 
 		public void Update(PostEntity updatedPost)

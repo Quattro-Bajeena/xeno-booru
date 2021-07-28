@@ -56,19 +56,24 @@ namespace XenoBooru.Data.Repositories
 			return pool.Id;
 		}
 
-		public void AddPost(int id, PostEntity post)
+		public void AddPoolEntry(int poolId, int postId)
 		{
-			var pool = _context.Pools.Where(pool => pool.Id == id).Include(pool => pool.Entires).Single();
+			var pool = _context.Pools.Where(pool => pool.Id == poolId).Include(pool => pool.Entires).FirstOrDefault();
+			var post = _context.Posts.Where(post => post.Id == postId).FirstOrDefault();
 
-			var newEntry = new PoolEntryEntity
+			if(pool != null && post != null)
 			{
-				Post = post,
-				Pool = pool,
-				Position = pool.Entires.Count + 1
-			};
+				var newEntry = new PoolEntryEntity
+				{
+					Post = post,
+					Pool = pool,
+					Position = pool.Entires.Count + 1
+				};
 
-			pool.Entires.Add(newEntry);
-			_context.SaveChanges();
+				pool.Entires.Add(newEntry);
+				_context.SaveChanges();
+			}
+			
 		}
 		public void RemovePost(int id, int postId)
 		{
