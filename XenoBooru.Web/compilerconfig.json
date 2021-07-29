@@ -1,34 +1,42 @@
 ﻿[
     {
-    "outputFile": "wwwroot/css/index.css",
-    "inputFile": "wwwroot/scss/index.scss"
+        "outputFile": "wwwroot/css/index.css",
+        "inputFile": "wwwroot/scss/index.scss",
+        "minify": {"enabled": false}
     },
     {
-    "outputFile": "wwwroot/css/post_index.css",
-    "inputFile": "wwwroot/scss/post_index.scss"
+        "outputFile": "wwwroot/css/post_index.css",
+        "inputFile": "wwwroot/scss/post_index.scss",
+        "minify": { "enabled": false }
     },
     {
-    "outputFile": "wwwroot/css/post_show.css",
-    "inputFile": "wwwroot/scss/post_show.scss"
+        "outputFile": "wwwroot/css/post_show.css",
+        "inputFile": "wwwroot/scss/post_show.scss",
+        "minify": { "enabled": false }
     },
     {
-    "outputFile": "wwwroot/css/post_upload.css",
-    "inputFile": "wwwroot/scss/post_upload.scss"
+        "outputFile": "wwwroot/css/post_upload.css",
+        "inputFile": "wwwroot/scss/post_upload.scss",
+        "minify": { "enabled": false }
     },
     {
-    "outputFile": "wwwroot/css/tag_index.css",
-    "inputFile": "wwwroot/scss/tag_index.scss"
+        "outputFile": "wwwroot/css/tag_index.css",
+        "inputFile": "wwwroot/scss/tag_index.scss",
+        "minify": { "enabled": false }
     },
     {
         "outputFile": "wwwroot/css/pool.css",
-        "inputFile": "wwwroot/scss/pool.scss"
+        "inputFile": "wwwroot/scss/pool.scss",
+        "minify": { "enabled": false }
     },
     {
         "outputFile": "wwwroot/css/login.css",
-        "inputFile": "wwwroot/scss/login.scss"
+        "inputFile": "wwwroot/scss/login.scss",
+        "minify": { "enabled": false }
     },
     {
         "outputFile": "wwwroot/css/comment.css",
-        "inputFile": "wwwroot/scss/comment.scss"
+        "inputFile": "wwwroot/scss/comment.scss",
+        "minify": { "enabled": false }
     }
 ]
