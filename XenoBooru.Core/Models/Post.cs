@@ -9,7 +9,7 @@ namespace XenoBooru.Core.Models
 
 	public enum PostType
 	{
-		Default, Artwork, Music, Model
+		Default, Artwork, Audio, Model
 	}
 
 	public class Post
@@ -18,6 +18,7 @@ namespace XenoBooru.Core.Models
 		public Post()
 		{
 			Pending = true;
+			Likes = 0;
 		}
 
 		public int Id { get; set; }

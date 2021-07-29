@@ -14,7 +14,7 @@ namespace XenoBooru.Core.Utilities
 			return Enum.GetValues(typeof(PostType)).Cast<PostType>().Where(type => type != PostType.Default).Select(type => type.ToString());
 		}
 
-		public static string ThumbnailUrl(string storageUrl, string audioThumbnailFileName, Post post)
+		public static string ThumbnailUrl(string containerUrl, string audioThumbnailFileName, Post post)
 		{
 			string fileName = post.ThumbnailFileName;
 			if(fileName == null)
@@ -23,14 +23,14 @@ namespace XenoBooru.Core.Utilities
 				{
 					fileName = post.FileName;
 				}
-				else if (post.Type == PostType.Music)
+				else if (post.Type == PostType.Audio)
 				{
 					fileName = audioThumbnailFileName;
 				}
 				
 			}
 
-			return storageUrl + "/" + fileName;
+			return containerUrl + "/" + fileName;
 		}
 	}
 }

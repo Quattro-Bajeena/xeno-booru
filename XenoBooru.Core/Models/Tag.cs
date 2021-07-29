@@ -15,5 +15,7 @@ namespace XenoBooru.Core.Models
 		public TagType Type { get; set; }
 		public ICollection<Post> Posts { get; set; }
 		public int PostCount { get; set; }
+
+		public override string ToString() => Name.Replace('_', ' ');
 	}
 }

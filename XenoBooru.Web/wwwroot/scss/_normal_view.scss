@@ -1,0 +1,11 @@
+﻿body {
+	grid-template-areas: "header" "content" "footer";
+	grid-template-columns: 1fr;
+	grid-template-rows: auto 1fr auto;
+}
+
+#content {
+	grid-area: content;
+}
+
+

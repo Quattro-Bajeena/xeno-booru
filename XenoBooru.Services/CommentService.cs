@@ -21,6 +21,13 @@ namespace XenoBooru.Services
 			_mapper = mapper;
 		}
 
+		public IEnumerable<Comment> GetAll()
+		{
+			var commentsDb = _repository.GetAll();
+			var comments = _mapper.Map<IEnumerable<Comment>>(commentsDb);
+			return comments;
+		}
+
 		public IEnumerable<Comment> GetFromPost(int postId)
 		{
 			var commentsDb = _repository.GetFromPost(postId);

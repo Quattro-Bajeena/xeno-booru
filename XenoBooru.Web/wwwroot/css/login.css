@@ -145,8 +145,5 @@ body {
 #content {
   grid-area: content; }
 
-#tags #posts-col {
-  width: 60px; }
-
-#tags #type-col {
-  width: 200px; }
+#login-form {
+  padding: 20px 5px; }

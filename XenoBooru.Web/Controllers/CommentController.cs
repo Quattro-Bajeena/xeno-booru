@@ -18,10 +18,11 @@ namespace XenoBooru.Web.Controllers
 			_comments = comments;
 		}
 
-		//public IActionResult Index()
-		//{
-		//	return View();
-		//}
+		public IActionResult Index()
+		{
+			var comments = _comments.GetAll();
+			return View(comments);
+		}
 
 		[HttpPost]
 		public IActionResult Add(Comment comment)

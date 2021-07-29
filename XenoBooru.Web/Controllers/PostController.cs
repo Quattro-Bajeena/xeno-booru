@@ -20,8 +20,10 @@ namespace XenoBooru.Web.Controllers
 		private readonly CommentService _comments;
 		private readonly PoolService _pools;
 		private readonly IOptions<AppConfig> _config;
+		private readonly AuthenticationService _authentication;
 
-		public PostController(PostService posts, TagService tags, CommentService comments, PoolService pools, IOptions<AppConfig> config)
+		public PostController(PostService posts, TagService tags, CommentService comments, PoolService pools, IOptions<AppConfig> config,
+			AuthenticationService authentication)
 		{
 			_posts = posts;
 			_tags = tags;
@@ -29,6 +31,7 @@ namespace XenoBooru.Web.Controllers
 			_pools = pools;
 
 			_config = config;
+			_authentication = authentication;
 		}
 
 		public IActionResult Index(string tags)
@@ -83,6 +86,10 @@ namespace XenoBooru.Web.Controllers
 			{
 				return RedirectToAction("Index");
 			}
+			if (_authentication.CheckAuthentication() == false)
+			{
+				return RedirectToAction("Upload");
+			}
 
 			
 			post.FileName = file.FileName;
@@ -94,14 +101,23 @@ namespace XenoBooru.Web.Controllers
 		[HttpPost]
 		public IActionResult Update(int id, Post post, string tags)
 		{
+			if (_authentication.CheckAuthentication() == false)
+			{
+				return RedirectToAction("Show", new { id });
+			}
+
 			post.Id = id;
 			_posts.Update(post, tags);
-			return RedirectToAction("Show", new { id = post.Id });
+			return RedirectToAction("Show", new { id });
 		}
 
 		[HttpDelete]
 		public IActionResult Delete(int id)
 		{
+			if (_authentication.CheckAuthentication() == false)
+			{
+				return RedirectToAction("Show", new { id });
+			}
 			_posts.Remove(id);
 			return RedirectToAction("Index");
 		}

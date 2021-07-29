@@ -11,6 +11,31 @@
 	<link rel="stylesheet" href="~/css/post_show.css" />
 }
 
+@section Notices{
+
+	@foreach (PoolEntry entry in Model.PoolEntries)
+	{
+		<div class="status-notice">
+			@if (entry.PreviousPostId != null)
+			{<a asp-route-id="@entry.PreviousPostId">🡨Previous</a>}
+			&nbsp;
+			@if (entry.NextPostId != null)
+			{<a asp-route-id="@entry.NextPostId">Next🡪</a>}
+			&nbsp;|&nbsp;
+			This post is #@entry.Position in the <a asp-controller="Pool" asp-action="Show" asp-route-id="@entry.Pool.Id">@entry.Pool.Name</a> pool
+		</div>
+	}
+
+	@if (Model.Post.Pending)
+	{
+		<div id="pending-notice" class="status-notice">
+			This post is pending moderator approval.
+		</div>
+	}
+}
+
+
+
 @section Sidebar{
 	<form class="sidebar-section" id="search"><h4>Search</h4><input class="search-bar" type="text"></form>
 	<div class="sidebar-section" id="tags">
@@ -18,7 +43,7 @@
 		<ul>
 			@foreach (Tag tag in Model.Tags)
 			{
-				<li><a asp-action="Index" asp-route-tags="@tag.Name" class="tag-@tag.Type">@tag.Name</a>&nbsp;<span class="tag-count">@tag.PostCount</span></li>
+				<li><a asp-action="Index" asp-route-tags="@tag.Name" class="tag-@tag.Type">@tag.ToString()</a>&nbsp;<span class="tag-count">@tag.PostCount</span></li>
 			}
 		</ul>
 	</div>
@@ -44,7 +69,10 @@
 	<div class="sidebar-section" id="options">
 		<h4>Options</h4>
 		<ul>
-			<li><button class="link-button">Like</button></li>
+			@if (Model.Post.Pending == false)
+			{
+				<li><button class="link-button">Like</button></li>
+			}
 			<li><button class="link-button switch-button edit-post-button">Edit</button></li>
 			<li><a href="@Model.DataUrl" download>Download</a></li>
 		</ul>
@@ -52,25 +80,7 @@
 }
 
 
-@foreach (PoolEntry entry in Model.PoolEntries)
-{
-	<div class="status-notice">
-		@if (entry.PreviousPostId != null)
-		{<a asp-route-id="@entry.PreviousPostId">🡨Previous</a>}
-		&nbsp;
-		@if (entry.NextPostId != null)
-		{<a asp-route-id="@entry.NextPostId">Next🡪</a>}
-		&nbsp;|&nbsp;
-		This post is #@entry.Position in the <a asp-controller="Pool" asp-action="Show" asp-route-id="@entry.Pool.Id">@entry.Pool.Name</a> pool
-	</div>
-}
 
-@if (Model.Post.Pending)
-{
-	<div id="pending-notice" class="status-notice">
-		This post is pending moderator approval.
-	</div>
-}
 
 
 @switch (Model.Post.Type)
@@ -81,7 +91,7 @@
 	case PostType.Artwork:
 		@await Html.PartialAsync("_ArtworkPartial.cshtml", Model.DataUrl);
 		break;
-	case PostType.Music:
+	case PostType.Audio:
 		@await Html.PartialAsync("_MusicPartial.cshtml", Model.DataUrl);
 		break;
 	default:

@@ -70,6 +70,9 @@ footer {
   margin-top: 30px; }
   footer .footer-section {
     margin: 0 10px; }
+  footer img {
+    height: 32px;
+    vertical-align: middle; }
 
 .nav-button {
   width: 100px;
@@ -97,9 +100,9 @@ footer {
 
 .status-notice {
   background-color: #121010;
-  border: 2px solid #aaa;
-  margin: 1em;
-  padding: 1em; }
+  border: 1px solid #aaa;
+  margin: 0.8em;
+  padding: 0.7em; }
 
 .link-button {
   padding: 0;
@@ -135,7 +138,7 @@ footer {
     background-color: #5b5858; }
 
 body {
-  grid-template-areas: "header"  "content"  "footer";
+  grid-template-areas: "header" "content" "footer";
   grid-template-columns: 1fr;
   grid-template-rows: auto 1fr auto; }
 

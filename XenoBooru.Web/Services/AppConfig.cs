@@ -10,6 +10,6 @@ namespace XenoBooru.Web.Services
 		public string StorageUrl { get; set; }
 		public string StorageContainer { get; set; }
 		public string AudioThumbnailFileName { get; set; }
-		public string Password { get; set; }
+		public List<string> Passwords { get; set; }
 	}
 }

@@ -10,6 +10,7 @@ body {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr auto;
     justify-items: center;
+    font-size: 1.5em;
 }
 
 header{
@@ -37,7 +38,7 @@ main {
 }
 
 footer{
-    width: 50%;
-    min-width: fit-content;
+    
+    
     justify-content:space-around;
 }

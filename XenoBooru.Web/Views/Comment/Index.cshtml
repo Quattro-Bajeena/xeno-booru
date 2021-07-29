@@ -1,0 +1,33 @@
+﻿@model IEnumerable<XenoBooru.Core.Models.Comment>
+
+@{
+	ViewData["Title"] = "Comments";
+}
+
+
+@section Stylesheets{
+	<link rel="stylesheet" href="~/css/comment.css" />
+}
+
+<table id="comments" class="list-table">
+	<thead>
+		<tr>
+			<th id="author-col">Author</th>
+			<th id="content-col">Content</th>
+			<th id="post-col">Post</th>
+			<th id="created-col">Created</th>
+
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (Comment comment in Model)
+		{
+		<tr>
+			<td>@comment.Author</td>
+			<td><p>@comment.Content</p></td>
+			<td><a asp-controller="Index" asp-action="Show" asp-route-id="@comment.PostId">@comment.Post.Name</a></td>
+			<td>@comment.Date.ToString("g")</td>
+		</tr>
+		}
+	</tbody>
+</table>

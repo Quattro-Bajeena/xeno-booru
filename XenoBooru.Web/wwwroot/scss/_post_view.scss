@@ -2,6 +2,7 @@
 body{
     grid-template-areas: 
 	"header header"
+	"notices notices"
 	"sidebar content"
 	"footer footer";
 
@@ -48,6 +49,9 @@ body{
 	}
 }
 
+#notices {
+	grid-area: notices;
+}
 
 #content{
 	grid-area: content;

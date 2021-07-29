@@ -145,8 +145,14 @@ body {
 #content {
   grid-area: content; }
 
-#tags #posts-col {
-  width: 60px; }
+#author-col {
+  min-width: 130px; }
 
-#tags #type-col {
-  width: 200px; }
+#content-col {
+  width: 100%; }
+
+#post-col {
+  min-width: 150px; }
+
+#created-col {
+  min-width: 140px; }

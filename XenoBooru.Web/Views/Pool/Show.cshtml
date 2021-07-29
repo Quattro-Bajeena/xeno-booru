@@ -1,5 +1,5 @@
 ﻿@model XenoBooru.Core.Models.Pool
-
+@using XenoBooru.Core.Utilities;
 @{
 	ViewData["Title"] = "Pool id:";
 }
@@ -44,7 +44,7 @@
 	{
 		<li>
 			<a asp-controller="Post" asp-action="Show" asp-route-id="@entry.Post.Id">
-				<div class="entry-preview">POST id is @entry.Post.Id</div>
+				<img class="entry-preview" src="@PostUtilities.ThumbnailUrl((string)ViewData["ContainerUrl"],(string)ViewData["AudioThumbnailFileName"], entry.Post)">
 			</a>
 		</li>
 	}

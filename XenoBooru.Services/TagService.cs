@@ -71,18 +71,5 @@ namespace XenoBooru.Services
 			return tags.Values.OrderByDescending(tag => tag.PostCount).Take(limit);
 		}
 
-		public ICollection<Tag> GetFromString(string tagsStr)
-		{
-			var tags = new List<Tag>();
-			var tagsStrLst = tagsStr.Split(' ');
-
-			foreach (var tagStr in tagsStrLst)
-			{
-				var tagDb = _tagRepository.Get(tagStr);
-				var tag = _mapper.Map<Tag>(tagDb);
-				tags.Add(tag);
-			}
-			return tags;
-		}
 	}
 }

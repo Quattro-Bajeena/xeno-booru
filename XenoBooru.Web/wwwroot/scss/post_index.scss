@@ -1,24 +1,46 @@
 @import 'main';
-@import 'content_page';
+@import 'post_view';
 @import 'classes';
 
+$pending-color: #7e7e7e;
+$liked-color: #ffd800;
+$select-color: #d0423f;
+$thumbnail-border-thickness: 3px;
 
 #posts {
-	display: flex;
-	flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap;
 
-	.post-preview {
-		box-sizing: border-box;
-		height: 150px;
-		width: 150px;
-		object-fit: cover;
-		margin: 4px;
-		background-color: $secondary-color;
+    .post-preview {
+        margin: 4px;
+        height: 150px;
+        width: 150px;
+        box-sizing: border-box;
 
-		&:hover {
-			border: 3px solid $link-color;
-		}
-	}
+        &:hover {
+            border: $thumbnail-border-thickness solid $select-color;
+
+            img {
+                border: none;
+            }
+        }
+    }
+
+    img {
+        box-sizing:border-box;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+
+.liked {
+    border: $thumbnail-border-thickness solid $liked-color;
+}
+
+.pending {
+    filter: grayscale(90%) opacity(50%);
 }
 
 

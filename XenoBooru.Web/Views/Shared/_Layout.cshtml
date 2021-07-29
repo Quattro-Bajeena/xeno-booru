@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using XenoBooru.Web.Services;
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -10,18 +11,29 @@
 <body>
 	<header>
 		<div id="title">
-			<a asp-controller="Home" asp-action="Index"><h1>Xenogears Map Viewer</h1></a>
+			<a asp-controller="Home" asp-action="Index"><h1>Xenobooru</h1></a>
 		</div>
 
 		<nav id="menu">
 			<ul id="menu-options">
-				<li><a asp-controller="Post" asp-action="Index">Posts</a></li>
-				<li><a asp-controller="Tag" asp-action="Index">Tags</a></li>
-				<li><a asp-controller="Pool" asp-action="Index">Pools</a></li>
-				<li><a href="">Comments</a></li>
+				<li><a asp-controller="Post" asp-action="Index">Posts</a></li>&nbsp;|&nbsp;
+				<li><a asp-controller="Tag" asp-action="Index">Tags</a></li>&nbsp;|&nbsp;
+				<li><a asp-controller="Pool" asp-action="Index">Pools</a></li>&nbsp;|&nbsp;
+				<li><a asp-controller="Comment" asp-action="Index">Comments</a></li>&nbsp;|&nbsp;
+				<li><a asp-controller="Home" asp-action="Login">Login</a></li>
 			</ul>
 		</nav>
 	</header>
+
+	<div id="notices">
+		@if (AuthenticationService.CheckAuthFailure(TempData))
+		{
+			<div class="status-notice">
+				You are not authenticated <a asp-controller="Home" asp-action="Login">Login page</a>
+			</div>
+		}
+		@RenderSection("Notices", required: false)
+	</div>
 
 	<div class="sidebar">
 		@RenderSection("Sidebar", required: false)
@@ -38,13 +50,13 @@
 		</div>
 		<div class="footer-section">
 			Find me on:&nbsp;
-			<a href="https://www.youtube.com/channel/UCINPzzjxRzGOq4Pex5r3EKg" target="_blank">YouTube</a>/
-			<a href="https://twitter.com/turtle_guy_" target="_blank">Twitter</a>/
-			<a href="https://github.com/Quattro-Bajeena" target="_blank">GitHub</a>
+			<a href="https://www.youtube.com/channel/UCINPzzjxRzGOq4Pex5r3EKg" target="_blank"><img src="~/icons/YouTube.png" /></a>&nbsp;|
+			<a href="https://twitter.com/turtle_guy_" target="_blank"><img src="~/icons/Twitter.png" /></a>&nbsp;|
+			<a href="https://github.com/Quattro-Bajeena" target="_blank"><img src="~/icons/GitHub.png" /></a>
 		</div>
 		<div class="footer-section">
 			Thanks to:&nbsp;
-			<a href="https://github.com/Akari1982" target="_blank">Akari</a>/
+			<a href="https://github.com/Akari1982" target="_blank">Akari</a>&nbsp;|&nbsp;
 			<a href="https://twitter.com/prozacchiwawa" target="_blank">Prozacchiwa</a>
 		</div>
 

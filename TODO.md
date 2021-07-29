@@ -1,13 +1,13 @@
 # TODO
 ## Important
 - creating miatures for levels
-- admin authentication
+
 - js highlight tags when creating new post to indicate type or the fact that it doesnt exists
 - likes
 - highlining posts hwen you hover over a tag
 
 ## Less important
-
+- admin authentication
 - post minatures
 - adding, updaing, deleting tags
 	- backed
@@ -23,6 +23,7 @@
 - checking file extesion with the post type
 
 - pools
+	- adding
 	- changing post order in pool
 
 - paging

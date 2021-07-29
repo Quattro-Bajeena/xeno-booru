@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,7 +22,7 @@ namespace XenoBooru.Data.Repositories
 
 		public IEnumerable<CommentEntity> GetAll()
 		{
-			return _context.Comments;
+			return _context.Comments.Include(comment => comment.Post).OrderByDescending(comment => comment.Date);
 		}
 
 		public IEnumerable<CommentEntity> GetFromPost(int postId)

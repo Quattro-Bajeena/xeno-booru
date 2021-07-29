@@ -19,7 +19,7 @@
 		<ul>
 			@foreach (Tag tag in Model.Tags)
 			{
-				<li><a asp-route-tags="@tag.Name" class="tag-@tag.Type">@tag.Name</a>&nbsp;<span class="tag-count">@tag.PostCount</span></li>
+				<li><a asp-route-tags="@tag.Name" class="tag-@tag.Type">@tag.ToString()</a>&nbsp;<span class="tag-count">@tag.PostCount</span></li>
 			}
 		</ul>
 	</div>
@@ -39,9 +39,20 @@
 
 	@foreach (Post post in Model.Posts)
 	{
-		<li>
+		<li class="post-preview">
 			<a asp-controller="Post" asp-action="Show" asp-route-id="@post.Id">
-				<img class="post-preview" src="@PostUtilities.ThumbnailUrl(Model.ContainerUrl, Model.AudioThumbnailFileName, post)">
+				@if (post.Pending)
+				{
+					<img class="pending" src="@PostUtilities.ThumbnailUrl(Model.ContainerUrl, Model.AudioThumbnailFileName, post)">
+				}
+				else if (post.Likes > 10)
+				{
+					<img class="liked" src="@PostUtilities.ThumbnailUrl(Model.ContainerUrl, Model.AudioThumbnailFileName, post)">
+				}
+				else
+				{
+					<img src="@PostUtilities.ThumbnailUrl(Model.ContainerUrl, Model.AudioThumbnailFileName, post)">
+				}
 			</a>
 		</li>
 	}

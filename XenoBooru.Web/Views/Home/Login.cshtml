@@ -1,0 +1,42 @@
+﻿@{
+	ViewData["Title"] = "Login";
+}
+
+
+@section Stylesheets{
+	<link rel="stylesheet" href="~/css/login.css" />
+}
+
+
+<form id="login-form" asp-action="Authenticate" method="post">
+	<p>
+		For now this page doesnt have full-fledged account system.<br />
+		If you want permission to upload and edit content DM me on<br />
+		Twitter at <a href="https://twitter.com/turtle_guy_" target="_blank">@@turtle_guy_</a>,<br />
+		Discord as Paraon#1585,<br />
+		or send an email: motmen001@gmail.com
+	</p>
+	<table class="form-table">
+		<tbody>
+			<tr>
+				<th><label for="password-input">Password</label></th>
+				<td><input id="password-input" type="password" name="password"></td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td></td>
+				<td><button>Login</button></td>
+			</tr>
+		</tfoot>
+	</table>
+	@if ((bool?)ViewData["authorized"] != null)
+	{
+		@if ((bool?)ViewData["authorized"] == true)
+		{<h4>Logged in as administrator</h4> }
+		else if ((bool?)ViewData["authorized"] == false)
+		{ <h4>Wrong password</h4>}
+	}
+</form>
+
+
