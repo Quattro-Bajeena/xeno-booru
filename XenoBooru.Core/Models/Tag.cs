@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
+
 
 namespace XenoBooru.Core.Models
 {
@@ -13,6 +15,7 @@ namespace XenoBooru.Core.Models
 		public string Name { get; set; }
 		public string Description { get; set; }
 		public TagType Type { get; set; }
+		[JsonIgnore]
 		public ICollection<Post> Posts { get; set; }
 		public int PostCount { get; set; }
 

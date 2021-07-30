@@ -19,7 +19,9 @@
 		<ul>
 			@foreach (Tag tag in Model.Tags)
 			{
-				<li><a asp-route-tags="@tag.Name" class="tag-@tag.Type">@tag.ToString()</a>&nbsp;<span class="tag-count">@tag.PostCount</span></li>
+			<li class="tag" id="tag-@tag.Name">
+				<a class="tag-@tag.Type" asp-route-tags="@tag.Name">@tag.ToString()</a>&nbsp;<span class="tag-count">@tag.PostCount</span>
+			</li>
 			}
 		</ul>
 	</div>
@@ -39,7 +41,7 @@
 
 	@foreach (Post post in Model.Posts)
 	{
-		<li class="post-preview">
+		<li id="post-@post.Id" class="post-preview">
 			<a asp-controller="Post" asp-action="Show" asp-route-id="@post.Id">
 				@if (post.Pending)
 				{
@@ -65,3 +67,12 @@
 	<a class="nav-button">3</a>
 	<a class="nav-button">NEXT</a>
 </div>*@
+
+@section Scripts{ 
+	<script>
+		const posts = @Html.Raw(Json.Serialize(Model.Posts));
+		const tags = @Html.Raw(Json.Serialize(Model.Tags));
+	</script>
+	<script src="~/js/tag_highlighting.js" type="module"></script>
+
+}

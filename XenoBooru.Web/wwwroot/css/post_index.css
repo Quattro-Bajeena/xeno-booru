@@ -203,20 +203,25 @@ body {
 #posts {
   display: flex;
   flex-wrap: wrap; }
-  #posts .post-preview {
-    margin: 4px;
-    height: 150px;
-    width: 150px;
-    box-sizing: border-box; }
-    #posts .post-preview:hover {
-      border: 3px solid #d0423f; }
-      #posts .post-preview:hover img {
-        border: none; }
   #posts img {
     box-sizing: border-box;
     width: 100%;
     height: 100%;
     object-fit: cover; }
+  #posts .post-preview {
+    margin: 4px;
+    height: 150px;
+    width: 150px;
+    box-sizing: border-box; }
+    #posts .post-preview:focus, #posts .post-preview:hover {
+      border: 3px solid #d0423f; }
+      #posts .post-preview:focus img, #posts .post-preview:hover img {
+        border: none; }
+
+.highlighted-post {
+  border: 3px solid #d0423f; }
+  .highlighted-post img {
+    border: none; }
 
 .liked {
   border: 3px solid #ffd800; }

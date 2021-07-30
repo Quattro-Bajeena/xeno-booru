@@ -15,7 +15,7 @@
 		<tbody>
 			<tr>
 				<th><label for="upload-name">Name</label></th>
-				<td><input type="text" id="upload-name" name="Name" autocomplete="off"/></td>
+				<td><input type="text" id="upload-name" name="Name" autocomplete="off" /></td>
 			</tr>
 			<tr>
 				<th><label for="upload-description">Description</label></th>
@@ -23,7 +23,7 @@
 			</tr>
 			<tr>
 				<th><label for="upload-file">File</label></th>
-				<td><input type="file" id="upload-file" name="file"/></td>
+				<td><input type="file" id="upload-file" name="file" /></td>
 			</tr>
 			<tr>
 				<th><label for="upload-type">Type</label></th>
@@ -38,14 +38,14 @@
 			</tr>
 			<tr>
 				<th><label for="upload-source">Source</label><p>In-game, artbook, CD, etc.</p></th>
-				<td><input id="upload-source" type="text" name="Source" autocomplete="off"/></td>
+				<td><input id="upload-source" type="text" name="Source" autocomplete="off" /></td>
 			</tr>
 			<tr>
 				<th>
 					<label for="upload-credits">Credits</label>
 					<p>Of course the true credit goes to the original authors, but here ackwnologe the person who ripped the in-game asset, scanned the artbook, etc.</p>
 				</th>
-				<td><input id="upload-credits" type="text" name="Credits" autocomplete="off"/></td>
+				<td><input id="upload-credits" type="text" name="Credits" autocomplete="off" /></td>
 			</tr>
 			<tr>
 				<th><label for="upload-tags">Tags</label><p>Separate tags with spaces</p></th>
@@ -61,3 +61,8 @@
 		</tfoot>
 	</table>
 </form>
+
+@section Scripts{
+	<script src="~/js/tag_highlighting.js" type="module"></script>
+
+}

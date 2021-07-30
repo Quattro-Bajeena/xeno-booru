@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using XenoBooru.Core.Models;
 using XenoBooru.Data.Repositories.Interfaces;
+using XenoBooru.Services.ViewModels;
 
 namespace XenoBooru.Services
 {
@@ -69,6 +70,13 @@ namespace XenoBooru.Services
 				}
 			}
 			return tags.Values.OrderByDescending(tag => tag.PostCount).Take(limit);
+		}
+
+		public IEnumerable<ExistingTagViewModel> GetExisting()
+		{
+			var tagsDb = _tagRepository.GetAll();
+			var tags = _mapper.Map<IEnumerable<ExistingTagViewModel>>(tagsDb);
+			return tags;
 		}
 
 	}

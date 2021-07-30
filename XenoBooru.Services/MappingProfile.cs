@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using XenoBooru.Core.Models;
 using XenoBooru.Data.Entities;
+using XenoBooru.Services.ViewModels;
 
 namespace XenoBooru.Services
 {
@@ -18,6 +19,7 @@ namespace XenoBooru.Services
 			CreateMap<CommentEntity, Comment>().ReverseMap();
 			CreateMap<PoolEntity, Pool>().ReverseMap();
 			CreateMap<PoolEntryEntity, PoolEntry>().ReverseMap();
+			CreateMap<TagEntity, ExistingTagViewModel>();
 		}
 	}
 }

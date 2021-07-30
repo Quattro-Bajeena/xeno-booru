@@ -20,5 +20,10 @@ namespace XenoBooru.Web.Controllers
 			var allTags = _tags.GetAll();
 			return View(allTags);
 		}
+
+		public IActionResult AllTags()
+		{
+
+		}
 	}
 }

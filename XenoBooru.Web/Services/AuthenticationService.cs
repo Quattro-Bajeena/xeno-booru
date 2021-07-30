@@ -8,9 +8,20 @@ using System.Threading.Tasks;
 
 namespace XenoBooru.Web.Services
 {
+
+	public enum AuthenticationLevel { Admin, Moderator};
+
 	public class AuthenticationService
 	{
 		private readonly string authentication_key = "authenticated";
+		//private const string admin_key = "admin_authenticated";
+		//private const string moderator_key = "moderator_authenticated";
+		//private readonly Dictionary<AuthenticationLevel, string> authStrings = new()
+		//{
+		//	{AuthenticationLevel.Admin, admin_key },
+		//	{AuthenticationLevel.Moderator, moderator_key }
+		//};
+
 		private readonly IHttpContextAccessor _httpContextAccessor;
 		private readonly ITempDataDictionaryFactory _tempDataDictionaryFactory;
 		private readonly IOptions<AppConfig> _config;
@@ -29,6 +40,8 @@ namespace XenoBooru.Web.Services
 			var tempData = _tempDataDictionaryFactory.GetTempData(httpContext);
 
 			bool authorized = Convert.ToBoolean(httpContext.Session.GetInt32(authentication_key) ?? 0);
+
+
 			if(authorized == false)
 			{
 				tempData["AuthFailure"] = true;

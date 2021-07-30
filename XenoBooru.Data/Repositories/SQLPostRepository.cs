@@ -80,16 +80,16 @@ namespace XenoBooru.Data.Repositories
 
 		}
 
-		public IList<PostEntity> GetFromPool(int poolId)
-		{
-			var pool = _context.Pools.Where(pool => pool.Id == poolId).Include(pool => pool.Entires).Single();
-			var entries = pool.Entires;
-			var posts = entries.OrderBy(entry => entry.Position).Select(entry => entry.Post);
+		//public IList<PostEntity> GetFromPool(int poolId)
+		//{
+		//	var pool = _context.Pools.Where(pool => pool.Id == poolId).Include(pool => pool.Entires).Single();
+		//	var entries = pool.Entires;
+		//	var posts = entries.OrderBy(entry => entry.Position).Select(entry => entry.Post);
 
-			return posts.ToList();
-		}
+		//	return posts.ToList();
+		//}
 
-		IEnumerable<PostEntity> IPostRepository.GetFromPool(int poolId)
+		public IEnumerable<PostEntity> GetFromPool(int poolId)
 		{
 			var entires = _context.PoolEntries.Where(entry => entry.PoolId == poolId);
 			var posts = entires.Select(entry => entry.Post);

@@ -5,11 +5,20 @@
 $pending-color: #7e7e7e;
 $liked-color: #ffd800;
 $select-color: #d0423f;
+$highlight-color: #cd459b;
 $thumbnail-border-thickness: 3px;
 
 #posts {
     display: flex;
     flex-wrap: wrap;
+
+    img {
+        
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 
     .post-preview {
         margin: 4px;
@@ -17,6 +26,7 @@ $thumbnail-border-thickness: 3px;
         width: 150px;
         box-sizing: border-box;
 
+        &:focus,
         &:hover {
             border: $thumbnail-border-thickness solid $select-color;
 
@@ -25,15 +35,15 @@ $thumbnail-border-thickness: 3px;
             }
         }
     }
-
-    img {
-        box-sizing:border-box;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
 }
 
+.highlighted-post {
+    border: $thumbnail-border-thickness solid $select-color;
+
+    img {
+        border: none;
+    }
+}
 
 .liked {
     border: $thumbnail-border-thickness solid $liked-color;

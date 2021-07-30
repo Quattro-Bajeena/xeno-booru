@@ -57,8 +57,10 @@ namespace XenoBooru.Web
 			services.AddScoped<PoolService>();
 
 			services.AddAutoMapper(typeof(PostService));
-		
-			services.AddControllersWithViews().AddNewtonsoftJson().AddRazorRuntimeCompilation();
+
+			services.AddControllersWithViews().AddRazorRuntimeCompilation().AddNewtonsoftJson(options => {
+				options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+			});
 
 			services.AddDistributedMemoryCache();
 			services.AddSession(options =>
@@ -70,6 +72,8 @@ namespace XenoBooru.Web
 
 			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 			services.AddScoped<AuthenticationService>();
+
+			
 		}
 
 

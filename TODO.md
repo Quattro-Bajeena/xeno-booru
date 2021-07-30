@@ -6,8 +6,11 @@
 - likes
 - highlining posts hwen you hover over a tag
 
+- About page
+
 ## Less important
-- admin authentication
+- account system
+
 - post minatures
 - adding, updaing, deleting tags
 	- backed
@@ -30,6 +33,7 @@
 
 
 # DONE
+- admin authentication
 - sending files
 - pools
 	- show all pools
