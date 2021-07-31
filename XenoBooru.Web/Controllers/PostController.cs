@@ -36,6 +36,7 @@ namespace XenoBooru.Web.Controllers
 
 		public IActionResult Index(string tags)
 		{
+			
 			var posts = _posts.GetFiltered(tags);
 			var tagsDisplayed = _tags.GetFromPosts(posts);
 

@@ -27,39 +27,21 @@ namespace XenoBooru.Web.Controllers
 			_authentication = authentication;
 		}
 
-		public IActionResult Index()
-		{
-			return View();
-		}
-
-		public IActionResult Login(bool? authorized)
+		public IActionResult Index() => View();
+		public IActionResult Login(bool authorized)
 		{
 			ViewData["authorized"] = authorized;
 			return View();
 		}
 
+		
+		public IActionResult About() => View();
+
 		[HttpPost]
 		public IActionResult Authenticate(string password)
 		{
-			//bool authorized = false;
-			//if (_config.Value.Passwords.Contains(password))
-			//{
-			//	HttpContext.Session.SetInt32("authenticated", 1);
-			//	authorized = true;
-			//}
-			//else
-			//{
-			//	HttpContext.Session.SetInt32("authenticated", 0);
-			//}
 			bool authorized = _authentication.Authenticate(password);
-			
 			return RedirectToAction("Login", new { authorized });
-		}
-
-
-		public IActionResult Testing()
-		{
-			return View();
 		}
 
 

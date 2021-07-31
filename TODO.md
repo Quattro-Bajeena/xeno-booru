@@ -2,7 +2,7 @@
 ## Important
 
 - creating miatures for levels
-- likes
+
 - About page
 
 ## Less important
@@ -31,6 +31,7 @@
 
 
 # DONE
+- likes
 - js highlight tags when creating new post to indicate type or the fact that it doesnt exists
 - post minatures
 - admin authentication

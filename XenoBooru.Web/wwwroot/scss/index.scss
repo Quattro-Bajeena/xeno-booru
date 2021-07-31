@@ -13,22 +13,23 @@ body {
     font-size: 1.5em;
 }
 
-header{
+header {
     grid-area: header;
     margin-top: 100px;
-    
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    h1{
-        font-size: 3em;
-        font-weight: bold;
+    #title {
+        text-align: center;
+    }
 
-        span{
-            font-style: oblique;
-        }
-        
+    h1 {
+        font-weight: bold;
+        font-size: 3em;
+    }
+
+    h2 {
     }
 }
 

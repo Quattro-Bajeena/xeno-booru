@@ -40,7 +40,7 @@ namespace XenoBooru.Services
 			bool includePending;
 			if (tags != null)
 			{
-				tagsArr = tags.Split(' ');
+				tagsArr = tags.Trim().Split(' ');
 				includePending = false;
 			}
 			else
