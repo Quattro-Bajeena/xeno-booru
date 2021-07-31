@@ -30,23 +30,30 @@ a, .link-button {
 
 .tag-Normal {
   color: #f84848; }
-  .tag-Normal:hover {
-    color: white; }
+
+a.tag-Normal:hover {
+  color: white; }
 
 .tag-PostType {
   color: #ffe96c; }
-  .tag-PostType:hover {
-    color: white; }
+
+a.tag-PostType:hover() {
+  color: white; }
 
 .tag-Location {
   color: #ff3da4; }
-  .tag-Location:hover {
-    color: white; }
+
+a.tag-Location:hover {
+  color: white; }
 
 .tag-Character {
   color: #9bb359; }
-  .tag-Character:hover {
-    color: #eff3e5; }
+
+a.tag-Character:hover {
+  color: #eff3e5; }
+
+.tag-NotFound {
+  color: #adadad; }
 
 header {
   grid-area: header; }
@@ -145,8 +152,54 @@ body {
 #content {
   grid-area: content; }
 
+.tag-input-Normal {
+  color: #810000; }
+
+.tag-input-PostType {
+  color: #6a3200; }
+
+.tag-input-Location {
+  color: #8c008c; }
+
+.tag-input-Character {
+  color: #1d6000; }
+
+.tag-input-NotFound {
+  color: #313131; }
+
+#tag-input {
+  resize: none; }
+
+.tag-input-container {
+  position: relative;
+  padding: 0; }
+
+#tag-input-styled,
+#tag-input {
+  display: block;
+  width: 300px;
+  height: 200px;
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+  font-size: 17px;
+  border: 0; }
+
+#tag-input {
+  color: transparent;
+  caret-color: black; }
+
+#tag-input-styled {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  pointer-events: none;
+  word-wrap: break-word; }
+
 #upload input {
   width: 300px; }
 
-#upload textarea {
+#upload #tag-input-styled,
+#upload #tag-input {
   width: 500px; }

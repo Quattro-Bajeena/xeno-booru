@@ -30,23 +30,30 @@ a, .link-button {
 
 .tag-Normal {
   color: #f84848; }
-  .tag-Normal:hover {
-    color: white; }
+
+a.tag-Normal:hover {
+  color: white; }
 
 .tag-PostType {
   color: #ffe96c; }
-  .tag-PostType:hover {
-    color: white; }
+
+a.tag-PostType:hover() {
+  color: white; }
 
 .tag-Location {
   color: #ff3da4; }
-  .tag-Location:hover {
-    color: white; }
+
+a.tag-Location:hover {
+  color: white; }
 
 .tag-Character {
   color: #9bb359; }
-  .tag-Character:hover {
-    color: #eff3e5; }
+
+a.tag-Character:hover {
+  color: #eff3e5; }
+
+.tag-NotFound {
+  color: #adadad; }
 
 header {
   grid-area: header; }

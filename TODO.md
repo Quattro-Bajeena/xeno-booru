@@ -2,7 +2,7 @@
 ## Important
 - creating miatures for levels
 
-- js highlight tags when creating new post to indicate type or the fact that it doesnt exists
+
 - likes
 - highlining posts hwen you hover over a tag
 
@@ -11,7 +11,7 @@
 ## Less important
 - account system
 
-- post minatures
+
 - adding, updaing, deleting tags
 	- backed
 	- frontend
@@ -33,6 +33,8 @@
 
 
 # DONE
+- js highlight tags when creating new post to indicate type or the fact that it doesnt exists
+- post minatures
 - admin authentication
 - sending files
 - pools

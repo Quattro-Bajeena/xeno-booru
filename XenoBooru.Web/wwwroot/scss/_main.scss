@@ -16,6 +16,7 @@ $normal-tag-color: $link-color;
 $post-type-tag-color: #ffe96c;
 $character-tag-color: #9bb359;
 $location-tag-color: #ff3da4;
+$not-found-tag-color: #adadad;
 $tag-hover-lighten: 40%;
 
 html{
@@ -57,33 +58,44 @@ a, .link-button{
 
 
 .tag-Normal{
-	color: $normal-tag-color;
-	&:hover {
-		color: lighten($normal-tag-color, $tag-hover-lighten);
-	}
+	color: $normal-tag-color;	
 }
-.tag-PostType{
+
+a.tag-Normal:hover {
+	color: lighten($normal-tag-color, $tag-hover-lighten);
+}
+
+.tag-PostType {
 	color: $post-type-tag-color;
-	&:hover {
-		color: lighten($post-type-tag-color, $tag-hover-lighten);
-	}
 }
+a.tag-PostType:hover() {
+	color: lighten($post-type-tag-color, $tag-hover-lighten);
+}
+
 .tag-Location{
 	color: $location-tag-color;
-	&:hover {
-		color: lighten($location-tag-color, $tag-hover-lighten);
-	}
+}
+
+a.tag-Location:hover {
+	color: lighten($location-tag-color, $tag-hover-lighten);
 }
 
 .tag-Character{
 	color: $character-tag-color;
-	&:hover {
-		color: lighten($character-tag-color, $tag-hover-lighten);
-	}
+}
+
+a.tag-Character:hover {
+	color: lighten($character-tag-color, $tag-hover-lighten);
+}
+
+.tag-NotFound {
+	color: $not-found-tag-color;
 }
 
 
-header{
+
+
+header {
 	grid-area: header;
 	//background-color: yellow;
 
@@ -91,30 +103,26 @@ header{
 		font-size: 1.5em;
 		font-family: Xenogears;
 
-		a{
+		a {
 			color: $main-text-color;
 		}
-		
-	
 	}
 
 
-	#menu{
+	#menu {
 		//background-color: rgb(194, 194, 7);
 
-		&-options{
+		&-options {
 			//background-color: rgb(240, 240, 109);
 			display: flex;
 			justify-content: flex-start;
 			width: max-content;
 
-			li{
+			li {
 				margin: 0 5px;
 			}
-	
-		}	
+		}
 	}
-
 }
 
 

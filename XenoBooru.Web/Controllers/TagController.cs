@@ -21,9 +21,10 @@ namespace XenoBooru.Web.Controllers
 			return View(allTags);
 		}
 
-		public IActionResult AllTags()
+		public IActionResult GetExisting()
 		{
-
+			var tags = _tags.GetExisting();
+			return Json(tags);
 		}
 	}
 }

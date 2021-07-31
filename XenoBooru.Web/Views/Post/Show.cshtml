@@ -129,8 +129,11 @@
 				<td><input id="upload-credits" type="text" name="Credits" value="@Model.Post.Credits" /></td>
 			</tr>
 			<tr>
-				<th><label for="upload-tags">Tags</label></th>
-				<td><textarea id="upload-tags" class="tag-input" name="tags">@TagUtilities.ToString(Model.Tags)</textarea></td>
+				<th><label for="tag-input">Tags</label></th>
+				<td class="tag-input-container">
+					<div id="tag-input-styled"></div>
+					<textarea id="tag-input" name="tags" spellcheck="false">@TagUtilities.ToString(Model.Tags)</textarea>
+				</td>
 			</tr>
 		</tbody>
 		<tfoot>
@@ -167,5 +170,6 @@
 
 
 @section Scripts{
-	<script src="/js/option_switching.js" type="module"></script>
+	<script src="~/js/option_switching.js" type="module"></script>
+	<script src="~/js/tag_highlight_input.js" type="module"></script>
 }

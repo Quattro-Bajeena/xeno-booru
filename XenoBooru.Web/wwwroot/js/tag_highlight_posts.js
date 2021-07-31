@@ -6,7 +6,7 @@ function highlight_posts_with_tag(selected_tag) {
 
 
         if (selected_tag && post["tags"].filter(tag => tag["name"] == selected_tag).length > 0) {
-            console.log(post_elem);
+            //console.log(post_elem);
             post_elem.classList.add("highlighted-post");
         }
         else {
@@ -19,7 +19,7 @@ tags.forEach(tag => {
     let tag_elem = document.getElementById("tag-" + tag["name"]);
     let link_elem = tag_elem.querySelector("a");
 
-    console.log(tag["name"]);
+    //console.log(tag["name"]);
     link_elem.addEventListener("mouseover", event => {
         highlight_posts_with_tag(tag["name"]);
     });
@@ -28,5 +28,7 @@ tags.forEach(tag => {
     });
 });
 
-console.log(posts);
-console.log(tags);
+//console.log(posts);
+//console.log(tags);
+
+

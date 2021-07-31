@@ -1,0 +1,63 @@
+﻿$normal-tag-input-color: #810000;
+$post-type-tag-input-color: #6a3200;
+$character-tag-input-color: #1d6000;
+$location-tag-input-color: #8c008c;
+$not-found-tag-input-color: #313131;
+
+.tag-input-Normal {
+	color: $normal-tag-input-color;
+}
+
+.tag-input-PostType {
+	color: $post-type-tag-input-color;
+}
+
+
+.tag-input-Location {
+	color: $location-tag-input-color;
+}
+
+.tag-input-Character {
+	color: $character-tag-input-color;
+}
+
+
+.tag-input-NotFound {
+	color: $not-found-tag-input-color;
+}
+
+#tag-input {
+	resize: none;
+}
+
+.tag-input-container {
+	position: relative;
+	padding: 0;
+}
+
+#tag-input-styled,
+#tag-input {
+	display: block;
+	width: 300px;
+	height: 200px;
+	padding: 0;
+	margin: 0;
+	font-family: sans-serif;
+	font-size: 17px;
+	border: 0;
+}
+
+#tag-input {
+	color: transparent;
+	caret-color: black;
+}
+
+#tag-input-styled {
+	//font-weight: bold;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: transparent;
+	pointer-events: none;
+	word-wrap: break-word;
+}

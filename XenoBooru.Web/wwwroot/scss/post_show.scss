@@ -1,6 +1,7 @@
 @import 'main';
 @import 'post_view';
 @import 'classes';
+@import 'tag_highlight';
 
 
 
@@ -71,6 +72,8 @@
 	
 }
 
+
+
 #edit {
 	th {
 		background-color: lighten($background-color, 10%);
@@ -84,11 +87,9 @@
 		font-weight: normal;
 		font-size: 0.9em;
 	}
-
 	//input {
 	//	width: 300px;
 	//}
-
 	//textarea {
 	//	width: 500px;
 	//}

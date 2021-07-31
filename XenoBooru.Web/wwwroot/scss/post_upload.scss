@@ -2,17 +2,19 @@
 //@import 'content_page';
 @import 'classes';
 @import 'normal_view';
+@import 'tag_highlight';
 
 #upload {
-	
+
 
 	input {
 		width: 300px;
-		
 	}
 
-	textarea {
+	#tag-input-styled,
+	#tag-input {
 		width: 500px;
 	}
 }
+
 

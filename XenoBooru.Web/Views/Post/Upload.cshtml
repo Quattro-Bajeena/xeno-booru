@@ -48,8 +48,11 @@
 				<td><input id="upload-credits" type="text" name="Credits" autocomplete="off" /></td>
 			</tr>
 			<tr>
-				<th><label for="upload-tags">Tags</label><p>Separate tags with spaces</p></th>
-				<td><textarea id="upload-tags" name="tags"></textarea></td>
+				<th><label for="tag-input">Tags</label><p>Separate tags with spaces</p></th>
+				<td class="tag-input-container">
+					<div id="tag-input-styled"></div>
+					<textarea id="tag-input" name="tags" spellcheck="false"></textarea>
+				</td>
 			</tr>
 
 		</tbody>
@@ -63,6 +66,6 @@
 </form>
 
 @section Scripts{
-	<script src="~/js/tag_highlighting.js" type="module"></script>
+	<script src="~/js/tag_highlight_input.js" type="module"></script>
 
 }
