@@ -24,6 +24,7 @@ namespace XenoBooru.Data
 		public DbSet<TagEntity> Tags { get; set; }
 		public DbSet<PoolEntity> Pools { get; set; }
 		public DbSet<PoolEntryEntity> PoolEntries { get; set; }
+		public DbSet<UserLikeEntity> UserLikes { get; set; }
 
 	}
 }

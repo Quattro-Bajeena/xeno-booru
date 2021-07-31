@@ -9,18 +9,16 @@ html {
   height: 100%;
   margin: 0; }
 
-body {
-  background-color: #272626;
-  display: grid;
-  padding: 1em 3em;
-  color: #ffffff; }
-
 ul {
   list-style-type: none;
   padding: 0; }
 
 h1, h2, h3, h4, h5 {
   margin: 0; }
+
+.annotation {
+  font-size: 0.9em;
+  color: #aaa; }
 
 a, .link-button {
   text-decoration: none;
@@ -37,7 +35,7 @@ a.tag-Normal:hover {
 .tag-PostType {
   color: #ffe96c; }
 
-a.tag-PostType:hover() {
+a.tag-PostType:hover {
   color: white; }
 
 .tag-Location {
@@ -55,6 +53,15 @@ a.tag-Character:hover {
 .tag-NotFound {
   color: #adadad; }
 
+body {
+  background-color: #272626;
+  padding: 1em 3em;
+  color: #ffffff;
+  display: grid;
+  grid-template-areas: "header" "notices" "content" "footer";
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto; }
+
 header {
   grid-area: header; }
   header #title {
@@ -68,6 +75,12 @@ header {
     width: max-content; }
     header #menu-options li {
       margin: 0 5px; }
+
+#notices {
+  grid-area: notices; }
+
+#content {
+  grid-area: content; }
 
 footer {
   grid-area: footer;
@@ -143,14 +156,6 @@ footer {
     background-color: #413f3f; }
   .list-table tr:nth-child(even) td {
     background-color: #5b5858; }
-
-body {
-  grid-template-areas: "header" "content" "footer";
-  grid-template-columns: 1fr;
-  grid-template-rows: auto 1fr auto; }
-
-#content {
-  grid-area: content; }
 
 #tags #posts-col {
   width: 60px; }

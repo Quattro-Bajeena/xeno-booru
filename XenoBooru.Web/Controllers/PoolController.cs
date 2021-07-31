@@ -15,10 +15,13 @@ namespace XenoBooru.Web.Controllers
 	{
 		private readonly PoolService _pools;
 		private readonly IOptions<AppConfig> _config;
-		public PoolController(PoolService pools, IOptions<AppConfig> config)
+		private readonly AuthenticationService _authentication;
+		public PoolController(PoolService pools, IOptions<AppConfig> config,
+			AuthenticationService authentication)
 		{
 			_pools = pools;
 			_config = config;
+			_authentication = authentication;
 		}
 
 
@@ -29,9 +32,13 @@ namespace XenoBooru.Web.Controllers
 		}
 
 
-		public IActionResult Show(int id)
+		public IActionResult Show(int? id)
 		{
-			var pool = _pools.Get(id);
+			Pool pool;
+			if (id == null || id < 1 || (pool = _pools.Get((int)id)) == null)
+			{
+				return NotFound();
+			}
 
 			ViewData["ContainerUrl"] = _config.Value.StorageUrl + "/" + _config.Value.StorageContainer;
 			ViewData["AudioThumbnailFileName"] = _config.Value.AudioThumbnailFileName;
@@ -42,17 +49,18 @@ namespace XenoBooru.Web.Controllers
 		[HttpPost]
 		public IActionResult AddPool(Pool pool)
 		{
-			return null;
+			return BadRequest();
 		}
 
 		[HttpPost]
 		public IActionResult AddPoolEntry(int id, int postId)
 		{
-			if (Convert.ToBoolean(HttpContext.Session.GetInt32("authenticated") ?? 0) == false)
+			if (_authentication.CheckAuthentication() == false)
 			{
-				TempData["AuthFailure"] = true;
 				return RedirectToAction("Show", new { id });
 			}
+
+
 			_pools.AddPoolEntry(id, postId);
 			return RedirectToAction("Show", new { id });
 		}

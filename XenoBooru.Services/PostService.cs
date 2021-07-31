@@ -89,5 +89,15 @@ namespace XenoBooru.Services
 			_postRepository.Remove(id);
 		}
 
+		public void GiveLike(int id, string ip_adress)
+		{
+			_postRepository.GiveLike(id, ip_adress);
+		}
+
+		public bool UserLiked(int id, string ip_adress)
+		{
+			return _postRepository.UserLiked(id, ip_adress);
+		}
+
 	}
 }

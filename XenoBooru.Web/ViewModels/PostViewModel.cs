@@ -13,6 +13,7 @@ namespace XenoBooru.Web.ViewModels
 		public IEnumerable<Comment> Comments { get; set; }
 		public ICollection<Tag> Tags { get; set; }
 		public IEnumerable<PoolEntry> PoolEntries { get; set; }
+		public bool Liked { get; set; }
 		
 	}
 }

@@ -9,7 +9,7 @@ using XenoBooru.Data.Repositories.Interfaces;
 
 namespace XenoBooru.Data.Repositories
 {
-	public class SQLPostRepository : Interfaces.IPostRepository
+	public class SQLPostRepository : IPostRepository
 	{
 		private readonly AppDbContext _context;
 		public SQLPostRepository(AppDbContext context)
@@ -94,6 +94,39 @@ namespace XenoBooru.Data.Repositories
 			var entires = _context.PoolEntries.Where(entry => entry.PoolId == poolId);
 			var posts = entires.Select(entry => entry.Post);
 			return posts;
+		}
+
+		public void GiveLike(int id, string ip_adress)
+		{
+			var post = _context.Posts.Where(post => post.Id == id).FirstOrDefault();
+			var user_like = _context.UserLikes
+				.Where(like => like.PostId == id)
+				.Where(like => like.IpAdress == ip_adress)
+				.FirstOrDefault();
+
+			if (post != null && user_like == null)
+			{
+				user_like = new UserLikeEntity
+				{
+					PostId = id,
+					IpAdress = ip_adress,
+					Post = post
+				};
+
+				_context.UserLikes.Add(user_like);
+				post.Likes += 1;
+				_context.SaveChanges();
+
+			}
+		}
+
+		public bool UserLiked(int id, string ip_adress)
+		{
+			var user_like = _context.UserLikes
+				.Where(like => like.PostId == id)
+				.Where(like => like.IpAdress == ip_adress)
+				.FirstOrDefault();
+			return user_like != null;
 		}
 	}
 }

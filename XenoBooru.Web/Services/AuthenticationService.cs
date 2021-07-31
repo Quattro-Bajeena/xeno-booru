@@ -71,6 +71,17 @@ namespace XenoBooru.Web.Services
 			return authorized;
 		}
 
+		public string GetIp()
+		{
+			var httpContext = _httpContextAccessor.HttpContext;
+			var request = httpContext.Request;
+
+			string remoteIpAddress = httpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
+			if (request.Headers.ContainsKey("X-Forwarded-For"))
+				remoteIpAddress = request.Headers["X-Forwarded-For"];
+
+			return remoteIpAddress;
+		}
 
 	}
 }

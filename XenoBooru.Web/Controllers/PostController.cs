@@ -60,13 +60,15 @@ namespace XenoBooru.Web.Controllers
 			}
 
 
+
 			var viewModel = new PostViewModel
 			{
 				Post = post,
 				Comments = _comments.GetFromPost(post.Id),
 				Tags = _tags.GetFromPost(post.Id).ToList(),
 				PoolEntries = _pools.GetPostEntries(post.Id),
-				DataUrl = $"{_config.Value.StorageUrl}/{_config.Value.StorageContainer}/{post.FileName}"
+				DataUrl = $"{_config.Value.StorageUrl}/{_config.Value.StorageContainer}/{post.FileName}",
+				Liked = _posts.UserLiked(post.Id, _authentication.GetIp())
 			};
 
 
@@ -120,6 +122,18 @@ namespace XenoBooru.Web.Controllers
 			}
 			_posts.Remove(id);
 			return RedirectToAction("Index");
+		}
+
+		[HttpPost]
+		public IActionResult GiveLike(int id)
+		{
+			if(id < 1)
+			{
+				return NotFound();
+			}
+
+			_posts.GiveLike(id, _authentication.GetIp());
+			return RedirectToAction("Show", new { id });
 		}
 	}
 }

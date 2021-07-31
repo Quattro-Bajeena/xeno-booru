@@ -1,14 +1,12 @@
 # TODO
 ## Important
+
 - creating miatures for levels
-
-
 - likes
-- highlining posts hwen you hover over a tag
-
 - About page
 
 ## Less important
+- highlining posts hwen you hover over a tag
 - account system
 
 

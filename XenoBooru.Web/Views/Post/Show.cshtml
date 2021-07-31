@@ -63,15 +63,27 @@
 			<li>Id: @Model.Post.Id</li>
 			<li>Type: @Model.Post.Type</li>
 			<li>Credits: @Model.Post.Credits</li>
-			<li>Likes: @Model.Post.Likes</li>
+			@if (Model.Post.Pending == false)
+			{
+			<li>
+				Likes: @Model.Post.Likes
+				@if (Model.Liked == true)
+				{<span class="annotation">(Liked)</span>}
+			</li>
+			}
+
 		</ul>
 	</div>
 	<div class="sidebar-section" id="options">
 		<h4>Options</h4>
 		<ul>
-			@if (Model.Post.Pending == false)
+			@if (Model.Post.Pending == false && Model.Liked == false)
 			{
-				<li><button class="link-button">Like</button></li>
+			<li>
+				<form asp-action="GiveLike" asp-route-id="@Model.Post.Id" method="post">
+					<button class="link-button switch-button edit-post-button">Like</button>
+				</form>
+			</li>
 			}
 			<li><button class="link-button switch-button edit-post-button">Edit</button></li>
 			<li><a href="@Model.DataUrl" download>Download</a></li>

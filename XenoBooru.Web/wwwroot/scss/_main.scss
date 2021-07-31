@@ -27,16 +27,10 @@ html{
 	 
 }
 
-body {
-    background-color: $background-color;
-	display: grid;
-	
-	
-	padding: 1em 3em;
 
-	color: $main-text-color;
-	
-}
+
+
+
 ul {
 	list-style-type: none;
 	padding: 0;
@@ -45,6 +39,11 @@ ul {
 h1, h2,h3,h4, h5{
 	margin: 0;
 	
+}
+
+.annotation {
+	font-size: 0.9em;
+	color: $secondary-color;
 }
 
 a, .link-button{
@@ -68,7 +67,7 @@ a.tag-Normal:hover {
 .tag-PostType {
 	color: $post-type-tag-color;
 }
-a.tag-PostType:hover() {
+a.tag-PostType:hover {
 	color: lighten($post-type-tag-color, $tag-hover-lighten);
 }
 
@@ -93,7 +92,15 @@ a.tag-Character:hover {
 }
 
 
-
+body {
+	background-color: $background-color;
+	padding: 1em 3em;
+	color: $main-text-color;
+	display: grid;
+	grid-template-areas: "header" "notices" "content" "footer";
+	grid-template-columns: 1fr;
+	grid-template-rows: auto 1fr auto;
+}
 
 header {
 	grid-area: header;
@@ -125,6 +132,13 @@ header {
 	}
 }
 
+#notices {
+	grid-area: notices;
+}
+
+#content {
+	grid-area: content;
+}
 
 footer{
 	grid-area: footer;
