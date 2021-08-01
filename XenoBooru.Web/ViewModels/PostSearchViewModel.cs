@@ -13,5 +13,9 @@ namespace XenoBooru.Web.ViewModels
 		public IEnumerable<Tag> Tags { get; set; }
 		public string ContainerUrl { get; set; }
 		public string AudioThumbnailFileName { get; set; }
+		public IEnumerable<object> Pages { get; set; }
+		public int CurrentPage { get; set; }
+		public int PageCount { get; set; }
+		public int PostsOnPage { get; set; }
 	}
 }

@@ -16,21 +16,31 @@ namespace XenoBooru.Core.Utilities
 
 		public static string ThumbnailUrl(string containerUrl, string audioThumbnailFileName, Post post)
 		{
-			string fileName = post.ThumbnailFileName;
-			if(fileName == null)
+			string fileUrl = containerUrl + "/";
+			if(post.ThumbnailFileName == null)
 			{
-				if(post.Type == PostType.Artwork)
+				switch (post.Type)
 				{
-					fileName = post.FileName;
+					
+					case PostType.Artwork:
+						fileUrl += post.FileName;
+						break;
+					case PostType.Audio:
+						fileUrl += audioThumbnailFileName;
+						break;
+					case PostType.Default:
+					case PostType.Model:
+						fileUrl = "";
+						break;
 				}
-				else if (post.Type == PostType.Audio)
-				{
-					fileName = audioThumbnailFileName;
-				}
-				
+
+			}
+			else
+			{
+				fileUrl += post.ThumbnailFileName;
 			}
 
-			return containerUrl + "/" + fileName;
+			return fileUrl;
 		}
 	}
 }

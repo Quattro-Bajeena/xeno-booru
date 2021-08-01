@@ -2,7 +2,7 @@
 
 @font-face {
 	font-family: Xenogears;
-	src: url("/fonts/Xenogears.woff") format("woff");
+	src:url("/fonts/Xenogears.woff") format("woff");
 }
 
 $main-text-color: #ffffff;
@@ -11,6 +11,7 @@ $hover-link-color: #ffcdcd;
 $background-color: #272626;
 $secondary-color: #aaa;
 $dark-color: #121010;
+$button-hover-color: #391184;
 
 $normal-tag-color: $link-color;
 $post-type-tag-color: #ffe96c;

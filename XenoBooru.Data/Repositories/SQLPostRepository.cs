@@ -69,7 +69,7 @@ namespace XenoBooru.Data.Repositories
 			}
 		}
 
-		public IEnumerable<PostEntity> GetByTags(ICollection<string> tags, bool includePending)
+		public ICollection<PostEntity> GetByTags(ICollection<string> tags, bool includePending)
 		{
 			var posts = GetAll(includePending)
 				.Include(post => post.Tags)

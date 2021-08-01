@@ -44,7 +44,7 @@ body{
 		line-height: normal;
 
 		.tag-count {
-			color: $secondary-color
+			color: $secondary-color;
 		}
 	}
 }
@@ -92,6 +92,7 @@ body{
 			display: flex;
 			flex-flow: row;
 			justify-content: flex-start;
+			//border: 1px solid $secondary-color;
 			
 
 			margin-bottom: 30px;
@@ -103,6 +104,10 @@ body{
 					font-size: 1.3em;
 				}
 				
+			}
+
+			&-date{
+				color: $secondary-color;
 			}
 
 			&-content{

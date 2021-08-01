@@ -34,7 +34,7 @@ namespace XenoBooru.Services
 			return post;
 		}
 
-		public IEnumerable<Post> GetFiltered(string tags)
+		public ICollection<Post> GetFiltered(string tags)
 		{
 			string[] tagsArr;
 			bool includePending;
@@ -50,7 +50,7 @@ namespace XenoBooru.Services
 			}
 
 			var postsDb = _postRepository.GetByTags(tagsArr, includePending);
-			var posts = _mapper.Map<IEnumerable<Post>>(postsDb);
+			var posts = _mapper.Map<ICollection<Post>>(postsDb);
 
 			return posts;
 		}

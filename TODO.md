@@ -3,9 +3,9 @@
 
 - creating miatures for levels
 
-- About page
 
 ## Less important
+- paging
 - highlining posts hwen you hover over a tag
 - account system
 
@@ -27,10 +27,9 @@
 	- adding
 	- changing post order in pool
 
-- paging
-
 
 # DONE
+- About page
 - likes
 - js highlight tags when creating new post to indicate type or the fact that it doesnt exists
 - post minatures

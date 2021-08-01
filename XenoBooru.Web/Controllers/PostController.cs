@@ -10,6 +10,7 @@ using XenoBooru.Web.ViewModels;
 using XenoBooru.Web.Services;
 using Azure.Storage.Blobs;
 using Microsoft.AspNetCore.Http;
+using XenoBooru.Web.Helpers;
 
 namespace XenoBooru.Web.Controllers
 {
@@ -34,19 +35,27 @@ namespace XenoBooru.Web.Controllers
 			_authentication = authentication;
 		}
 
-		public IActionResult Index(string tags)
+		public IActionResult Index(string tags,  int page = 1, int postsOnPage = 25)
 		{
 			
+
 			var posts = _posts.GetFiltered(tags);
-			var tagsDisplayed = _tags.GetFromPosts(posts);
+
+			postsOnPage = postsOnPage == -1 ? posts.Count : postsOnPage;
+			var postsDisplayed = posts.Skip((page - 1) * postsOnPage).Take(postsOnPage).ToList();
+			int pageCount = (int)Math.Ceiling((double)posts.Count / postsOnPage);
 
 			var viewModel = new PostSearchViewModel
 			{
-				Posts = posts.ToList(),
-				Tags = tagsDisplayed,
+				Posts = postsDisplayed,
+				Tags = _tags.GetFromPosts(postsDisplayed),
 				SearchedTagsStr = tags,
 				ContainerUrl = $"{_config.Value.StorageUrl}/{_config.Value.StorageContainer}",
-				AudioThumbnailFileName = _config.Value.AudioThumbnailFileName
+				AudioThumbnailFileName = _config.Value.AudioThumbnailFileName,
+				CurrentPage = page,
+				PageCount = pageCount,
+				PostsOnPage = postsOnPage,
+				Pages = WebHelpers.Pages(page, pageCount)
 			};
 			return View(viewModel);
 		}
