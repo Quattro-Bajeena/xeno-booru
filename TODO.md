@@ -1,22 +1,19 @@
 # TODO
 ## Important
-
 - creating miatures for levels
-
-- About page
+- About page, more credits, technical details
+- button to hide pending 
+- think about what should be done with login 
+- list of tags sorted by categories. not a ranking, just informative
 
 ## Less important
-- highlining posts hwen you hover over a tag
 - account system
-
-
 - adding, updaing, deleting tags
 	- backed
 	- frontend
 - deleting comments
 	- backed
 	- frontend
-
 - ordering tags by categories
 - unit of work pattern
 
@@ -27,10 +24,9 @@
 	- adding
 	- changing post order in pool
 
-- paging
-
-
 # DONE
+- paging
+- highlining posts hwen you hover over a tag
 - likes
 - js highlight tags when creating new post to indicate type or the fact that it doesnt exists
 - post minatures
