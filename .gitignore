@@ -4,6 +4,7 @@ three/
 appsettings*.json
 FeatureTesting/
 XenoBooru.Web/wwwroot/css/*
+StaticSite/css/*
 
 # Visual studio
 
