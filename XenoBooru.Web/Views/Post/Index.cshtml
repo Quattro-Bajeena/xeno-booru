@@ -27,6 +27,10 @@
 	</div>
 	<div class="sidebar-section" id="options">
 		<h4>Options</h4>
+        <h4>
+            <label for="pending-checkbox">Pending</label>
+            <input type="checkbox" id="pending-checkbox" name="show-pending"/>
+        </h4>
 		<a asp-action="Upload">Upload</a>
 	</div>
 }
@@ -34,7 +38,7 @@
 
 @if (Model.Posts.Count == 0)
 {
-	<h4>It's okay not to feel `whole'. Even if you feel only partly complete, if you repeat that enough, it'll eventually be `whole'. A part... is better than zero</h4>
+	<h4 class="no-entries">It's okay not to feel `whole'. Even if you feel only partly complete, if you repeat that enough, it'll eventually be `whole'. A part... is better than zero</h4>
 }
 <ul id="posts">
 
@@ -43,18 +47,11 @@
 	{
 		<li id="post-@post.Id" class="post-preview">
 			<a asp-controller="Post" asp-action="Show" asp-route-id="@post.Id">
-				@if (post.Pending)
-				{
-					<img class="pending" src="@PostUtilities.ThumbnailUrl(Model.ContainerUrl, Model.AudioThumbnailFileName, post)">
-				}
-				else if (post.Likes > 10)
-				{
-					<img class="liked" src="@PostUtilities.ThumbnailUrl(Model.ContainerUrl, Model.AudioThumbnailFileName, post)">
-				}
-				else
-				{
-					<img src="@PostUtilities.ThumbnailUrl(Model.ContainerUrl, Model.AudioThumbnailFileName, post)">
-				}
+
+				<img 
+					 class="pending-@post.Pending liked-@(post.Likes > 10)" 
+					 src="@PostUtilities.ThumbnailUrl(Model.ContainerUrl, Model.AudioThumbnailFileName, post)"
+				>
 			</a>
 		</li>
 	}
@@ -74,5 +71,6 @@
 		const tags = @Html.Raw(Json.Serialize(Model.Tags));
 	</script>
 	<script src="~/js/tag_highlight_posts.js" type="module"></script>
+	<script src="~/js/post_index.js" type="module"></script>
 
 }

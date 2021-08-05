@@ -46,22 +46,31 @@ namespace XenoBooru.Web.Controllers
 			return View(pool);
 		}
 
+		public IActionResult Create()
+        {
+			if (_authentication.CheckAuthentication("CreatePool") == false)
+			{
+				return RedirectToAction("Index");
+			}
+			return View();
+		}
+
+
 		[HttpPost]
-		public IActionResult AddPool(Pool pool)
+		public IActionResult Create(Pool pool)
 		{
-			return BadRequest();
+			
+			var id = _pools.AddPool(pool);
+			return RedirectToAction("Show", new { id });
 		}
 
 		[HttpPost]
 		public IActionResult AddPoolEntry(int id, int postId)
 		{
-			if (_authentication.CheckAuthentication() == false)
+			if (_authentication.CheckAuthentication("AddPoolEntry") == true)
 			{
-				return RedirectToAction("Show", new { id });
+				_pools.AddPoolEntry(id, postId);
 			}
-
-
-			_pools.AddPoolEntry(id, postId);
 			return RedirectToAction("Show", new { id });
 		}
 	}

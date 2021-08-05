@@ -19,7 +19,7 @@ namespace XenoBooru.Core.Models
 		public string Author { get; set; }
 		public string Content { get; set; }
 		public DateTime Date { get; set; }
-		public string IpAdress { get; set; }
+		public string IpAddress { get; set; }
 		public int PostId { get; set; }
 		public Post Post { get; set; }
 		

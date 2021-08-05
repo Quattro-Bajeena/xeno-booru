@@ -3,7 +3,7 @@ XenoBooru.Web/wwwroot/lib/
 three/
 appsettings*.json
 FeatureTesting/
-wwwroot/css/*.css
+XenoBooru.Web/wwwroot/css/*
 
 # Visual studio
 

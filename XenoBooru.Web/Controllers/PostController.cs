@@ -79,6 +79,10 @@ namespace XenoBooru.Web.Controllers
 
 		public IActionResult Upload()
 		{
+			if (_authentication.CheckAuthentication("UploadPost") == false)
+			{
+				return RedirectToAction("Upload");
+			}
 			return View();
 		}
 
@@ -89,12 +93,7 @@ namespace XenoBooru.Web.Controllers
 			{
 				return RedirectToAction("Index");
 			}
-			if (_authentication.CheckAuthentication() == false)
-			{
-				return RedirectToAction("Upload");
-			}
 
-			
 			post.FileName = file.FileName;
 			int id = _posts.Add(post, tags, file.OpenReadStream());
 
@@ -104,7 +103,7 @@ namespace XenoBooru.Web.Controllers
 		[HttpPost]
 		public IActionResult Update(int id, Post post, string tags)
 		{
-			if (_authentication.CheckAuthentication() == false)
+			if (_authentication.CheckAuthentication("UpdatePost") == false)
 			{
 				return RedirectToAction("Show", new { id });
 			}
@@ -117,7 +116,7 @@ namespace XenoBooru.Web.Controllers
 		[HttpDelete]
 		public IActionResult Delete(int id)
 		{
-			if (_authentication.CheckAuthentication() == false)
+			if (_authentication.CheckAuthentication("DeletePost") == false)
 			{
 				return RedirectToAction("Show", new { id });
 			}
