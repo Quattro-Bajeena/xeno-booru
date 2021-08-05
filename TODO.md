@@ -2,10 +2,8 @@
 ## Important
 - creating miatures for levels
 - About page, more credits, technical details
-- button to hide pending 
-- think about what should be done with login 
 - list of tags sorted by categories. not a ranking, just informative
-- button to hide or display pending posts
+
 
 ## Less important
 - adding interfaces to services
@@ -27,6 +25,8 @@
 	- changing post order in pool
 
 # DONE
+- think about what should be done with login 
+- button to hide or display pending posts
 - paging
 - highlining posts hwen you hover over a tag
 - likes
