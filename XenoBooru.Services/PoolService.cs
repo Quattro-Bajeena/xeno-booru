@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using XenoBooru.Core.Models;
+using XenoBooru.Data.Entities;
 using XenoBooru.Data.Repositories.Interfaces;
 
 namespace XenoBooru.Services
@@ -64,5 +65,12 @@ namespace XenoBooru.Services
 		{
 			_poolRepository.AddPoolEntry(poolId, postId);
 		}
+
+		public int AddPool(Pool pool)
+        {
+			var poolDb = _mapper.Map<PoolEntity>(pool);
+			int newId = _poolRepository.Add(poolDb);
+			return newId;
+        }
 	}
 }

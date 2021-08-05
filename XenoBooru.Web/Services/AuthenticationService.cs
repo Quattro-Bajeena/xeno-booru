@@ -34,8 +34,15 @@ namespace XenoBooru.Web.Services
 		}
 
 
-		public bool CheckAuthentication()
+		public bool CheckAuthentication(string action)
 		{
+			bool authRequired = true;
+			_config.Value.AuthenticationRequired.TryGetValue(action, out authRequired);
+			if (authRequired == false)
+            {
+				return true;
+            }
+
 			var httpContext = _httpContextAccessor.HttpContext;
 			var tempData = _tempDataDictionaryFactory.GetTempData(httpContext);
 

@@ -1,0 +1,35 @@
+﻿@model XenoBooru.Core.Models.Pool;
+@using XenoBooru.Core.Utilities
+@{
+    ViewData["Title"] = "Create Pool";
+}
+
+@section Stylesheets{
+    <link rel="stylesheet" href="~/css/simple_page.css" />
+}
+
+<form id="pool-create" method="post" asp-controller="Pool" asp-action="Create">
+    <table class="form-table">
+        <tbody>
+            <tr>
+                <th><label for="pool-name">Name</label></th>
+                <td><input type="text" id="pool-name" name="Name" autocomplete="off" /></td>
+            </tr>
+            <tr>
+                <th><label for="pool-name">Creator</label></th>
+                <td><input type="text" id="pool-name" name="Creator" autocomplete="off" /></td>
+            </tr>
+            <tr>
+                <th><label for="pool-description">Description</label></th>
+                <td><textarea id="pool-description" name="Description"></textarea></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td><button>Create</button></td>
+            </tr>
+        </tfoot>
+    </table>
+</form>
+

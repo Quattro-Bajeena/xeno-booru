@@ -45,11 +45,11 @@ $thumbnail-border-thickness: 3px;
     }
 }
 
-.liked {
+.liked-True {
     border: $thumbnail-border-thickness solid $liked-color;
 }
 
-.pending {
+.pending-True {
     filter: grayscale(90%) opacity(50%);
 }
 

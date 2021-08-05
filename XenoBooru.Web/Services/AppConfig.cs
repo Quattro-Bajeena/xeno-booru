@@ -11,5 +11,6 @@ namespace XenoBooru.Web.Services
 		public string StorageContainer { get; set; }
 		public string AudioThumbnailFileName { get; set; }
 		public List<string> Passwords { get; set; }
-	}
+        public Dictionary<string, bool> AuthenticationRequired { get; set; }
+    }
 }

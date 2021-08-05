@@ -1,52 +1,53 @@
 ﻿@model XenoBooru.Core.Models.Pool
 @using XenoBooru.Core.Utilities;
 @{
-	ViewData["Title"] = "Pool id:";
+    ViewData["Title"] = "Pool id:";
 }
 
 @section Stylesheets{
-	<link rel="stylesheet" href="~/css/pool.css" />
+    <link rel="stylesheet" href="~/css/pool.css" />
 }
 
 
-@if (Model.Entires.Count == 0)
-{
-	<h4>It's okay not to feel `whole'. Even if you feel only partly complete, if you repeat that enough, it'll eventually be `whole'. A part... is better than zero</h4>
-}
+
 
 <div id="pool-info">
-	<h3>@Model.Name</h3>
-	<h5>Creator: @Model.Creator</h5>
-	<p>@Model.Description</p>
+    <h3>@Model.Name</h3>
+    <h5>Creator: @Model.Creator</h5>
+    <p>@Model.Description</p>
 </div>
 
 <form id="pool-add" method="post" asp-action="AddPoolEntry" asp-route-id="@Model.Id">
-	<h4>Add post to pool</h4>
-	<table class="form-table">
-		<tbody>
-			<tr>
-				<th><label for="post-id">Post ID</label></th>
-				<td><input type="text" id="post-id" name="postId" autocomplete="off" /></td>
-			</tr>
-		</tbody>
-		<tfoot>
-			<tr>
-				<td></td>
-				<td><button>Add</button></td>
-			</tr>
-		</tfoot>
-	</table>
+    <h4>Add post to pool</h4>
+    <table class="form-table">
+        <tbody>
+            <tr>
+                <th><label for="post-id">Post ID</label></th>
+                <td><input type="text" id="post-id" name="postId" autocomplete="off" /></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td><button>Add</button></td>
+            </tr>
+        </tfoot>
+    </table>
 </form>
 
-<ul id="pool-entries">
+@if (Model.Entires.Count == 0)
+{
+    <h4 class="no-entries">It's okay not to feel `whole'. Even if you feel only partly complete, if you repeat that enough, it'll eventually be `whole'. A part... is better than zero</h4>
+}
 
-	@foreach (PoolEntry entry in Model.Entires)
-	{
-		<li>
-			<a asp-controller="Post" asp-action="Show" asp-route-id="@entry.Post.Id">
-				<img class="entry-preview" src="@PostUtilities.ThumbnailUrl((string)ViewData["ContainerUrl"],(string)ViewData["AudioThumbnailFileName"], entry.Post)">
-			</a>
-		</li>
-	}
+<ul id="pool-entries">
+    @foreach (PoolEntry entry in Model.Entires)
+    {
+        <li>
+            <a asp-controller="Post" asp-action="Show" asp-route-id="@entry.Post.Id">
+                <img class="entry-preview" src="@PostUtilities.ThumbnailUrl((string)ViewData["ContainerUrl"],(string)ViewData["AudioThumbnailFileName"], entry.Post)">
+            </a>
+        </li>
+    }
 </ul>
 
