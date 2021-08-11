@@ -36,9 +36,12 @@ namespace XenoBooru.Services
 			return sortedTags;
 		}
 
-		public ICollection<Tag> GetFiltered(string name, TagType type, TagOrder order)
+		public ICollection<Tag> GetFilteredSorted(string nameQuery, TagType? type, TagOrder order)
         {
-			
+			var prepName = nameQuery?.ToLower().Replace(' ', '_');
+			var tagsDb = _tagRepository.GetFilteredSorted(prepName, type?.ToString(), order);
+			var tags = _mapper.Map<ICollection<Tag>>(tagsDb);
+			return tags;
         }
 
 		public IEnumerable<Tag> GetFromPost(int postId)

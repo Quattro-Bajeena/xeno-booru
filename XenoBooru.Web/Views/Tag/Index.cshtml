@@ -21,7 +21,7 @@
                 <th><label for="tag-type">Type</label></th>
                 <td>
                     <select id="tag-type" name="type">
-                        @foreach (var type in Utilities.EnumToStrings<TagType>())
+                        @foreach (var type in Enum.GetNames(typeof(TagType)))
                         {
                             <option value="@type">@type</option>
                         }
@@ -68,6 +68,7 @@
 </table>
 
 <div id="paginator">
+    Those buttons have to include route parametes for filetring and quering too!
     @if (Model.CurrentPage > 1)
     {<a class="page-button" asp-route-page="@(Model.CurrentPage-1)" asp-route-onPage="@Model.TagsOnPage">←Previous</a>}
     else
@@ -85,6 +86,7 @@
 else if (pageNum is string)
 {<span class="page-skip">@pageNum</span>}
 }
+
     @if (Model.CurrentPage < Model.PageCount)
     {<a class="page-button" asp-route-page="@(Model.CurrentPage+1)" asp-route-onPage="@Model.TagsOnPage">Next→</a>}
     else

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using XenoBooru.Data.Entities;
 using XenoBooru.Data.Repositories.Interfaces;
+using XenoBooru.Core.Models;
 
 namespace XenoBooru.Data.Repositories
 {
@@ -27,9 +28,38 @@ namespace XenoBooru.Data.Repositories
 			return _context.Tags;
 		}
 
-		public IEnumerable<TagEntity> GetFiltered(string name, string type, string order)
+		private IQueryable<TagEntity> Sort(IQueryable<TagEntity> tags, TagOrder order)
+        {
+            switch (order)
+            {
+                case TagOrder.Name:
+					return tags.OrderBy(tag => tag.Name);
+                case TagOrder.Count:
+					return tags.OrderBy(tag => tag.Type);
+				default:
+					return tags;
+            }
+        }
+
+		private IQueryable<TagEntity> Filter(IQueryable<TagEntity> tags, string nameQuery, string type)
+        {
+			if(String.IsNullOrEmpty(nameQuery) == false)
+            {
+				tags = tags.Where(tag => tag.Name.Contains(nameQuery));
+			}
+			if(type != null)
+            {
+				tags = tags.Where(tag => tag.Type == type);
+			}
+			return tags;
+        }
+
+		public IEnumerable<TagEntity> GetFilteredSorted(string name, string type, TagOrder order)
 		{
-			throw new NotImplementedException();
+			var tags = _context.Tags;
+			var filtered = Filter(tags, name, type);
+			var sorted = Sort(filtered, order);
+			return sorted;
 		}
 
 		public IEnumerable<TagEntity> GetFromPost(int postId)

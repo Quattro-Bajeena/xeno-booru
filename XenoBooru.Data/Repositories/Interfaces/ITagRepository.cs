@@ -13,7 +13,7 @@ namespace XenoBooru.Data.Repositories.Interfaces
 		TagEntity Get(string name);
 		IEnumerable<TagEntity> GetAll();
 		IEnumerable<TagEntity> GetFromPost(int postId);
-		IEnumerable<TagEntity> GetFiltered(string name, string type, string order);
+		IEnumerable<TagEntity> GetFilteredSorted(string name, string type, TagOrder order);
 		void Add(TagEntity tag);
 		void Remove(int id);
 		void Update(TagEntity tag);

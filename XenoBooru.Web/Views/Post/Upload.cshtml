@@ -29,7 +29,7 @@
 				<th><label for="upload-type">Type</label><p>IMPORTANT! it won't display properly if picked wrong</p></th>
 				<td>
 					<select id="upload-type" name="Type">
-						@foreach (var type in PostUtilities.PostTypesToString())
+						@foreach (var type in Enum.GetNames(typeof(PostType)))
 						{
 							<option value="@type">@type</option>
 						}

@@ -9,10 +9,6 @@ namespace XenoBooru.Core.Utilities
 {
 	public static class PostUtilities
 	{
-		public static IEnumerable<string> PostTypesToString()
-		{
-			return Enum.GetValues(typeof(PostType)).Cast<PostType>().Where(type => type != PostType.Default).Select(type => type.ToString());
-		}
 
 		public static string ThumbnailUrl(string containerUrl, string audioThumbnailFileName, Post post)
 		{
@@ -28,7 +24,7 @@ namespace XenoBooru.Core.Utilities
 					case PostType.Audio:
 						fileUrl += audioThumbnailFileName;
 						break;
-					case PostType.Default:
+					default:
 					case PostType.Model:
 						fileUrl = "";
 						break;

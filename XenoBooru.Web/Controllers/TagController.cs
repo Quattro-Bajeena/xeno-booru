@@ -18,9 +18,9 @@ namespace XenoBooru.Web.Controllers
 			_tags = tags;
 		}
 
-		public IActionResult Index(string name, TagType type, string order,int page = 1, int onPage = 5)
+		public IActionResult Index(string name, TagType? type, TagOrder order = TagOrder.Default, int page = 1, int onPage = 5)
 		{
-			var tags = _tags.GetAll();
+			var tags = _tags.GetFilteredSorted(name, type, order);
 
 			onPage = onPage == -1 ? tags.Count : onPage;
 			var tagsDisplayed = tags.Skip((page - 1) * onPage).Take(onPage).ToList();
