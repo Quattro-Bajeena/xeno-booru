@@ -68,7 +68,7 @@
 
 <div id="paginator">
 	@if (Model.CurrentPage > 1)
-	{<a class="page-button" asp-route-page="@(Model.CurrentPage-1)" asp-route-postsOnPage="@Model.PostsOnPage">←Previous</a>}
+	{<a class="page-button" asp-route-page="@(Model.CurrentPage-1)" asp-route-onPage="@Model.PostsOnPage">←Previous</a>}
 	else
 	{<span class="page-button disabled">←Previous</span>}
 
@@ -79,13 +79,13 @@
 			if ((int)pageNum == Model.CurrentPage)
 			{<span class="current-page">@pageNum</span>}
 			else
-			{<a class="page-button" asp-route-page="@pageNum" asp-route-postsOnPage="@Model.PostsOnPage">@pageNum</a>}
+			{<a class="page-button" asp-route-page="@pageNum" asp-route-onPage="@Model.PostsOnPage">@pageNum</a>}
 		}
 		else if (pageNum is string)
 		{<span class="page-skip">@pageNum</span>}
 	}
 	@if (Model.CurrentPage < Model.PageCount)
-	{ <a class="page-button" asp-route-page="@(Model.CurrentPage+1)" asp-route-postsOnPage="@Model.PostsOnPage">Next→</a>}
+	{ <a class="page-button" asp-route-page="@(Model.CurrentPage+1)" asp-route-onPage="@Model.PostsOnPage">Next→</a>}
 	else 
 	{ <span class="page-button disabled">Next→</span>}
 			

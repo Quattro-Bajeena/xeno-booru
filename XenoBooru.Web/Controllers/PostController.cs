@@ -35,15 +35,15 @@ namespace XenoBooru.Web.Controllers
 			_authentication = authentication;
 		}
 
-		public IActionResult Index(string tags,  int page = 1, int postsOnPage = 25)
+		public IActionResult Index(string tags,  int page = 1, int onPage = 25)
 		{
 			
 
 			var posts = _posts.GetFiltered(tags);
 
-			postsOnPage = postsOnPage == -1 ? posts.Count : postsOnPage;
-			var postsDisplayed = posts.Skip((page - 1) * postsOnPage).Take(postsOnPage).ToList();
-			int pageCount = (int)Math.Ceiling((double)posts.Count / postsOnPage);
+			onPage = onPage == -1 ? posts.Count : onPage;
+			var postsDisplayed = posts.Skip((page - 1) * onPage).Take(onPage).ToList();
+			int pageCount = (int)Math.Ceiling((double)posts.Count / onPage);
 
 			var viewModel = new PostSearchViewModel
 			{
@@ -54,7 +54,7 @@ namespace XenoBooru.Web.Controllers
 				AudioThumbnailFileName = _config.Value.AudioThumbnailFileName,
 				CurrentPage = page,
 				PageCount = pageCount,
-				PostsOnPage = postsOnPage,
+				PostsOnPage = onPage,
 				Pages = WebHelpers.Pages(page, pageCount)
 			};
 			return View(viewModel);
@@ -125,10 +125,10 @@ namespace XenoBooru.Web.Controllers
 		[HttpDelete]
 		public IActionResult Delete(int id)
 		{
+
 			if (_authentication.CheckAuthentication("DeletePost") == false)
-			{
 				return RedirectToAction("Show", new { id });
-			}
+
 			_posts.Remove(id);
 			return RedirectToAction("Index");
 		}
@@ -136,11 +136,6 @@ namespace XenoBooru.Web.Controllers
 		[HttpPost]
 		public IActionResult GiveLike(int id)
 		{
-			if(id < 1)
-			{
-				return NotFound();
-			}
-
 			_posts.GiveLike(id, _authentication.GetIp());
 			return RedirectToAction("Show", new { id });
 		}

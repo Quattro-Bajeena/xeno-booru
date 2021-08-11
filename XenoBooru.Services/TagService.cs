@@ -24,7 +24,7 @@ namespace XenoBooru.Services
 		}
 
 
-		public IEnumerable<Tag> GetAll()
+		public ICollection<Tag> GetAll()
 		{
 			var tagsDb = _tagRepository.GetAll();
 			var tags = _mapper.Map<IEnumerable<Tag>>(tagsDb);
@@ -32,9 +32,14 @@ namespace XenoBooru.Services
 			{
 				tag.PostCount = _tagRepository.GetTagPostCount(tag.Id);
 			}
-			tags = tags.OrderByDescending(tag => tag.PostCount);
-			return tags;
+			var sortedTags = tags.OrderByDescending(tag => tag.PostCount).ToList();
+			return sortedTags;
 		}
+
+		public ICollection<Tag> GetFiltered(string name, TagType type, TagOrder order)
+        {
+			
+        }
 
 		public IEnumerable<Tag> GetFromPost(int postId)
 		{

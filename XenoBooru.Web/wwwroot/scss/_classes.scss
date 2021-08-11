@@ -70,3 +70,42 @@
         background-color: lighten($background-color, 20%);
     }
 }
+
+#paginator {
+    display: flex;
+    margin: 20px;
+    text-align: center;
+    font-size: 0.9em;
+    align-items: center;
+    justify-content: center;
+
+    li {
+    }
+
+    .page-button {
+        min-width: 20px;
+        padding: 2px 5px;
+        margin: 0 4px;
+        border: 1px solid $main-text-color;
+
+        &:not(.disabled):hover {
+            background-color: $button-hover-color;
+            color: $main-text-color;
+        }
+    }
+
+    .disabled {
+        border: none;
+
+        &:hover {
+        }
+    }
+
+    .page-skip {
+        margin: 0 6px;
+    }
+
+    .current-page {
+        margin: 0 10px;
+    }
+}

@@ -27,6 +27,11 @@ namespace XenoBooru.Data.Repositories
 			return _context.Tags;
 		}
 
+		public IEnumerable<TagEntity> GetFiltered(string name, string type, string order)
+		{
+			throw new NotImplementedException();
+		}
+
 		public IEnumerable<TagEntity> GetFromPost(int postId)
 		{
 			var postDb = _context.Posts.Include(post => post.Tags).SingleOrDefault(post => post.Id == postId);
@@ -64,6 +69,6 @@ namespace XenoBooru.Data.Repositories
 			return _context.Tags.Where(tag => tagsStrLst.Contains(tag.Name)).ToList();
 		}
 
-		 
-	}
+        
+    }
 }
