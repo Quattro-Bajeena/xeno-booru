@@ -18,21 +18,22 @@ namespace XenoBooru.Web.Controllers
 			_tags = tags;
 		}
 
-		public IActionResult Index(string name, TagType? type, TagOrder order = TagOrder.Default, int page = 1, int onPage = 5)
+		public IActionResult Index(string name, TagType? type, TagOrder order = TagOrder.Count, int page = 1)
 		{
-			var tags = _tags.GetFilteredSorted(name, type, order);
+			const int onPage = 5;
 
-			onPage = onPage == -1 ? tags.Count : onPage;
-			var tagsDisplayed = tags.Skip((page - 1) * onPage).Take(onPage).ToList();
-			int pageCount = (int)Math.Ceiling((double)tags.Count / onPage);
+			var tags = _tags.GetFilteredSortedPaged(name, type, order, page, onPage);
+			int pageCount = (int)Math.Ceiling((double)_tags.Count() / onPage);
 
 			var viewModel = new TagsViewModel
 			{
-				Tags = tagsDisplayed,
+				Tags = tags,
 				Pages = WebHelpers.Pages(page, pageCount),
 				CurrentPage = page,
 				PageCount = pageCount,
-				TagsOnPage = onPage
+				TagsOnPage = onPage,
+				Type = type,
+				Order = order
 			};
 
 			return View(viewModel);

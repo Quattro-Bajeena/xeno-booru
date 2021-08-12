@@ -21,9 +21,10 @@
                 <th><label for="tag-type">Type</label></th>
                 <td>
                     <select id="tag-type" name="type">
+                        <option value="">Any</option>
                         @foreach (var type in Enum.GetNames(typeof(TagType)))
                         {
-                            <option value="@type">@type</option>
+                         <option value="@type">@type</option>
                         }
                     </select>
                 </td>
@@ -32,8 +33,10 @@
                 <th><label for="tag-order">Order</label></th>
                 <td>
                     <select id="tag-order" name="order">
-                        <option value="Name">Name</option>
-                        <option value="Count">Count</option>
+                        @foreach (var order in Enum.GetNames(typeof(TagOrder)))
+                        {
+                         <option value="@order">@order</option>
+                        }
                     </select>
                 </td>
             </tr>
@@ -70,7 +73,7 @@
 <div id="paginator">
     Those buttons have to include route parametes for filetring and quering too!
     @if (Model.CurrentPage > 1)
-    {<a class="page-button" asp-route-page="@(Model.CurrentPage-1)" asp-route-onPage="@Model.TagsOnPage">←Previous</a>}
+    {<a class="page-button" asp-route-type="@Model.Type" asp-route-order="@Model.Order" asp-route-page="@(Model.CurrentPage-1)" >←Previous</a>}
     else
     {<span class="page-button disabled">←Previous</span>}
 
@@ -81,14 +84,14 @@
             if ((int)pageNum == Model.CurrentPage)
             {<span class="current-page">@pageNum</span>}
         else
-        {<a class="page-button" asp-route-page="@pageNum" asp-route-onPage="@Model.TagsOnPage">@pageNum</a>}
+        {<a class="page-button" asp-route-type="@Model.Type" asp-route-order="@Model.Order" asp-route-page="@pageNum">@pageNum</a>}
 }
 else if (pageNum is string)
 {<span class="page-skip">@pageNum</span>}
 }
 
     @if (Model.CurrentPage < Model.PageCount)
-    {<a class="page-button" asp-route-page="@(Model.CurrentPage+1)" asp-route-onPage="@Model.TagsOnPage">Next→</a>}
+    {<a class="page-button" asp-route-type="@Model.Type" asp-route-order="@Model.Order" asp-route-page="@(Model.CurrentPage+1)">Next→</a>}
     else
     { <span class="page-button disabled">Next→</span>}
 

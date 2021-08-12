@@ -13,5 +13,7 @@ namespace XenoBooru.Web.ViewModels
         public int CurrentPage { get; set; }
         public int PageCount { get; set; }
         public int TagsOnPage { get; set; }
+        public TagType? Type { get; set; }
+        public TagOrder Order { get; set; }
     }
 }

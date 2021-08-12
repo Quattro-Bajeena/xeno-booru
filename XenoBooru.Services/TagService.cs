@@ -36,10 +36,10 @@ namespace XenoBooru.Services
 			return sortedTags;
 		}
 
-		public ICollection<Tag> GetFilteredSorted(string nameQuery, TagType? type, TagOrder order)
+		public ICollection<Tag> GetFilteredSortedPaged(string nameQuery, TagType? type, TagOrder order, int page, int onPage)
         {
 			var prepName = nameQuery?.ToLower().Replace(' ', '_');
-			var tagsDb = _tagRepository.GetFilteredSorted(prepName, type?.ToString(), order);
+			var tagsDb = _tagRepository.GetFilteredSortedPaged(prepName, type?.ToString(),order, page, onPage).ToList();
 			var tags = _mapper.Map<ICollection<Tag>>(tagsDb);
 			return tags;
         }
@@ -85,6 +85,11 @@ namespace XenoBooru.Services
 			var tagsDb = _tagRepository.GetAll();
 			var tags = _mapper.Map<IEnumerable<ExistingTagViewModel>>(tagsDb);
 			return tags;
+		}
+
+		public int Count()
+		{
+			return _tagRepository.Count();
 		}
 
 	}

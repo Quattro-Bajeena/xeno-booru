@@ -35,8 +35,8 @@ namespace XenoBooru.Data.Repositories
                 case TagOrder.Name:
 					return tags.OrderBy(tag => tag.Name);
                 case TagOrder.Count:
-					return tags.OrderBy(tag => tag.Type);
-				default:
+					return tags.OrderBy(tag => tag.Posts.Count);
+                default:
 					return tags;
             }
         }
@@ -54,12 +54,14 @@ namespace XenoBooru.Data.Repositories
 			return tags;
         }
 
-		public IEnumerable<TagEntity> GetFilteredSorted(string name, string type, TagOrder order)
+		public IEnumerable<TagEntity> GetFilteredSortedPaged(string name, string type, TagOrder order, int page, int onPage)
 		{
-			var tags = _context.Tags;
+			var tags = _context.Tags.Include(tag => tag.Posts);
 			var filtered = Filter(tags, name, type);
 			var sorted = Sort(filtered, order);
-			return sorted;
+			var paged = sorted.Skip((page - 1) * onPage).Take(onPage);
+			// todo look up sql query that this emits
+			return paged;
 		}
 
 		public IEnumerable<TagEntity> GetFromPost(int postId)
@@ -99,6 +101,12 @@ namespace XenoBooru.Data.Repositories
 			return _context.Tags.Where(tag => tagsStrLst.Contains(tag.Name)).ToList();
 		}
 
-        
-    }
+		public int Count()
+        {
+			return _context.Tags.Count();
+        }
+
+
+
+	}
 }
