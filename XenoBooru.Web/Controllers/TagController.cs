@@ -20,7 +20,7 @@ namespace XenoBooru.Web.Controllers
 
 		public IActionResult Index(string name, TagType? type, TagOrder order = TagOrder.Count, int page = 1)
 		{
-			const int onPage = 5;
+			const int onPage = 50;
 
 			var tags = _tags.GetFilteredSortedPaged(name, type, order, page, onPage);
 			int pageCount = (int)Math.Ceiling((double)_tags.Count() / onPage);

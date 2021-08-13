@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace XenoBooru.Core.Models
 {
-	public enum TagType { Normal, Location, PostType, Character }
-	public enum TagOrder { Name, Count }
+	public enum TagType { PostType, Normal, Location, Character }
+	public enum TagOrder { Count, Name }
 	public class Tag
 	{
 		public int Id { get; set; }

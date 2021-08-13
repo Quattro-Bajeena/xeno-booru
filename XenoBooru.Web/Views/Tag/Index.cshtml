@@ -2,98 +2,101 @@
 @using XenoBooru.Core.Utilities
 
 @{
-    ViewData["Title"] = "Tags";
+	ViewData["Title"] = "Tags";
 }
 
 
 @section Stylesheets{
-    <link rel="stylesheet" href="~/css/tag_index.css" />
+	<link rel="stylesheet" href="~/css/tag_index.css" />
 }
 
 <form id="tags-search">
-    <table class="form-table">
-        <tbody>
-            <tr>
-                <th><label for="tag-name">Name</label><p>Use * as a wildcard</p></th>
-                <td><input type="text" id="tag-name" name="name" autocomplete="off" /></td>
-            </tr>
-            <tr>
-                <th><label for="tag-type">Type</label></th>
-                <td>
-                    <select id="tag-type" name="type">
-                        <option value="">Any</option>
-                        @foreach (var type in Enum.GetNames(typeof(TagType)))
-                        {
-                         <option value="@type">@type</option>
-                        }
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <th><label for="tag-order">Order</label></th>
-                <td>
-                    <select id="tag-order" name="order">
-                        @foreach (var order in Enum.GetNames(typeof(TagOrder)))
-                        {
-                         <option value="@order">@order</option>
-                        }
-                    </select>
-                </td>
-            </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                <td></td>
-                <td><button>Search</button></td>
-            </tr>
-        </tfoot>
-    </table>
+	<table class="form-table">
+		<tbody>
+			<tr>
+				<th><label for="tag-name">Name</label><p>Use * as a wildcard</p></th>
+				<td><input type="text" id="tag-name" name="name" autocomplete="off" /></td>
+			</tr>
+			<tr>
+				<th><label for="tag-type">Type</label></th>
+				<td>
+					<select id="tag-type" name="type">
+						<option value="">Any</option>
+						@foreach (var type in Enum.GetNames(typeof(TagType)))
+						{
+							<option value="@type">@type</option>
+						}
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="tag-order">Order</label></th>
+				<td>
+					<select id="tag-order" name="order">
+						@foreach (var order in Enum.GetNames(typeof(TagOrder)))
+						{
+							<option value="@order">@order</option>
+						}
+					</select>
+				</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td></td>
+				<td><button>Search</button></td>
+			</tr>
+		</tfoot>
+	</table>
 </form>
 
 <table id="tags" class="list-table">
-    <thead>
-        <tr>
-            <th id="posts-col">Posts</th>
-            <th id="name-col">Name</th>
-            <th id="type-col">Type</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (Tag tag in Model.Tags)
-        {
-            <tr>
-                <td>@tag.PostCount</td>
-                <td><a asp-controller="Post" asp-route-tags="@tag.Name">@tag.Name</a></td>
-                <td>@tag.Type.ToString()</td>
-            </tr>
-        }
-    </tbody>
+	<thead>
+		<tr>
+			<th id="posts-col">Posts</th>
+			<th id="name-col">Name</th>
+			<th id="type-col">Type</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (Tag tag in Model.Tags)
+		{
+			<tr>
+				<td>@tag.PostCount</td>
+				<td><a asp-controller="Post" asp-route-tags="@tag.Name">@tag.Name</a></td>
+				<td>@tag.Type.ToString()</td>
+			</tr>
+		}
+	</tbody>
 </table>
 
 <div id="paginator">
-    Those buttons have to include route parametes for filetring and quering too!
-    @if (Model.CurrentPage > 1)
-    {<a class="page-button" asp-route-type="@Model.Type" asp-route-order="@Model.Order" asp-route-page="@(Model.CurrentPage-1)" >←Previous</a>}
-    else
-    {<span class="page-button disabled">←Previous</span>}
+	@if (Model.CurrentPage > 1)
+	{<a class="page-button" asp-route-type="@Model.Type" asp-route-order="@Model.Order" asp-route-page="@(Model.CurrentPage-1)">←Previous</a>}
+	else
+	{<span class="page-button disabled">←Previous</span>}
 
-    @foreach (object pageNum in Model.Pages)
-    {
-        if (pageNum is int)
-        {
-            if ((int)pageNum == Model.CurrentPage)
-            {<span class="current-page">@pageNum</span>}
-        else
-        {<a class="page-button" asp-route-type="@Model.Type" asp-route-order="@Model.Order" asp-route-page="@pageNum">@pageNum</a>}
+	@foreach (object pageNum in Model.Pages)
+	{
+		if (pageNum is int)
+		{
+			if ((int)pageNum == Model.CurrentPage)
+			{<span class="current-page">@pageNum</span>}
+		else
+		{<a class="page-button" asp-route-type="@Model.Type" asp-route-order="@Model.Order" asp-route-page="@pageNum">@pageNum</a>}
 }
 else if (pageNum is string)
 {<span class="page-skip">@pageNum</span>}
 }
 
-    @if (Model.CurrentPage < Model.PageCount)
-    {<a class="page-button" asp-route-type="@Model.Type" asp-route-order="@Model.Order" asp-route-page="@(Model.CurrentPage+1)">Next→</a>}
-    else
-    { <span class="page-button disabled">Next→</span>}
+	@if (Model.CurrentPage < Model.PageCount)
+	{<a class="page-button" asp-route-type="@Model.Type" asp-route-order="@Model.Order" asp-route-page="@(Model.CurrentPage+1)">Next→</a>}
+	else
+	{ <span class="page-button disabled">Next→</span>}
 
 </div>
+
+@section Scripts{
+	<script src="~/js/tag_index.js" type="module"></script>
+}
 

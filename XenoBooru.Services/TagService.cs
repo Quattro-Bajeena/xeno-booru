@@ -41,6 +41,10 @@ namespace XenoBooru.Services
 			var prepName = nameQuery?.ToLower().Replace(' ', '_');
 			var tagsDb = _tagRepository.GetFilteredSortedPaged(prepName, type?.ToString(),order, page, onPage).ToList();
 			var tags = _mapper.Map<ICollection<Tag>>(tagsDb);
+			foreach (var tag in tags)
+			{
+				tag.PostCount = tag.Posts.Count;
+			}
 			return tags;
         }
 

@@ -35,7 +35,7 @@ namespace XenoBooru.Data.Repositories
                 case TagOrder.Name:
 					return tags.OrderBy(tag => tag.Name);
                 case TagOrder.Count:
-					return tags.OrderBy(tag => tag.Posts.Count);
+					return tags.OrderByDescending(tag => tag.Posts.Count);
                 default:
 					return tags;
             }
@@ -56,11 +56,15 @@ namespace XenoBooru.Data.Repositories
 
 		public IEnumerable<TagEntity> GetFilteredSortedPaged(string name, string type, TagOrder order, int page, int onPage)
 		{
+			var tagsAll = _context.Tags.Include(tag => tag.Posts).ToList();
 			var tags = _context.Tags.Include(tag => tag.Posts);
 			var filtered = Filter(tags, name, type);
 			var sorted = Sort(filtered, order);
 			var paged = sorted.Skip((page - 1) * onPage).Take(onPage);
 			// todo look up sql query that this emits
+			var sql = paged.ToQueryString();
+			var listed = paged.ToList();
+
 			return paged;
 		}
 
