@@ -1,9 +1,7 @@
 # TODO
 ## Important
 - creating miatures for levels
-- About page, more credits, technical details
-- list of tags sorted by categories. not a ranking, just informative
-
+- fill in credits
 
 ## Less important
 - adding interfaces to services
@@ -25,6 +23,8 @@
 	- changing post order in pool
 
 # DONE
+- About page, more credits, technical details
+- list of tags sorted by categories. not a ranking, just informative (KINDA)
 - think about what should be done with login 
 - button to hide or display pending posts
 - paging

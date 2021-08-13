@@ -45,7 +45,7 @@ namespace XenoBooru.Data.Repositories
         {
 			if(String.IsNullOrEmpty(nameQuery) == false)
             {
-				tags = tags.Where(tag => tag.Name.Contains(nameQuery));
+				tags = tags.Where(tag => EF.Functions.Like( tag.Name, $"%{nameQuery}%"));
 			}
 			if(type != null)
             {
