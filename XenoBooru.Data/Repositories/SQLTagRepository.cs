@@ -60,6 +60,10 @@ namespace XenoBooru.Data.Repositories
 
 		public ICollection<TagEntity> GetFromStr(string tagsStr)
 		{
+			if(tagsStr == null)
+			{
+				return new List<TagEntity>();
+			}
 			var tagsStrLst = tagsStr.Split(' ');
 			return _context.Tags.Where(tag => tagsStrLst.Contains(tag.Name)).ToList();
 		}

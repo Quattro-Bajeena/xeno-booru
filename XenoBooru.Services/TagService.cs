@@ -69,7 +69,7 @@ namespace XenoBooru.Services
 					}
 				}
 			}
-			return tags.Values.OrderByDescending(tag => tag.PostCount).Take(limit);
+			return tags.Values.OrderBy(tag => tag.Type).ThenByDescending(tag => tag.PostCount).Take(limit);
 		}
 
 		public IEnumerable<ExistingTagViewModel> GetExisting()
