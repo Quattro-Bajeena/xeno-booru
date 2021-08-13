@@ -9,7 +9,7 @@ namespace XenoBooru.Core.Models
 
 	public enum PostType
 	{
-		Default, Artwork, Audio, Model
+		Artwork, Audio, Model
 	}
 
 	public class Post

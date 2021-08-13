@@ -3,7 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using XenoBooru.Core.Models;
 using XenoBooru.Services;
+using XenoBooru.Web.Helpers;
+using XenoBooru.Web.ViewModels;
 
 namespace XenoBooru.Web.Controllers
 {
@@ -15,11 +18,27 @@ namespace XenoBooru.Web.Controllers
 			_tags = tags;
 		}
 
-		public IActionResult Index()
+		public IActionResult Index(string name, TagType? type, TagOrder order = TagOrder.Count, int page = 1)
 		{
-			var allTags = _tags.GetAll();
-			return View(allTags);
+			const int onPage = 5;
+
+			var tags = _tags.GetFilteredSortedPaged(name, type, order, page, onPage);
+			int pageCount = (int)Math.Ceiling((double)_tags.Count() / onPage);
+
+			var viewModel = new TagsViewModel
+			{
+				Tags = tags,
+				Pages = WebHelpers.Pages(page, pageCount),
+				CurrentPage = page,
+				PageCount = pageCount,
+				TagsOnPage = onPage,
+				Type = type,
+				Order = order
+			};
+
+			return View(viewModel);
 		}
+
 
 		public IActionResult GetExisting()
 		{

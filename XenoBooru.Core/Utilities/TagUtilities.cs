@@ -21,10 +21,5 @@ namespace XenoBooru.Core.Utilities
 
 			return sb.ToString();
 		}
-
-		public static IEnumerable<string> TagTypesToString()
-		{
-			return Enum.GetValues(typeof(TagType)).Cast<TagType[]>().Select(type => type.ToString()); ;
-		}
 	}
 }

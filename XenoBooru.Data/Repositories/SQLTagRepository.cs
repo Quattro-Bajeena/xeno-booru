@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using XenoBooru.Data.Entities;
 using XenoBooru.Data.Repositories.Interfaces;
+using XenoBooru.Core.Models;
 
 namespace XenoBooru.Data.Repositories
 {
@@ -25,6 +26,42 @@ namespace XenoBooru.Data.Repositories
 		public IEnumerable<TagEntity> GetAll()
 		{
 			return _context.Tags;
+		}
+
+		private IQueryable<TagEntity> Sort(IQueryable<TagEntity> tags, TagOrder order)
+        {
+            switch (order)
+            {
+                case TagOrder.Name:
+					return tags.OrderBy(tag => tag.Name);
+                case TagOrder.Count:
+					return tags.OrderBy(tag => tag.Posts.Count);
+                default:
+					return tags;
+            }
+        }
+
+		private IQueryable<TagEntity> Filter(IQueryable<TagEntity> tags, string nameQuery, string type)
+        {
+			if(String.IsNullOrEmpty(nameQuery) == false)
+            {
+				tags = tags.Where(tag => tag.Name.Contains(nameQuery));
+			}
+			if(type != null)
+            {
+				tags = tags.Where(tag => tag.Type == type);
+			}
+			return tags;
+        }
+
+		public IEnumerable<TagEntity> GetFilteredSortedPaged(string name, string type, TagOrder order, int page, int onPage)
+		{
+			var tags = _context.Tags.Include(tag => tag.Posts);
+			var filtered = Filter(tags, name, type);
+			var sorted = Sort(filtered, order);
+			var paged = sorted.Skip((page - 1) * onPage).Take(onPage);
+			// todo look up sql query that this emits
+			return paged;
 		}
 
 		public IEnumerable<TagEntity> GetFromPost(int postId)
@@ -68,6 +105,12 @@ namespace XenoBooru.Data.Repositories
 			return _context.Tags.Where(tag => tagsStrLst.Contains(tag.Name)).ToList();
 		}
 
-		 
+		public int Count()
+        {
+			return _context.Tags.Count();
+        }
+
+
+
 	}
 }
