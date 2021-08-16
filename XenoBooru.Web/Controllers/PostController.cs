@@ -35,22 +35,22 @@ namespace XenoBooru.Web.Controllers
 			_authentication = authentication;
 		}
 
-		public IActionResult Index(string tags,  int page = 1, int onPage = 25)
+		public IActionResult Index(string tags, string showPending, int page = 1, int onPage = 25)
 		{
+			bool incldePending = showPending == "on";
+			int postCount = _posts.Count(incldePending);
+			onPage = onPage == -1 ? postCount : onPage;
+			var posts = _posts.GetByTagsPaged(tags, page, onPage, incldePending);
+
 			
-
-			var posts = _posts.GetFiltered(tags);
-
-			onPage = onPage == -1 ? posts.Count : onPage;
-			var postsDisplayed = posts.Skip((page - 1) * onPage).Take(onPage).ToList();
-			int pageCount = (int)Math.Ceiling((double)posts.Count / onPage);
+			int pageCount = (int)Math.Ceiling((double)postCount / onPage);
 
 			var viewModel = new PostSearchViewModel
 			{
-				Posts = postsDisplayed,
-				Tags = _tags.GetFromPosts(postsDisplayed),
+				Posts = posts,
+				Tags = _tags.GetFromPosts(posts),
 				SearchedTagsStr = tags,
-				ContainerUrl = $"{_config.Value.StorageUrl}/{_config.Value.StorageContainer}",
+				ContainerUrl = _config.Value.ContainerUrl,
 				AudioThumbnailFileName = _config.Value.AudioThumbnailFileName,
 				CurrentPage = page,
 				PageCount = pageCount,
@@ -70,14 +70,13 @@ namespace XenoBooru.Web.Controllers
 			}
 
 
-
 			var viewModel = new PostViewModel
 			{
 				Post = post,
 				Comments = _comments.GetFromPost(post.Id),
 				Tags = _tags.GetFromPost(post.Id).ToList(),
 				PoolEntries = _pools.GetPostEntries(post.Id),
-				DataUrl = $"{_config.Value.StorageUrl}/{_config.Value.StorageContainer}/{post.FileName}",
+				DataUrl = post.DownloadUrl(_config.Value.ContainerUrl),
 				Liked = _posts.UserLiked(post.Id, _authentication.GetIp())
 			};
 

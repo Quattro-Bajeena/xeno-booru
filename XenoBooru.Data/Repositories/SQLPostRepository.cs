@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using XenoBooru.Data.Entities;
@@ -9,6 +10,7 @@ using XenoBooru.Data.Repositories.Interfaces;
 
 namespace XenoBooru.Data.Repositories
 {
+
 	public class SQLPostRepository : IPostRepository
 	{
 		private readonly AppDbContext _context;
@@ -56,38 +58,24 @@ namespace XenoBooru.Data.Repositories
 			_context.SaveChanges();
 		}
 
-		private IQueryable<PostEntity> GetAll(bool includePending)
+		public ICollection<PostEntity> GetByTagsPaged(ICollection<string> tags, bool includePending, int page, int onPage)
 		{
-
-			if (includePending)
-			{
-				return _context.Posts;
-			}
-			else
-			{
-				return _context.Posts.Where(post => post.Pending == false);
-			}
-		}
-
-		public ICollection<PostEntity> GetByTags(ICollection<string> tags, bool includePending)
-		{
-			var posts = GetAll(includePending)
+			var posts = _context.Posts
+				.ByPending(includePending)
 				.Include(post => post.Tags)
 				.Where(post => post.Tags.Where(tag => tags.Contains(tag.Name)).Count() == tags.Count)
+				.Skip( (page - 1) * onPage)
+				.Take(onPage)
 				.ToList();
-				
-			return posts;
 
+			return posts;
 		}
 
-		//public IList<PostEntity> GetFromPool(int poolId)
-		//{
-		//	var pool = _context.Pools.Where(pool => pool.Id == poolId).Include(pool => pool.Entires).Single();
-		//	var entries = pool.Entires;
-		//	var posts = entries.OrderBy(entry => entry.Position).Select(entry => entry.Post);
+		public int Count(bool includePending)
+		{
+			return _context.Posts.ByPending(includePending).Count();
+		}
 
-		//	return posts.ToList();
-		//}
 
 		public IEnumerable<PostEntity> GetFromPool(int poolId)
 		{

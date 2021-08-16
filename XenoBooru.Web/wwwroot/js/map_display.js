@@ -18,9 +18,9 @@ const wireframe_checkbox = document.getElementById("wireframe-checkbox");
 const controls_list = document.getElementById("controls-list");
 
 
-console.log(map_url);
+//console.log(map_url);
 
-let minDistance = 1000;
+let minDistance = 500;
 let maxDistance = 7000;
 
 try {
@@ -45,7 +45,7 @@ function init(){
     parent.appendChild(renderer.domElement);
 
     camera = new THREE.PerspectiveCamera( 60, width / height, 10, 20000 );
-    camera.position.set( 4500, 1000, 800 );
+    camera.position.set( 2500, 500, 400 );
     camera.lookAt( 0, 0, 0 );
 
     scene = new THREE.Scene();

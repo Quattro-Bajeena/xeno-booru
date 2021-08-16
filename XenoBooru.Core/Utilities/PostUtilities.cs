@@ -38,5 +38,6 @@ namespace XenoBooru.Core.Utilities
 
 			return fileUrl;
 		}
+
 	}
 }

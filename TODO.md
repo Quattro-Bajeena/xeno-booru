@@ -1,7 +1,13 @@
 # TODO
 ## Important
-- creating miatures for levels
 - fill in credits
+- child posts
+- optional separate post download url. So f.e. you can download levels in origina format.
+- scale icons in footer up
+- add technical explantios about map convertions, wireframe 
+- create pool with all levels
+- pool with featured levels
+
 
 ## Less important
 - adding interfaces to services
@@ -23,6 +29,9 @@
 	- changing post order in pool
 
 # DONE
+- creating miatures for levels
+- posts filtering and paging in repository layer
+- change includePending to be on server layer
 - About page, more credits, technical details
 - list of tags sorted by categories. not a ranking, just informative (KINDA)
 - think about what should be done with login 

@@ -24,6 +24,7 @@ namespace XenoBooru.Core.Models
 		public int Id { get; set; }
 		public PostType Type { get; set; }
 		public string FileName { get; set; }
+		public string FileNameDownload { get; set; }
 		public string ThumbnailFileName { get; set; }
 		public string Name { get; set; }
 		public string Description { get; set; }
@@ -35,6 +36,11 @@ namespace XenoBooru.Core.Models
 		public ICollection<Comment> Comments { get; set; }
 		public ICollection<PoolEntry> PoolsEntries { get; set; }
 
-		
+
+
+		public string DownloadUrl(string containerUrl)
+		{
+			return containerUrl + "/" + (FileNameDownload ?? FileName);
+		}
 	}
 }

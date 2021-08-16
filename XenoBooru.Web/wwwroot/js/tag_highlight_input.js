@@ -44,7 +44,7 @@ function highlight_input_tags(tag_input_styled, tags_existing, event) {
     }
     //event.target.innerHTML = "lol";
     //event.target.value = elements;
-    console.log(elements);
+    //console.log(elements);
     
 }
 

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using XenoBooru.Data;
 
 namespace XenoBooru.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210816144337_Added SourceDownload to Post")]
+    partial class AddedSourceDownloadtoPost
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -132,9 +134,6 @@ namespace XenoBooru.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FileNameDownload")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Likes")
                         .HasColumnType("int");
 
@@ -145,6 +144,9 @@ namespace XenoBooru.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Source")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SourceDownload")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ThumbnailFileName")

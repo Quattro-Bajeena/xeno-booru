@@ -29,9 +29,6 @@ html{
 }
 
 
-
-
-
 ul {
 	list-style-type: none;
 	padding: 0;
@@ -99,7 +96,7 @@ a.tag-Character:hover {
 
 body {
 	background-color: $background-color;
-	padding: 1em 3em;
+	padding: 1rem 3rem;
 	color: $main-text-color;
 	display: grid;
 	grid-template-areas: "header" "notices" "content" "footer";
@@ -166,7 +163,7 @@ footer{
     }
 
 	img{
-		height: 32px;
+		height: 1.2em;
 		vertical-align:middle;
 	}
   //background-color: cyan;

@@ -34,27 +34,28 @@ namespace XenoBooru.Services
 			return post;
 		}
 
-		public ICollection<Post> GetFiltered(string tags)
+		public ICollection<Post> GetByTagsPaged(string tags, int page, int onPage, bool includePending)
 		{
 			string[] tagsArr;
-			bool includePending;
 			if (tags != null)
 			{
 				tagsArr = tags.Trim().Split(' ');
-				includePending = false;
 			}
 			else
 			{
 				tagsArr = Array.Empty<string>();
-				includePending = true;
 			}
 
-			var postsDb = _postRepository.GetByTags(tagsArr, includePending);
+			var postsDb = _postRepository.GetByTagsPaged(tagsArr, includePending, page, onPage);
 			var posts = _mapper.Map<ICollection<Post>>(postsDb);
 
 			return posts;
 		}
 
+		public int Count(bool includePending)
+		{
+			return _postRepository.Count(includePending);
+		}
 
 		public int Add(Post post, string tagsStr, Stream fileStream)
 		{

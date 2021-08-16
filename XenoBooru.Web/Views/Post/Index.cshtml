@@ -28,13 +28,14 @@
 	<div class="sidebar-section" id="options">
 		<h4>Options</h4>
 		<a asp-action="Upload">Upload</a>
-		<h4>
-			<label for="pending-checkbox">Pending</label>
-			<input type="checkbox" id="pending-checkbox" name="show-pending" />
-		</h4>
 		<form id="post-on-page-form" asp-action="Index" method="get">
+			<div>
+				<label for="pending-checkbox">Pending</label>
+				<input type="checkbox" id="pending-checkbox" name="showPending" />
+			</div>
+
 			<label for="posts-on-page">Posts on page </label>
-			<select id="posts-on-page" name="postsOnPage">
+			<select id="posts-on-page" name="onPage">
 				<option value="25">25</option>
 				<option value="50">50</option>
 				<option value="100">100</option>
@@ -98,6 +99,6 @@
 	</script>
 	<script src="~/js/tag_highlight_posts.js" type="module"></script>
 	<script src="~/js/paging.js" type="module"></script>
-	<script src="~/js/post_index.js" type="module"></script>
+	@*<script src="~/js/post_index.js" type="module"></script>*@
 
 }
