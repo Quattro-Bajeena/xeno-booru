@@ -38,9 +38,12 @@ namespace XenoBooru.Web.Controllers
 		public IActionResult Index(string tags, string showPending, int page = 1, int onPage = 25)
 		{
 			bool incldePending = showPending == "on";
-			int postCount = _posts.Count(incldePending);
+			bool includeChildren = tags != null;
+
+			// get accurete count
+			int postCount = _posts.Count(tags, incldePending, includeChildren);
 			onPage = onPage == -1 ? postCount : onPage;
-			var posts = _posts.GetByTagsPaged(tags, page, onPage, incldePending);
+			var posts = _posts.GetByTagsPaged(tags, page, onPage, incldePending, includeChildren);
 
 			
 			int pageCount = (int)Math.Ceiling((double)postCount / onPage);
@@ -69,14 +72,14 @@ namespace XenoBooru.Web.Controllers
 				return NotFound();
 			}
 
-
 			var viewModel = new PostViewModel
 			{
 				Post = post,
 				Comments = _comments.GetFromPost(post.Id),
 				Tags = _tags.GetFromPost(post.Id).ToList(),
 				PoolEntries = _pools.GetPostEntries(post.Id),
-				DataUrl = post.DownloadUrl(_config.Value.ContainerUrl),
+				DataUrl = _config.Value.ContainerUrl + "/" + post.FileName,
+				DownloadUrl = post.DownloadUrl(_config.Value.ContainerUrl),
 				Liked = _posts.UserLiked(post.Id, _authentication.GetIp())
 			};
 

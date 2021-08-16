@@ -17,14 +17,18 @@ namespace XenoBooru.Data
 
 		}
 
-
-
 		public DbSet<PostEntity> Posts { get; set; }
 		public DbSet<CommentEntity> Comments { get; set; }
 		public DbSet<TagEntity> Tags { get; set; }
 		public DbSet<PoolEntity> Pools { get; set; }
 		public DbSet<PoolEntryEntity> PoolEntries { get; set; }
 		public DbSet<UserLikeEntity> UserLikes { get; set; }
+
+		//protected override void OnModelCreating(ModelBuilder modelBuilder)
+		//{
+		//	modelBuilder.Entity<PostEntity>().HasMany(p => p.Children).WithOne(p => p.Parent);
+		//	base.OnModelCreating(modelBuilder);
+		//}
 
 	}
 }

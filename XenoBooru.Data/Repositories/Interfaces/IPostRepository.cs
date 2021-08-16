@@ -13,10 +13,12 @@ namespace XenoBooru.Data.Repositories.Interfaces
 		int Add(PostEntity post);
 		void Remove(int id);
 		void Update(PostEntity updatedPost);
-		ICollection<PostEntity> GetByTagsPaged(ICollection<string> tags, bool includePending, int page, int onPage);
-		int Count(bool includePending);
+		ICollection<PostEntity> GetByTagsPaged(ICollection<string> tags, bool includePending, bool includeChildren, int page, int onPage);
+		int Count(ICollection<string> tags, bool includePending, bool includeChildren);
 		IEnumerable<PostEntity> GetFromPool(int poolId);
 		void GiveLike(int id, string ip_adress);
 		bool UserLiked(int id, string ip_adress);
+		void AddChild(PostEntity parent, PostEntity child);
+		ICollection<PostEntity> GetChildren(int id);
 	}
 }

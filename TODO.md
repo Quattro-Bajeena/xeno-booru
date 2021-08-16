@@ -2,11 +2,9 @@
 ## Important
 - fill in credits
 - child posts
-- optional separate post download url. So f.e. you can download levels in origina format.
-- scale icons in footer up
+- clickng on pending or tags keeps the other one
 - add technical explantios about map convertions, wireframe 
-- create pool with all levels
-- pool with featured levels
+
 
 
 ## Less important
@@ -29,6 +27,10 @@
 	- changing post order in pool
 
 # DONE
+- scale icons in footer up
+- create pool with all levels
+- pool with featured levels
+- optional separate post download url. So f.e. you can download levels in origina format.
 - creating miatures for levels
 - posts filtering and paging in repository layer
 - change includePending to be on server layer

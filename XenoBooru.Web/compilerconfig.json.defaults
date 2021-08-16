@@ -10,19 +10,20 @@
       "rootPath": "",
       "sourceMapRoot": "",
       "sourceMapBasePath": "",
-      "sourceMap": false
+      "sourceMap": true
     },
     "sass": {
-      "autoPrefix": "",
-      "includePath": "",
-      "indentType": "space",
-      "indentWidth": 2,
-      "outputStyle": "nested",
-      "Precision": 5,
-      "relativeUrls": true,
-      "sourceMapRoot": "",
-      "lineFeed": "",
-      "sourceMap": false
+        "autoPrefix": "",
+        "includePath": "",
+        "indentType": "space",
+        "indentWidth": 2,
+        "outputStyle": "nested",
+        "Precision": 5,
+        "relativeUrls": true,
+        "sourceMapRoot": "",
+        "lineFeed": "",
+        "sourceMap": true,
+        "minify": { "enabled": false }
     },
     "stylus": {
       "sourceMap": false

@@ -9,6 +9,7 @@ namespace XenoBooru.Web.ViewModels
 	public class PostViewModel
 	{
 		public string DataUrl { get; set; }
+		public string DownloadUrl { get; set; }
 		public Post Post { get; set; }
 		public IEnumerable<Comment> Comments { get; set; }
 		public ICollection<Tag> Tags { get; set; }

@@ -2,7 +2,7 @@
 @using XenoBooru.Core.Utilities
 
 @{
-	ViewData["Title"] = "Post-" + Model.Post.Id;
+	ViewData["Title"] = Model.Post.Name;
 }
 
 
@@ -15,22 +15,29 @@
 
 	@foreach (PoolEntry entry in Model.PoolEntries)
 	{
-		<div class="status-notice">
-			@if (entry.PreviousPostId != null)
-			{<a asp-route-id="@entry.PreviousPostId">🡨Previous</a>}
-			&nbsp;
-			@if (entry.NextPostId != null)
-			{<a asp-route-id="@entry.NextPostId">Next🡪</a>}
-			&nbsp;|&nbsp;
-			This post is #@entry.Position in the <a asp-controller="Pool" asp-action="Show" asp-route-id="@entry.Pool.Id">@entry.Pool.Name</a> pool
-		</div>
+	<div class="status-notice">
+		@if (entry.PreviousPostId != null)
+		{<a asp-route-id="@entry.PreviousPostId">🡨Previous</a>}
+		&nbsp;
+		@if (entry.NextPostId != null)
+		{<a asp-route-id="@entry.NextPostId">Next🡪</a>}
+		&nbsp;|&nbsp;
+		This post is #@entry.Position in the <a asp-controller="Pool" asp-action="Show" asp-route-id="@entry.Pool.Id">@entry.Pool.Name</a> pool
+	</div>
+	}
+
+	@if (Model.Post.ParentId != null)
+	{
+	<div class="status-notice">
+		This post has a <a asp-route-id="@Model.Post.ParentId">parent</a>.
+	</div>
 	}
 
 	@if (Model.Post.Pending)
 	{
-		<div id="pending-notice" class="status-notice">
-			This post is pending moderator approval.
-		</div>
+	<div id="pending-notice" class="status-notice">
+		This post is pending moderator approval.
+	</div>
 	}
 }
 
@@ -86,7 +93,7 @@
 			</li>
 			}
 			<li><button class="link-button switch-button edit-post-button">Edit</button></li>
-			<li><a href="@Model.DataUrl" download>Download</a></li>
+			<li><a href="@Model.DownloadUrl" download>Download</a></li>
 		</ul>
 	</div>
 }

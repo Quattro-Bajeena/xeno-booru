@@ -20,5 +20,17 @@ namespace XenoBooru.Data
 				return posts.Where(post => post.Pending == false);
 			}
 		}
+
+		public static IQueryable<T> IncludeChildren<T>(this IQueryable<T> posts, bool includeChildren) where T : PostEntity
+		{
+			if (includeChildren)
+			{
+				return posts;
+			}
+			else
+			{
+				return posts.Where(post => post.ParentId == null);
+			}
+		}
 	}
 }

@@ -1,62 +1,42 @@
 ﻿[
   {
     "outputFile": "wwwroot/css/index.css",
-    "inputFile": "wwwroot/scss/index.scss",
-    "minify": { "enabled": false },
-    "sourceMap": true
+    "inputFile": "wwwroot/scss/index.scss"
   },
   {
     "outputFile": "wwwroot/css/post_index.css",
-    "inputFile": "wwwroot/scss/post_index.scss",
-    "minify": { "enabled": false },
-    "sourceMap": true
+    "inputFile": "wwwroot/scss/post_index.scss"
   },
   {
     "outputFile": "wwwroot/css/post_show.css",
-    "inputFile": "wwwroot/scss/post_show.scss",
-    "minify": { "enabled": false },
-    "sourceMap": true
+    "inputFile": "wwwroot/scss/post_show.scss"
   },
   {
     "outputFile": "wwwroot/css/post_upload.css",
-    "inputFile": "wwwroot/scss/post_upload.scss",
-    "minify": { "enabled": false },
-    "sourceMap": true
+    "inputFile": "wwwroot/scss/post_upload.scss"
   },
   {
     "outputFile": "wwwroot/css/tag_index.css",
-    "inputFile": "wwwroot/scss/tag_index.scss",
-    "minify": { "enabled": false },
-    "sourceMap": true
+    "inputFile": "wwwroot/scss/tag_index.scss"
   },
   {
     "outputFile": "wwwroot/css/pool.css",
-    "inputFile": "wwwroot/scss/pool.scss",
-    "minify": { "enabled": false },
-    "sourceMap": true
+    "inputFile": "wwwroot/scss/pool.scss"
   },
   {
     "outputFile": "wwwroot/css/login.css",
-    "inputFile": "wwwroot/scss/login.scss",
-    "minify": { "enabled": false },
-    "sourceMap": true
+    "inputFile": "wwwroot/scss/login.scss"
   },
   {
     "outputFile": "wwwroot/css/comment.css",
-    "inputFile": "wwwroot/scss/comment.scss",
-    "minify": { "enabled": false },
-    "sourceMap": true
+    "inputFile": "wwwroot/scss/comment.scss"
   },
   {
     "outputFile": "wwwroot/css/about.css",
-    "inputFile": "wwwroot/scss/about.scss",
-    "minify": { "enabled": false },
-    "sourceMap": true
+    "inputFile": "wwwroot/scss/about.scss"
   },
   {
     "outputFile": "wwwroot/css/simple_page.css",
-    "inputFile": "wwwroot/scss/simple_page.scss",
-    "minify": { "enabled": false },
-    "sourceMap": true
+    "inputFile": "wwwroot/scss/simple_page.scss"
   }
 ]

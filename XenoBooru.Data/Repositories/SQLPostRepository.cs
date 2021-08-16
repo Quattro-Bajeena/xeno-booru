@@ -58,11 +58,12 @@ namespace XenoBooru.Data.Repositories
 			_context.SaveChanges();
 		}
 
-		public ICollection<PostEntity> GetByTagsPaged(ICollection<string> tags, bool includePending, int page, int onPage)
+		public ICollection<PostEntity> GetByTagsPaged(ICollection<string> tags, bool includePending, bool includeChildren, int page, int onPage)
 		{
 			var posts = _context.Posts
 				.ByPending(includePending)
-				.Include(post => post.Tags)
+				.IncludeChildren(includeChildren)
+				.Include(post => post.Tags).Include(post => post.Parent)
 				.Where(post => post.Tags.Where(tag => tags.Contains(tag.Name)).Count() == tags.Count)
 				.Skip( (page - 1) * onPage)
 				.Take(onPage)
@@ -71,9 +72,13 @@ namespace XenoBooru.Data.Repositories
 			return posts;
 		}
 
-		public int Count(bool includePending)
+		public int Count(ICollection<string> tags, bool includePending, bool includeChildren)
 		{
-			return _context.Posts.ByPending(includePending).Count();
+			return _context.Posts
+				.ByPending(includePending)
+				.IncludeChildren(includeChildren)
+				.Where(post => post.Tags.Where(tag => tags.Contains(tag.Name)).Count() == tags.Count)
+				.Count();
 		}
 
 
@@ -115,6 +120,21 @@ namespace XenoBooru.Data.Repositories
 				.Where(like => like.IpAdress == ip_adress)
 				.FirstOrDefault();
 			return user_like != null;
+		}
+
+		public void AddChild(PostEntity parent, PostEntity child)
+		{
+			if(child.ParentId == null)
+			{
+				child.Parent = parent;
+			}
+			
+			_context.SaveChanges();
+		}
+
+		public ICollection<PostEntity> GetChildren(int id)
+		{
+			return _context.Posts.Where(post => post.ParentId == id).ToList();
 		}
 	}
 }

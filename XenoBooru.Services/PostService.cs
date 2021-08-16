@@ -34,7 +34,7 @@ namespace XenoBooru.Services
 			return post;
 		}
 
-		public ICollection<Post> GetByTagsPaged(string tags, int page, int onPage, bool includePending)
+		public ICollection<Post> GetByTagsPaged(string tags, int page, int onPage, bool includePending, bool includeChildren)
 		{
 			string[] tagsArr;
 			if (tags != null)
@@ -46,15 +46,24 @@ namespace XenoBooru.Services
 				tagsArr = Array.Empty<string>();
 			}
 
-			var postsDb = _postRepository.GetByTagsPaged(tagsArr, includePending, page, onPage);
+			var postsDb = _postRepository.GetByTagsPaged(tagsArr, includePending, includeChildren, page, onPage);
 			var posts = _mapper.Map<ICollection<Post>>(postsDb);
 
 			return posts;
 		}
 
-		public int Count(bool includePending)
+		public int Count(string tags, bool includePending, bool includeChildren)
 		{
-			return _postRepository.Count(includePending);
+			string[] tagsArr;
+			if (tags != null)
+			{
+				tagsArr = tags.Trim().Split(' ');
+			}
+			else
+			{
+				tagsArr = Array.Empty<string>();
+			}
+			return _postRepository.Count(tagsArr, includePending, includeChildren);
 		}
 
 		public int Add(Post post, string tagsStr, Stream fileStream)
@@ -98,6 +107,20 @@ namespace XenoBooru.Services
 		public bool UserLiked(int id, string ip_adress)
 		{
 			return _postRepository.UserLiked(id, ip_adress);
+		}
+
+		public void AddChild(Post parent, Post child)
+		{
+			var parentDb = _mapper.Map<PostEntity>(parent);
+			var childDb = _mapper.Map<PostEntity>(child);
+			_postRepository.AddChild(parentDb, childDb);
+		}
+
+		public ICollection<Post> GetChildren(int id)
+		{
+			var childrenDb = _postRepository.GetChildren(id);
+			var children = _mapper.Map<ICollection<Post>>(childrenDb);
+			return children;
 		}
 
 	}
