@@ -13,10 +13,59 @@ namespace XenoBooru.DataManipulation
 	{
 		public string DevConnectionString { get; set; }
 		public string ProdConnectionString { get; set; }
-	}
+        public bool Prod { get; set; }
+    }
 
 	static class DatabaseOperations
 	{
+		static void AddMapPosts(AppDbContext db)
+        {
+
+			var levelPool = new PoolEntity
+			{
+				Name = "Levels",
+				Description = "Levels from in-game files",
+				Creator = "Paraon",
+				Created = DateTime.Now,
+				Entires = new List<PoolEntryEntity>()
+			};
+
+			var levelTag = db.Tags.Where(tag => tag.Name == "level").FirstOrDefault();
+			for (int i = 1; i <= 729; i++)
+            {
+				var post = new PostEntity
+				{
+					Type = "Model",
+					FileName = "level" + i.ToString() + ".glb",
+					Name = "Level " + i.ToString(),
+					Description = "Level " + i.ToString(),
+					Likes = 0,
+					Source = "In-game files",
+					Pending = false,
+					ThumbnailFileName = "LevelThumbnail_" + i.ToString() + ".webp",
+					FileNameDownload = "LevelDownload_" + i.ToString() + ".zip",
+					Tags = new List<TagEntity>()
+				};
+
+				var entryEntity = new PoolEntryEntity
+				{
+					Post = post,
+					Pool = levelPool,
+					Position = i
+				};
+				levelPool.Entires.Add(entryEntity);
+
+				post.Tags.Add(levelTag);
+
+				db.Posts.Add(post);
+
+				Console.WriteLine("Added level " + i);
+            }
+			db.Pools.Add(levelPool);
+			db.SaveChanges();
+			Console.WriteLine("Done");
+
+        }
 		
 		static void AddDownloadLinksToPosts(AppDbContext db)
 		{
@@ -79,15 +128,18 @@ namespace XenoBooru.DataManipulation
 			string jsonString = r.ReadToEnd();
 			Settings settings = JsonSerializer.Deserialize<Settings>(jsonString);
 
+			string connectionString = settings.Prod ? settings.ProdConnectionString : settings.DevConnectionString;
+
 			var contextOptions = new DbContextOptionsBuilder<AppDbContext>()
-				.UseSqlServer(settings.DevConnectionString)
+				.UseSqlServer(connectionString)
 				.Options;
 
 			using (AppDbContext db = new AppDbContext(contextOptions))
 			{
+				AddMapPosts(db);
 				//AddDownloadLinksToPosts(db);
 				//CreateLevelPool(db);
-				AddLevelTag(db);
+				//AddLevelTag(db);
 			}
 
 			Console.Read();
