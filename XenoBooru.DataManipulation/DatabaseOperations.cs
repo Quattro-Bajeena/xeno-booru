@@ -30,6 +30,8 @@ namespace XenoBooru.DataManipulation
 				Entires = new List<PoolEntryEntity>()
 			};
 
+			db.Pools.Add(levelPool);
+			db.SaveChanges();
 			var levelTag = db.Tags.Where(tag => tag.Name == "level").FirstOrDefault();
 			for (int i = 1; i <= 729; i++)
             {
@@ -49,6 +51,7 @@ namespace XenoBooru.DataManipulation
 
 				var entryEntity = new PoolEntryEntity
 				{
+
 					Post = post,
 					Pool = levelPool,
 					Position = i
@@ -58,10 +61,10 @@ namespace XenoBooru.DataManipulation
 				post.Tags.Add(levelTag);
 
 				db.Posts.Add(post);
-
+				db.SaveChanges();
 				Console.WriteLine("Added level " + i);
             }
-			db.Pools.Add(levelPool);
+
 			db.SaveChanges();
 			Console.WriteLine("Done");
 
@@ -136,7 +139,7 @@ namespace XenoBooru.DataManipulation
 
 			using (AppDbContext db = new AppDbContext(contextOptions))
 			{
-				AddMapPosts(db);
+				//AddMapPosts(db);
 				//AddDownloadLinksToPosts(db);
 				//CreateLevelPool(db);
 				//AddLevelTag(db);
