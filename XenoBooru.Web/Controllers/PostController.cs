@@ -52,12 +52,13 @@ namespace XenoBooru.Web.Controllers
 			{
 				Posts = posts,
 				Tags = _tags.GetFromPosts(posts),
-				SearchedTagsStr = tags,
+				SearchedTags = tags,
 				ContainerUrl = _config.Value.ContainerUrl,
 				AudioThumbnailFileName = _config.Value.AudioThumbnailFileName,
 				CurrentPage = page,
 				PageCount = pageCount,
 				PostsOnPage = onPage,
+				ShowPending = showPending,
 				Pages = WebHelpers.Pages(page, pageCount)
 			};
 			return View(viewModel);

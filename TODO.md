@@ -1,7 +1,7 @@
 # TODO
 ## Important
 - fill in credits
-- child posts
+
 - clickng on pending or tags keeps the other one
 - add technical explantios about map convertions, wireframe 
 
@@ -27,6 +27,7 @@
 	- changing post order in pool
 
 # DONE
+- child posts
 - scale icons in footer up
 - create pool with all levels
 - pool with featured levels

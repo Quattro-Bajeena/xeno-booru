@@ -9,7 +9,7 @@ namespace XenoBooru.Core.Utilities
 {
 	public static class TagUtilities
 	{
-		public static string ToString(ICollection<Tag> tags)
+		public static string ToString(IEnumerable<Tag> tags)
 		{
 			var sb = new StringBuilder();
 

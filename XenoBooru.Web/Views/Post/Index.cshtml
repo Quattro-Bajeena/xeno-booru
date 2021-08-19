@@ -12,7 +12,7 @@
 @section Sidebar{
 	<form class="sidebar-section" id="search" asp-controller="Post" asp-action="Index" method="get">
 		<h4>Search</h4>
-		<input class="search-bar" type="text" name="tags" autocomplete="off" value="@Model.SearchedTagsStr">
+		<input class="search-bar" type="text" name="tags" autocomplete="off" value="@Model.SearchedTags">
 	</form>
 	<div class="sidebar-section" id="tags">
 		<h4>Tags</h4>
@@ -20,7 +20,7 @@
 			@foreach (Tag tag in Model.Tags.Take(20))
 			{
 			<li class="tag" id="tag-@tag.Name">
-				<a class="tag-@tag.Type" asp-route-tags="@tag.Name">@tag.ToString()</a>&nbsp;<span class="tag-count">@tag.PostCount</span>
+				<a class="tag-@tag.Type" asp-route-tags="@tag.Name" asp-route-onPage="@Model.PostsOnPage">@tag.ToString()</a>&nbsp;<span class="tag-count">@tag.PostCount</span>
 			</li>
 			}
 		</ul>
@@ -29,6 +29,9 @@
 		<h4>Options</h4>
 		<a asp-action="Upload">Upload</a>
 		<form id="post-on-page-form" asp-action="Index" method="get">
+			<input type="hidden" name="tags" value="@Model.SearchedTags" />
+			<input type="hidden" name="page" value="@Model.CurrentPage" />
+
 			<div>
 				<label for="pending-checkbox">Pending</label>
 				<input type="checkbox" id="pending-checkbox" name="showPending" />
@@ -69,7 +72,10 @@
 
 <div id="paginator">
 	@if (Model.CurrentPage > 1)
-	{<a class="page-button" asp-route-page="@(Model.CurrentPage-1)" asp-route-onPage="@Model.PostsOnPage">←Previous</a>}
+	{<a class="page-button" 
+		asp-all-route-data="@Model.PagingRouteData"
+		asp-route-page="@(Model.CurrentPage-1)" >
+	←Previous</a>}
 	else
 	{<span class="page-button disabled">←Previous</span>}
 
@@ -80,13 +86,19 @@
 			if ((int)pageNum == Model.CurrentPage)
 			{<span class="current-page">@pageNum</span>}
 			else
-			{<a class="page-button" asp-route-page="@pageNum" asp-route-onPage="@Model.PostsOnPage">@pageNum</a>}
+			{<a class="page-button" 
+				asp-all-route-data="@Model.PagingRouteData"
+				asp-route-page="@pageNum" >
+			@pageNum</a>}
 		}
 		else if (pageNum is string)
 		{<span class="page-skip">@pageNum</span>}
 	}
 	@if (Model.CurrentPage < Model.PageCount)
-	{ <a class="page-button" asp-route-page="@(Model.CurrentPage+1)" asp-route-onPage="@Model.PostsOnPage">Next→</a>}
+	{ <a class="page-button" 
+		 asp-all-route-data="@Model.PagingRouteData"
+		 asp-route-page="@(Model.CurrentPage+1)" >
+	Next→</a>}
 	else 
 	{ <span class="page-button disabled">Next→</span>}
 			
