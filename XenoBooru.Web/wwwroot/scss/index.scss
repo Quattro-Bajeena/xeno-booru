@@ -37,6 +37,13 @@ header {
 main {
     grid-area: content;
     margin-bottom: 20px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    #featured{
+        margin: 20px 0;
+    }
 }
 
 footer{

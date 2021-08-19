@@ -1,10 +1,6 @@
 # TODO
 ## Important
-- fill in credits
-
-- clickng on pending or tags keeps the other one
-- add technical explantios about map convertions, wireframe 
-
+- featured levels page
 
 
 ## Less important
@@ -27,6 +23,9 @@
 	- changing post order in pool
 
 # DONE
+- fill in credits
+- add technical explantios about map convertions, wireframe 
+- clickng on pending or tags keeps the other one
 - child posts
 - scale icons in footer up
 - create pool with all levels
