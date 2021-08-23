@@ -35,7 +35,7 @@ namespace XenoBooru.Web.Controllers
 			_authentication = authentication;
 		}
 
-		public IActionResult Index(string tags, string showPending, int page = 1, int onPage = 25)
+		public IActionResult Index(string tags, string showPending, int page = 1, int onPage = 50)
 		{
 			bool incldePending = showPending == "on";
 			bool includeChildren = tags != null;
@@ -53,7 +53,7 @@ namespace XenoBooru.Web.Controllers
 				Posts = posts,
 				Tags = _tags.GetFromPosts(posts),
 				SearchedTags = tags,
-				ContainerUrl = _config.Value.ContainerUrl,
+				ContainerUrl = _config.Value.PostsContainerUrl,
 				AudioThumbnailFileName = _config.Value.AudioThumbnailFileName,
 				CurrentPage = page,
 				PageCount = pageCount,
@@ -79,8 +79,8 @@ namespace XenoBooru.Web.Controllers
 				Comments = _comments.GetFromPost(post.Id),
 				Tags = _tags.GetFromPost(post.Id).ToList(),
 				PoolEntries = _pools.GetPostEntries(post.Id),
-				DataUrl = _config.Value.ContainerUrl + "/" + post.FileName,
-				DownloadUrl = post.DownloadUrl(_config.Value.ContainerUrl),
+				DataUrl = _config.Value.PostsContainerUrl + "/" + post.FileName,
+				DownloadUrl = post.DownloadUrl(_config.Value.PostsContainerUrl),
 				Liked = _posts.UserLiked(post.Id, _authentication.GetIp())
 			};
 
@@ -93,7 +93,7 @@ namespace XenoBooru.Web.Controllers
 		{
 			if (_authentication.CheckAuthentication("UploadPost") == false)
 			{
-				return RedirectToAction("Upload");
+				return RedirectToAction("Index");
 			}
 			return View();
 		}

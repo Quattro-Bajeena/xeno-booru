@@ -1,6 +1,10 @@
 # TODO
 ## Important
 - featured levels page
+- cool backgrounds from screen levels
+- add google analytics tracking?
+- searchbar suggestions
+- export gear models
 
 
 ## Less important
@@ -23,6 +27,7 @@
 	- changing post order in pool
 
 # DONE
+- level viewr app
 - fill in credits
 - add technical explantios about map convertions, wireframe 
 - clickng on pending or tags keeps the other one

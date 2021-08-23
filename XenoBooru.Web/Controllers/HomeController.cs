@@ -28,6 +28,8 @@ namespace XenoBooru.Web.Controllers
 		}
 
 		public IActionResult Index() => View();
+	
+		
 		public IActionResult Login(bool authorized)
 		{
 			ViewData["authorized"] = authorized;
@@ -36,6 +38,14 @@ namespace XenoBooru.Web.Controllers
 
 		
 		public IActionResult About() => View();
+		public IActionResult MapViewerAppInfo()
+		{
+			var viewModel = new IndexViewModel
+			{
+				MapViewerDownloadUrl = _config.Value.GetResourceUrl("XenogearsMapViewer.zip")
+			};
+			return View(viewModel);
+		}
 
 		[HttpPost]
 		public IActionResult Authenticate(string password)

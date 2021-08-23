@@ -1,8 +1,9 @@
 ﻿@model XenoBooru.Web.ViewModels.PostSearchViewModel
 @using XenoBooru.Core.Utilities
 @{
-	ViewData["Title"] = "Maps";
+	ViewData["Title"] = "Posts | " + Model.SearchedTags;
 }
+
 
 @section Stylesheets{
 	<link rel="stylesheet" href="~/css/post_index.css" />
@@ -40,8 +41,9 @@
 			<label for="posts-on-page">Posts on page </label>
 			<select id="posts-on-page" name="onPage">
 				<option value="25">25</option>
-				<option value="50">50</option>
+				<option value="50" selected>50</option>
 				<option value="100">100</option>
+				<option value="200">200</option>
 				<option value="-1">All</option>
 			</select>
 		</form>

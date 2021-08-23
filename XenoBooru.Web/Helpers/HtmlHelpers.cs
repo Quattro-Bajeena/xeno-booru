@@ -11,6 +11,7 @@ namespace XenoBooru.Web.Helpers
 {
 	public static class HtmlHelpers
 	{
+
         private const string ScriptsKey = "DelayedScripts";
 
         public static IDisposable BeginScripts(this IHtmlHelper helper)

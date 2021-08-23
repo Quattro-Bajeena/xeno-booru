@@ -36,8 +36,7 @@ namespace XenoBooru.Web.Services
 
 		public bool CheckAuthentication(string action)
 		{
-			bool authRequired = true;
-			_config.Value.AuthenticationRequired.TryGetValue(action, out authRequired);
+			_config.Value.AuthenticationRequired.TryGetValue(action, out bool authRequired);
 			if (authRequired == false)
             {
 				return true;

@@ -40,7 +40,7 @@ namespace XenoBooru.Web.Controllers
 				return NotFound();
 			}
 
-			ViewData["ContainerUrl"] = _config.Value.StorageUrl + "/" + _config.Value.StorageContainer;
+			ViewData["ContainerUrl"] = _config.Value.StorageUrl + "/" + _config.Value.PostContainer;
 			ViewData["AudioThumbnailFileName"] = _config.Value.AudioThumbnailFileName;
 
 			return View(pool);

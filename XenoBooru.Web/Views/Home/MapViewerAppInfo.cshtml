@@ -1,0 +1,47 @@
+﻿@{
+	ViewData["Title"] = "Map Viewer App";
+}
+
+
+@section Stylesheets{
+	<link rel="stylesheet" href="~/css/about.css" />
+}
+
+
+<article>
+	<h1>Xenogears Map Viewer Desktop Appliaction</h1>
+	<p>
+		<h3>
+			<a href="@Model.MapViewerDownloadUrl" download="XenogearsMapViewer">DOWNLOAD</a>
+		</h3>
+	</p>
+	
+
+	<h2>Why additional app?</h2>
+	<p>
+		As you maybe noticed, currently the maps are not perfectly complete. The two main problems are the lack of transparency in textures and vertex colors.
+		That means the texures with partial transparency, like trees, chairs etc. look weird, as the transparent part is replaced with random(?) pixels.
+		And some objects that used vector colors and were all semi-transparent are just black. An easy way to see that is Shevat's energy barier.
+		The needed data is loaded correctly into xenogears map viewer created by Micky but then the function exporting the model isn't (by his own admition) complete.<br />
+		I was trying to dig into it myself, but couldn't figure out how to export this data. If anyone reading this is more knowledgble in this topic and would like to help,
+		I would be thankfull for getting in contact.
+	</p>
+	<h2>Reason to use it</h2>
+	<p>
+		But the thing is, the original map viewer script renders the maps perfectly fine. The only problems were it's relative cluckiness in navigating the 3D space,
+		and the fact you had to have at least begginer level or programing knowledge to run it.<br />
+		That's why I reworked the controlls and packaged it into user-friendly appliaction with graphic interface and all,
+		so if you want to look at the maps in their best quality I advise you to download and use that appliaction.
+	</p>
+	<h2>More alternatives</h2>
+	<p>
+		If you realy want to explore the maps throughly, beside using the Map Viewer App, I would reccomend downloading the file and opening it in 3D software (like the free <a href="https://www.blender.org/download/" target="_blank">Blender</a>),
+		to be able to move freely and delete fragments of geometry that block the view.
+		Also the ability to focus on particular mesh is very helpful with exploring the bigger maps.
+	</p>
+	<p>
+		As a note, the wireframe option in online model viewer doesn't show the real map geometry. That is because in order to convert the mesh to the format suitable for display in the browser,
+		it had to be triangulated and geometry ripped apart on some edges. That's why in download link I offer the original zipped files, with separate texture files.
+	</p>
+</article>
+
