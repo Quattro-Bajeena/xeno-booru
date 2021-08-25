@@ -10,5 +10,6 @@ namespace XenoBooru.Services.ViewModels
 	{
 		public string Type { get; set; }
 		public string Name { get; set; }
+		public int PostCount { get; set; }
 	}
 }

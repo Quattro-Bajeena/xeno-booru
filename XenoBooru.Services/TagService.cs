@@ -23,15 +23,19 @@ namespace XenoBooru.Services
 			_mapper = mapper;
 		}
 
+		private void AddTagCounts(IEnumerable<Tag> tags)
+		{
+			foreach (var tag in tags)
+			{
+				tag.PostCount = _tagRepository.GetTagPostCount(tag.Id);
+			}
+		}
 
 		public ICollection<Tag> GetAll()
 		{
 			var tagsDb = _tagRepository.GetAll();
 			var tags = _mapper.Map<IEnumerable<Tag>>(tagsDb);
-			foreach (var tag in tags)
-			{
-				tag.PostCount = _tagRepository.GetTagPostCount(tag.Id);
-			}
+			AddTagCounts(tags);
 			var sortedTags = tags.OrderByDescending(tag => tag.PostCount).ToList();
 			return sortedTags;
 		}
@@ -52,10 +56,7 @@ namespace XenoBooru.Services
 		{
 			var tagsDb = _tagRepository.GetFromPost(postId);
 			var tags = _mapper.Map<IEnumerable<Tag>>(tagsDb);
-			foreach (var tag in tags)
-			{
-				tag.PostCount = _tagRepository.GetTagPostCount(tag.Id);
-			}
+			AddTagCounts(tags);
 			tags = tags.OrderByDescending(tag => tag.PostCount);
 			return tags;
 		}
@@ -87,8 +88,10 @@ namespace XenoBooru.Services
 		public IEnumerable<ExistingTagViewModel> GetExisting()
 		{
 			var tagsDb = _tagRepository.GetAll();
-			var tags = _mapper.Map<IEnumerable<ExistingTagViewModel>>(tagsDb);
-			return tags;
+			var tags = _mapper.Map<IEnumerable<Tag>>(tagsDb);
+			AddTagCounts(tags);
+			var tagsVm = _mapper.Map<IEnumerable<ExistingTagViewModel>>(tags);
+			return tagsVm;
 		}
 
 		public int Count()

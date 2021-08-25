@@ -36,6 +36,10 @@ namespace XenoBooru.Services
 
 		public ICollection<Post> GetByTagsPaged(string tags, int page, int onPage, bool includePending, bool includeChildren)
 		{
+			if(onPage == 0)
+			{
+				return new List<Post>();
+			}
 			string[] tagsArr;
 			if (tags != null)
 			{

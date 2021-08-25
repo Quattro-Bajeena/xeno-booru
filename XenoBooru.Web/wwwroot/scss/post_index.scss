@@ -55,26 +55,24 @@ $thumbnail-border-thickness: 3px;
 
 
 
+#tag-completion-box {
+    position:absolute;
+    top:200px;
+    left:50px;
+    background-color: #150504;
+    z-index: 2;
+    min-width: 160px;
 
+    ul{
+        margin: 0.5em;
+    }
 
-//.nav-button {
-//    display: block;
-//    width: max-content;
-//    min-width: 20px;
-//    margin: 0 5px;
-//    padding: 3px;
-//    border-radius: 0;
-//    color: $main-text-color;
-//    background-color: transparent;
-//    border: 1px solid $main-text-color;
-//}
+    li{
+        &:hover{
+            color:#dfdfdf;
+            background-color:#330c07;
+        }
 
-//.nav-button:hover {
-//    background-color: $link-color;
-//    cursor: pointer;
-//}
-
-//.nav-button:active {
-//    background-color: darken($link-color, 30%);
-//}
+    }
+}
 

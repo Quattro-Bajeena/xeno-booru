@@ -11,45 +11,53 @@
 
 
 @section Sidebar{
-    <form class="sidebar-section" id="search" asp-controller="Post" asp-action="Index" method="get">
-        <h4>Search</h4>
-        <input type="hidden" name="onPage" value="@Model.PostsOnPage" />
-        <input type="hidden" name="showPending" value="@Model.ShowPending" />
-        <input class="search-bar" type="text" name="tags" autocomplete="off" value="@Model.SearchedTags">
+
+<form class="sidebar-section" id="search" asp-controller="Post" asp-action="Index" method="get">
+    <h4>Search</h4>
+    <input type="hidden" name="onPage" value="@Model.PostsOnPage" />
+    <input type="hidden" name="showPending" value="@Model.ShowPending" />
+    <input class="search-bar" type="text" name="tags" autocomplete="off" value="@Model.SearchedTags">
+</form>
+<div class="sidebar-section" id="tags">
+    <h4>Tags</h4>
+    <ul>
+        @foreach (Tag tag in Model.Tags.Take(20))
+        {
+            <li class="tag" id="tag-@tag.Name">
+                <a class="tag-type-@tag.Type" asp-route-tags="@tag.Name" asp-route-onPage="@Model.PostsOnPage">@tag.ToString()</a>&nbsp;<span class="tag-count">@tag.PostCount</span>
+            </li>
+        }
+    </ul>
+</div>
+<div class="sidebar-section" id="options">
+    <h4>Options</h4>
+    <a asp-action="Upload">Upload</a>
+    <form id="post-on-page-form" asp-action="Index" method="get">
+        <input type="hidden" name="tags" value="@Model.SearchedTags" />
+        <input type="hidden" name="page" value="@Model.CurrentPage" />
+
+        <div>
+            <label for="pending-checkbox">Pending</label>
+            <input type="checkbox" id="pending-checkbox" name="showPending" />
+        </div>
+
+        <label for="posts-on-page">Posts on page </label>
+        <select id="posts-on-page" name="onPage">
+            <option value="25">25</option>
+            <option value="50" selected>50</option>
+            <option value="100">100</option>
+            <option value="200">200</option>
+            <option value="-1">All</option>
+        </select>
     </form>
-    <div class="sidebar-section" id="tags">
-        <h4>Tags</h4>
-        <ul>
-            @foreach (Tag tag in Model.Tags.Take(20))
-            {
-                <li class="tag" id="tag-@tag.Name">
-                    <a class="tag-@tag.Type" asp-route-tags="@tag.Name" asp-route-onPage="@Model.PostsOnPage">@tag.ToString()</a>&nbsp;<span class="tag-count">@tag.PostCount</span>
-                </li>
-            }
-        </ul>
-    </div>
-    <div class="sidebar-section" id="options">
-        <h4>Options</h4>
-        <a asp-action="Upload">Upload</a>
-        <form id="post-on-page-form" asp-action="Index" method="get">
-            <input type="hidden" name="tags" value="@Model.SearchedTags" />
-            <input type="hidden" name="page" value="@Model.CurrentPage" />
+</div>
 
-            <div>
-                <label for="pending-checkbox">Pending</label>
-                <input type="checkbox" id="pending-checkbox" name="showPending" />
-            </div>
+<div id="tag-completion-box" style="display:none">
+	<ul>
 
-            <label for="posts-on-page">Posts on page </label>
-            <select id="posts-on-page" name="onPage">
-                <option value="25">25</option>
-                <option value="50" selected>50</option>
-                <option value="100">100</option>
-                <option value="200">200</option>
-                <option value="-1">All</option>
-            </select>
-        </form>
-    </div>
+	</ul>
+
+</div>
 }
 
 

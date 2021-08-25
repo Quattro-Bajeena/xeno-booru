@@ -45,13 +45,16 @@ namespace XenoBooru.Web.Controllers
 			onPage = onPage == -1 ? postCount : onPage;
 			var posts = _posts.GetByTagsPaged(tags, page, onPage, incldePending, includeChildren);
 
-			
-			int pageCount = (int)Math.Ceiling((double)postCount / onPage);
+
+			int pageCount = onPage > 0 ? (int)Math.Ceiling((double)postCount / onPage) : 0;
+			IEnumerable<object> pages = WebHelpers.Pages(page, pageCount);
+
+			var tagsOnPage = _tags.GetFromPosts(posts);
 
 			var viewModel = new PostSearchViewModel
 			{
 				Posts = posts,
-				Tags = _tags.GetFromPosts(posts),
+				Tags = tagsOnPage,
 				SearchedTags = tags,
 				ContainerUrl = _config.Value.PostsContainerUrl,
 				AudioThumbnailFileName = _config.Value.AudioThumbnailFileName,
@@ -59,7 +62,7 @@ namespace XenoBooru.Web.Controllers
 				PageCount = pageCount,
 				PostsOnPage = onPage,
 				ShowPending = showPending,
-				Pages = WebHelpers.Pages(page, pageCount)
+				Pages = pages
 			};
 			return View(viewModel);
 		}

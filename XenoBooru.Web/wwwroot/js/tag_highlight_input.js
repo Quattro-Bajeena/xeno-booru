@@ -1,21 +1,4 @@
-﻿// Returns a function, that, as long as it continues to be invoked, will not
-// be triggered. The function will be called after it stops being called for
-// `wait` milliseconds.
-const debounce = (func, wait) => {
-    let timeout;
-
-    return function executedFunction(...args) {
-        const later = () => {
-            timeout = null;
-            func(...args);
-        };
-
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-};
-
-function highlight_input_tags(tag_input_styled, tags_existing, event) {
+﻿function highlight_input_tags(tag_input_styled, tags_existing, event) {
     let tags_str = event.target.value.trim().split(/\s+/);
     //let tags_str = event.target.value.split(' ');
     let elements = new Array;

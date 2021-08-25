@@ -20,6 +20,7 @@ namespace XenoBooru.Services
 			CreateMap<PoolEntity, Pool>().ReverseMap();
 			CreateMap<PoolEntryEntity, PoolEntry>().ReverseMap();
 			CreateMap<TagEntity, ExistingTagViewModel>();
+			CreateMap<Tag, ExistingTagViewModel>();
 		}
 	}
 }

@@ -50,7 +50,7 @@
 		<ul>
 			@foreach (Tag tag in Model.Tags)
 			{
-				<li><a asp-action="Index" asp-route-tags="@tag.Name" class="tag-@tag.Type">@tag.ToString()</a>&nbsp;<span class="tag-count">@tag.PostCount</span></li>
+				<li><a asp-action="Index" asp-route-tags="@tag.Name" class="tag-type-@tag.Type">@tag.ToString()</a>&nbsp;<span class="tag-count">@tag.PostCount</span></li>
 			}
 		</ul>
 	</div>

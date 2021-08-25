@@ -54,38 +54,38 @@ a, .link-button{
 }
 
 
-.tag-Normal{
+.tag-type-Normal{
 	color: $normal-tag-color;	
 }
 
-a.tag-Normal:hover {
+a.tag-type-Normal:hover {
 	color: lighten($normal-tag-color, $tag-hover-lighten);
 }
 
-.tag-PostType {
+.tag-type-PostType {
 	color: $post-type-tag-color;
 }
-a.tag-PostType:hover {
+a.tag-type-PostType:hover {
 	color: lighten($post-type-tag-color, $tag-hover-lighten);
 }
 
-.tag-Location{
+.tag-type-Location{
 	color: $location-tag-color;
 }
 
-a.tag-Location:hover {
+a.tag-type-Location:hover {
 	color: lighten($location-tag-color, $tag-hover-lighten);
 }
 
-.tag-Character{
+.tag-type-Character{
 	color: $character-tag-color;
 }
 
-a.tag-Character:hover {
+a.tag-type-Character:hover {
 	color: lighten($character-tag-color, $tag-hover-lighten);
 }
 
-.tag-NotFound {
+.tag-type-NotFound {
 	color: $not-found-tag-color;
 }
 
