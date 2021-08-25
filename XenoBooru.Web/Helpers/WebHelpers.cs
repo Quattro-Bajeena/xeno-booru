@@ -9,8 +9,14 @@ namespace XenoBooru.Web.Helpers
 	{
         public static IEnumerable<object> Pages(int current, int pageCount)
         {
+            
             List<object> pages = new List<object>();
             var delta = 7;
+
+            if (pageCount == 0)
+            {
+                return pages;
+            }
 
             if (pageCount > 7)
             {

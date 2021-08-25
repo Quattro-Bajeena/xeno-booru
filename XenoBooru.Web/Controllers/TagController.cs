@@ -40,7 +40,7 @@ namespace XenoBooru.Web.Controllers
 		}
 
 
-		public IActionResult GetExisting()
+		public IActionResult GetAll()
 		{
 			var tags = _tags.GetExisting();
 			return Json(tags);

@@ -1,118 +1,128 @@
 ﻿@model XenoBooru.Web.ViewModels.PostSearchViewModel
 @using XenoBooru.Core.Utilities
 @{
-	ViewData["Title"] = "Posts | " + Model.SearchedTags;
+    ViewData["Title"] = "Posts | " + Model.SearchedTags;
 }
 
 
 @section Stylesheets{
-	<link rel="stylesheet" href="~/css/post_index.css" />
+    <link rel="stylesheet" href="~/css/post_index.css" />
 }
 
 
 @section Sidebar{
-	<form class="sidebar-section" id="search" asp-controller="Post" asp-action="Index" method="get">
-		<h4>Search</h4>
-		<input class="search-bar" type="text" name="tags" autocomplete="off" value="@Model.SearchedTags">
-	</form>
-	<div class="sidebar-section" id="tags">
-		<h4>Tags</h4>
-		<ul>
-			@foreach (Tag tag in Model.Tags.Take(20))
-			{
-			<li class="tag" id="tag-@tag.Name">
-				<a class="tag-@tag.Type" asp-route-tags="@tag.Name" asp-route-onPage="@Model.PostsOnPage">@tag.ToString()</a>&nbsp;<span class="tag-count">@tag.PostCount</span>
-			</li>
-			}
-		</ul>
-	</div>
-	<div class="sidebar-section" id="options">
-		<h4>Options</h4>
-		<a asp-action="Upload">Upload</a>
-		<form id="post-on-page-form" asp-action="Index" method="get">
-			<input type="hidden" name="tags" value="@Model.SearchedTags" />
-			<input type="hidden" name="page" value="@Model.CurrentPage" />
+    <form class="sidebar-section" id="search" asp-controller="Post" asp-action="Index" method="get">
+        <h4>Search</h4>
+        <input type="hidden" name="onPage" value="@Model.PostsOnPage" />
+        <input type="hidden" name="showPending" value="@Model.ShowPending" />
+        <input class="search-bar" type="text" name="tags" autocomplete="off" value="@Model.SearchedTags">
+    </form>
+    <div class="sidebar-section" id="tags">
+        <h4>Tags</h4>
+        <ul>
+            @foreach (Tag tag in Model.Tags.Take(20))
+            {
+                <li class="tag" id="tag-@tag.Name">
+                    <a class="tag-@tag.Type" asp-route-tags="@tag.Name" asp-route-onPage="@Model.PostsOnPage">@tag.ToString()</a>&nbsp;<span class="tag-count">@tag.PostCount</span>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="sidebar-section" id="options">
+        <h4>Options</h4>
+        <a asp-action="Upload">Upload</a>
+        <form id="post-on-page-form" asp-action="Index" method="get">
+            <input type="hidden" name="tags" value="@Model.SearchedTags" />
+            <input type="hidden" name="page" value="@Model.CurrentPage" />
 
-			<div>
-				<label for="pending-checkbox">Pending</label>
-				<input type="checkbox" id="pending-checkbox" name="showPending" />
-			</div>
+            <div>
+                <label for="pending-checkbox">Pending</label>
+                <input type="checkbox" id="pending-checkbox" name="showPending" />
+            </div>
 
-			<label for="posts-on-page">Posts on page </label>
-			<select id="posts-on-page" name="onPage">
-				<option value="25">25</option>
-				<option value="50" selected>50</option>
-				<option value="100">100</option>
-				<option value="200">200</option>
-				<option value="-1">All</option>
-			</select>
-		</form>
-	</div>
+            <label for="posts-on-page">Posts on page </label>
+            <select id="posts-on-page" name="onPage">
+                <option value="25">25</option>
+                <option value="50" selected>50</option>
+                <option value="100">100</option>
+                <option value="200">200</option>
+                <option value="-1">All</option>
+            </select>
+        </form>
+    </div>
 }
 
 
 @if (Model.Posts.Count == 0)
 {
-	<h4 class="no-entries">It's okay not to feel `whole'. Even if you feel only partly complete, if you repeat that enough, it'll eventually be `whole'. A part... is better than zero</h4>
+    <h4 class="no-entries">It's okay not to feel `whole'. Even if you feel only partly complete, if you repeat that enough, it'll eventually be `whole'. A part... is better than zero</h4>
 }
 <ul id="posts">
 
 
-	@foreach (Post post in Model.Posts)
-	{
-		<li id="post-@post.Id" class="post-preview">
-			<a asp-controller="Post" asp-action="Show" asp-route-id="@post.Id">
+    @foreach (Post post in Model.Posts)
+    {
+        <li id="post-@post.Id" class="post-preview">
+            <a asp-controller="Post" asp-action="Show" asp-route-id="@post.Id">
 
-				<img 
-					 class="pending-@post.Pending liked-@(post.Likes > 10)" 
-					 src="@PostUtilities.ThumbnailUrl(Model.ContainerUrl, Model.AudioThumbnailFileName, post)"
-				>
-			</a>
-		</li>
-	}
+                <img class="pending-@post.Pending liked-@(post.Likes > 10)"
+                     src="@PostUtilities.ThumbnailUrl(Model.ContainerUrl, Model.AudioThumbnailFileName, post)">
+            </a>
+        </li>
+    }
 </ul>
 
 <div id="paginator">
-	@if (Model.CurrentPage > 1)
-	{<a class="page-button" 
-		asp-all-route-data="@Model.PagingRouteData"
-		asp-route-page="@(Model.CurrentPage-1)" >
-	←Previous</a>}
-	else
-	{<span class="page-button disabled">←Previous</span>}
+    @if (Model.PageCount > 0)
+    {
+        @if (Model.CurrentPage > 1)
+        {<a class="page-button"
+            asp-all-route-data="@Model.PagingRouteData"
+            asp-route-page="@(Model.CurrentPage-1)">
+                ←Previous
+            </a>}
+        else
+        {<span class="page-button disabled">←Previous</span>}
 
-	@foreach (object pageNum in Model.Pages)
-	{
-		if (pageNum is int)
-		{
-			if ((int)pageNum == Model.CurrentPage)
-			{<span class="current-page">@pageNum</span>}
-			else
-			{<a class="page-button" 
-				asp-all-route-data="@Model.PagingRouteData"
-				asp-route-page="@pageNum" >
-			@pageNum</a>}
-		}
-		else if (pageNum is string)
-		{<span class="page-skip">@pageNum</span>}
-	}
-	@if (Model.CurrentPage < Model.PageCount)
-	{ <a class="page-button" 
-		 asp-all-route-data="@Model.PagingRouteData"
-		 asp-route-page="@(Model.CurrentPage+1)" >
-	Next→</a>}
-	else 
-	{ <span class="page-button disabled">Next→</span>}
-			
+        @foreach (object pageNum in Model.Pages)
+        {
+            if (pageNum is int)
+            {
+                if ((int)pageNum == Model.CurrentPage)
+                {<span class="current-page">@pageNum</span>}
+            else
+            {<a class="page-button"
+                asp-all-route-data="@Model.PagingRouteData"
+                asp-route-page="@pageNum">
+                    @pageNum
+                </a>}
+        }
+        else if (pageNum is string)
+        {<span class="page-skip">@pageNum</span>}
+}
+        @if (Model.CurrentPage < Model.PageCount)
+        {<a class="page-button"
+            asp-all-route-data="@Model.PagingRouteData"
+            asp-route-page="@(Model.CurrentPage+1)">
+                Next→
+            </a>}
+        else
+        { <span class="page-button disabled">Next→</span>}
+    }
 </div>
 
-@section Scripts{ 
-	<script>
-		const posts = @Html.Raw(Json.Serialize(Model.Posts));
-		const tags = @Html.Raw(Json.Serialize(Model.Tags));
-	</script>
-	<script src="~/js/tag_highlight_posts.js" type="module"></script>
-	<script src="~/js/paging.js" type="module"></script>
-	@*<script src="~/js/post_index.js" type="module"></script>*@
+@section Scripts{
+    <script>
+        const get_tags_url = "/Tag/GetAll";
+    </script>
+    <script src="~/js/quick_search.js" type="module"></script>
+
+    <script>
+		const posts_on_page = @Html.Raw(Json.Serialize(Model.Posts));
+		const tags_on_page = @Html.Raw(Json.Serialize(Model.Tags));
+    </script>
+    <script src="~/js/tag_highlight_posts.js" type="module"></script>
+    <script src="~/js/paging.js" type="module"></script>
+    @*<script src="~/js/post_index.js" type="module"></script>*@
 
 }

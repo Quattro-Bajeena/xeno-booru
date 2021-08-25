@@ -19,6 +19,6 @@ if (url_params.has("onPage")) {
     post_visible_input.value = url_params.get("onPage");
 }
 
-if (url_params.has("showPending")) {
+if (url_params.has("showPending") && url_params.get("showPending") == "on") {
     pending_input.checked = true;
 }

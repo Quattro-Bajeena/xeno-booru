@@ -1,8 +1,8 @@
 ﻿
 
 function highlight_posts_with_tag(selected_tag) {
-    for (var post of posts) {
-        let post_elem = document.getElementById("post-" + post["id"]);
+    for (const post of posts_on_page) {
+        const post_elem = document.getElementById("post-" + post["id"]);
 
 
         if (selected_tag && post["tags"].filter(tag => tag["name"] == selected_tag).length > 0) {
@@ -15,7 +15,7 @@ function highlight_posts_with_tag(selected_tag) {
     }
 }
 
-tags.forEach(tag => {
+tags_on_page.forEach(tag => {
     let tag_elem = document.getElementById("tag-" + tag["name"]);
     let link_elem = tag_elem.querySelector("a");
 

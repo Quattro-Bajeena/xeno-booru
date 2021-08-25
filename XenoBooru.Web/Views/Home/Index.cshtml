@@ -8,10 +8,11 @@
 	<link rel="stylesheet" href="~/css/index.css" />
 }
 
-<form>
-	<input class="search-bar" type="text" name="search">
+<form id="search" asp-controller="Post" asp-action="Index" method="get">
+	<input class="search-bar" type="text" name="tags" autocomplete="off">
 	<button>Search</button>
 </form>
+
 
 <div id="featured">
 	<h3>Check out the most interesting and coolest maps in the <a asp-controller="Pool" asp-action="Show" asp-route-id="1">featured pool</a></h3>
@@ -20,6 +21,13 @@
 <div>
 	Download <a asp-action="MapViewerAppInfo">Desktop Map Viewer app</a> to experience the models in their full quality
 </div>
+
+@section Scripts{ 
+    <script>
+        let get_tags_url = "@Url.Action("GetAll", "Tag")";
+    </script>
+	<script src="~/js/quick_search.js" type="module"></script>
+}
 
 
 
