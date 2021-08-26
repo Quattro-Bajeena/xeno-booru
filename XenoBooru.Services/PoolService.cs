@@ -27,6 +27,7 @@ namespace XenoBooru.Services
 		{
 			var poolDb = _poolRepository.GetFull(id);
 			var pool = _mapper.Map<Pool>(poolDb);
+			pool.Entires = pool.Entires.OrderBy(entry => entry.Position).ToList();
 			return pool;
 		}
 

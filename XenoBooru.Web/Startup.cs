@@ -40,7 +40,7 @@ namespace XenoBooru.Web
 			);
 			//options.UseLazyLoadingProxies(). to enable lazy laoding + make prop virtual
 
-			services.Configure<AppConfig>(Configuration.GetSection("AppConfig"));
+			services.Configure<AppOptions>(Configuration.GetSection("AppConfig"));
 			services.AddOptions();
 
 			services.AddScoped(x =>

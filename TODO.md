@@ -1,10 +1,11 @@
 # TODO
 ## Important
-- featured levels page
-- cool backgrounds from screen levels
 - add google analytics tracking?
-- searchbar suggestions
+- add apporiate tags to posts
+
+## Later
 - export gear models
+- cool backgrounds from screen levels
 
 
 ## Less important
@@ -27,6 +28,9 @@
 	- changing post order in pool
 
 # DONE
+- featured levels page
+- download page with all maps and map viewer app and ...
+- searchbar suggestions
 - level viewr app
 - fill in credits
 - add technical explantios about map convertions, wireframe 

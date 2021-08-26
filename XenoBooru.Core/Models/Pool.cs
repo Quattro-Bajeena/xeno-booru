@@ -17,6 +17,7 @@ namespace XenoBooru.Core.Models
 		public string Name { get; set; }
 		public string Creator { get; set; }
 		public string Description { get; set; }
+		public bool Hidden { get; set; }
 		public DateTime Created { get; set; }
 		public ICollection<PoolEntry> Entires { get; set; }
 	}

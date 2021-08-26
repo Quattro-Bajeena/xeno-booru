@@ -20,7 +20,7 @@ const controls_list = document.getElementById("controls-list");
 
 //console.log(map_url);
 
-let minDistance = 500;
+let minDistance = 100;
 let maxDistance = 7000;
 
 try {

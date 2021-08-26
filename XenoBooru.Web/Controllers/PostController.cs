@@ -20,10 +20,10 @@ namespace XenoBooru.Web.Controllers
 		private readonly TagService _tags;
 		private readonly CommentService _comments;
 		private readonly PoolService _pools;
-		private readonly IOptions<AppConfig> _config;
+		private readonly AppOptions _config;
 		private readonly AuthenticationService _authentication;
 
-		public PostController(PostService posts, TagService tags, CommentService comments, PoolService pools, IOptions<AppConfig> config,
+		public PostController(PostService posts, TagService tags, CommentService comments, PoolService pools, IOptions<AppOptions> config,
 			AuthenticationService authentication)
 		{
 			_posts = posts;
@@ -31,7 +31,7 @@ namespace XenoBooru.Web.Controllers
 			_comments = comments;
 			_pools = pools;
 
-			_config = config;
+			_config = config.Value;
 			_authentication = authentication;
 		}
 
@@ -56,8 +56,8 @@ namespace XenoBooru.Web.Controllers
 				Posts = posts,
 				Tags = tagsOnPage,
 				SearchedTags = tags,
-				ContainerUrl = _config.Value.PostsContainerUrl,
-				AudioThumbnailFileName = _config.Value.AudioThumbnailFileName,
+				ContainerUrl = _config.PostsContainerUrl,
+				AudioThumbnailFileName = _config.AudioThumbnailFileName,
 				CurrentPage = page,
 				PageCount = pageCount,
 				PostsOnPage = onPage,
@@ -82,8 +82,8 @@ namespace XenoBooru.Web.Controllers
 				Comments = _comments.GetFromPost(post.Id),
 				Tags = _tags.GetFromPost(post.Id).ToList(),
 				PoolEntries = _pools.GetPostEntries(post.Id),
-				DataUrl = _config.Value.PostsContainerUrl + "/" + post.FileName,
-				DownloadUrl = post.DownloadUrl(_config.Value.PostsContainerUrl),
+				DataUrl = _config.PostsContainerUrl + "/" + post.FileName,
+				DownloadUrl = post.DownloadUrl(_config.PostsContainerUrl),
 				Liked = _posts.UserLiked(post.Id, _authentication.GetIp())
 			};
 

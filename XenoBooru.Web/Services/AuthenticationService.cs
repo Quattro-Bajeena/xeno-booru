@@ -24,19 +24,19 @@ namespace XenoBooru.Web.Services
 
 		private readonly IHttpContextAccessor _httpContextAccessor;
 		private readonly ITempDataDictionaryFactory _tempDataDictionaryFactory;
-		private readonly IOptions<AppConfig> _config;
+		private readonly AppOptions _config;
 
-		public AuthenticationService(IHttpContextAccessor context, ITempDataDictionaryFactory tempDataDictionaryFactory, IOptions<AppConfig> config)
+		public AuthenticationService(IHttpContextAccessor context, ITempDataDictionaryFactory tempDataDictionaryFactory, IOptions<AppOptions> config)
 		{
 			_httpContextAccessor = context;
-			_config = config;
+			_config = config.Value;
 			_tempDataDictionaryFactory = tempDataDictionaryFactory;
 		}
 
 
 		public bool CheckAuthentication(string action)
 		{
-			_config.Value.AuthenticationRequired.TryGetValue(action, out bool authRequired);
+			_config.AuthenticationRequired.TryGetValue(action, out bool authRequired);
 			if (authRequired == false)
             {
 				return true;
@@ -65,7 +65,7 @@ namespace XenoBooru.Web.Services
 			var httpContext = _httpContextAccessor.HttpContext;
 
 			bool authorized = false;
-			if (_config.Value.Passwords.Contains(password))
+			if (_config.Passwords.Contains(password))
 			{
 				httpContext.Session.SetInt32(authentication_key, 1);
 				authorized = true;

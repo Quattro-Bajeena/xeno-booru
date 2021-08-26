@@ -44,8 +44,9 @@ namespace XenoBooru.Data.Repositories
 		{
 			var pool = _context.Pools
 				.Include(pool => pool.Entires)
-				.ToList()
-				.Where(pool => pool.Name.Contains(query, StringComparison.OrdinalIgnoreCase));
+				.Where(pool => pool.Hidden == false)
+				.Where(pool => pool.Name.Contains(query));
+				
 			return pool;
 		}
 
@@ -93,9 +94,11 @@ namespace XenoBooru.Data.Repositories
 				.Where(post => post.Id == postId)
 				.Include(post => post.PoolsEntries)
 				.ThenInclude(entry => entry.Pool)
-				.Single();
+				.FirstOrDefault();
 
-			return post.PoolsEntries;
+			var poolEntries = post.PoolsEntries.Where(entry => entry.Pool.Hidden == false);
+
+			return poolEntries;
 
 		}
 

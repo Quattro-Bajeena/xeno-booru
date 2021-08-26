@@ -14,9 +14,9 @@ namespace XenoBooru.Web.Controllers
 	public class PoolController : Controller
 	{
 		private readonly PoolService _pools;
-		private readonly IOptions<AppConfig> _config;
+		private readonly IOptions<AppOptions> _config;
 		private readonly AuthenticationService _authentication;
-		public PoolController(PoolService pools, IOptions<AppConfig> config,
+		public PoolController(PoolService pools, IOptions<AppOptions> config,
 			AuthenticationService authentication)
 		{
 			_pools = pools;

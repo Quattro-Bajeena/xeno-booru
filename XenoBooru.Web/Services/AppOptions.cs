@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace XenoBooru.Web.Services
 {
-	public class AppConfig
+	public class AppOptions
 	{
 		public string StorageUrl { get; set; }
 		public string PostContainer { get; set; }

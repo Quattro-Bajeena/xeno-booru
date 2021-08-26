@@ -17,13 +17,13 @@ namespace XenoBooru.Web.Controllers
 	public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;
-		private readonly IOptions<AppConfig> _config;
+		private readonly AppOptions _config;
 		private readonly AuthenticationService _authentication;
 
-		public HomeController(ILogger<HomeController> logger, IOptions<AppConfig> config, AuthenticationService authentication)
+		public HomeController(ILogger<HomeController> logger, IOptions<AppOptions> config, AuthenticationService authentication)
 		{
 			_logger = logger;
-			_config = config;
+			_config = config.Value;
 			_authentication = authentication;
 		}
 
@@ -38,13 +38,17 @@ namespace XenoBooru.Web.Controllers
 
 		
 		public IActionResult About() => View();
-		public IActionResult MapViewerAppInfo()
+		public IActionResult MapViewerApp()
 		{
-			var viewModel = new IndexViewModel
-			{
-				MapViewerDownloadUrl = _config.Value.GetResourceUrl("XenogearsMapViewer.zip")
-			};
-			return View(viewModel);
+			ViewData["MapViewerDownloadUrl"] = _config.GetResourceUrl("XenogearsMapViewer.zip");
+			return View();
+		}
+
+		public IActionResult Downloads()
+		{
+			ViewData["MapViewerDownloadUrl"] = _config.GetResourceUrl("XenogearsMapViewer.zip");
+			ViewData["AllMapsDownloadUrl"] = _config.GetResourceUrl("XenogearsAllMaps.zip");
+			return View();
 		}
 
 		[HttpPost]
