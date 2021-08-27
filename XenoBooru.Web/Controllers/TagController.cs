@@ -39,8 +39,8 @@ namespace XenoBooru.Web.Controllers
 			return View(viewModel);
 		}
 
-
-		public IActionResult GetAll()
+		[ResponseCache(Duration = 60*60, Location = ResponseCacheLocation.Any)]
+		public JsonResult GetAll()
 		{
 			var tags = _tags.GetExisting();
 			return Json(tags);

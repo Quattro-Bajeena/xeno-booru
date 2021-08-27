@@ -125,7 +125,7 @@
 	</h3>
 </div>
 
-<form id="edit" method="post" asp-action="Update" asp-route-id="@Model.Post.Id" style="display:none">
+<form id="edit" method="post" asp-action="Update" asp-route-id="@Model.Post.Id" style="display:block">
 	<h3>Edit</h3>
 	<table>
 		<tbody>
@@ -189,6 +189,9 @@
 
 
 @section Scripts{
-	<script src="~/js/option_switching.js" type="module"></script>
-	<script src="~/js/tag_highlight_input.js" type="module"></script>
+    <script>
+	const get_tags_url = "@Url.Action("GetAll", "Tag")";
+    </script>
+<script src="~/js/option_switching.js" type="module"></script>
+<script src="~/js/tag_highlight_input.js" type="module"></script>
 }

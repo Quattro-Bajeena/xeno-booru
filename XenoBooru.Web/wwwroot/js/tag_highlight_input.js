@@ -32,7 +32,7 @@
 }
 
 
-fetch("/Tag/GetExisting")
+fetch(get_tags_url)
     .then(response => response.json())
     .then(data => {
         let tag_input_styled = document.getElementById("tag-input-styled");

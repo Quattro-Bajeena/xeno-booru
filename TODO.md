@@ -2,6 +2,9 @@
 ## Important
 - add google analytics tracking?
 - add apporiate tags to posts
+- favicon
+- better names for tags ('weird', 'matte_painting'). tag diferint city map and overworld city map?
+- ranking most liked maps
 
 ## Later
 - export gear models
