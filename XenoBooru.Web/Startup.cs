@@ -17,6 +17,9 @@ using XenoBooru.Data.Repositories;
 using XenoBooru.Data.Repositories.Interfaces;
 using XenoBooru.Services;
 using XenoBooru.Web.Services;
+using Microsoft.Extensions.Azure;
+using Azure.Storage.Queues;
+using Azure.Core.Extensions;
 
 namespace XenoBooru.Web
 {
@@ -78,6 +81,12 @@ namespace XenoBooru.Web
 			{
 				options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
 			});
+			services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
+			services.AddAzureClients(builder =>
+			{
+				builder.AddBlobServiceClient(Configuration["ConnectionStrings:AzureStorage:blob"], preferMsi: true);
+				builder.AddQueueServiceClient(Configuration["ConnectionStrings:AzureStorage:queue"], preferMsi: true);
+			});
 		}
 
 
@@ -113,6 +122,31 @@ namespace XenoBooru.Web
 					name: "default",
 					pattern: "{controller=Home}/{action=Index}/{id?}");
 			});
+		}
+	}
+	internal static class StartupExtensions
+	{
+		public static IAzureClientBuilder<BlobServiceClient, BlobClientOptions> AddBlobServiceClient(this AzureClientFactoryBuilder builder, string serviceUriOrConnectionString, bool preferMsi)
+		{
+			if (preferMsi && Uri.TryCreate(serviceUriOrConnectionString, UriKind.Absolute, out Uri serviceUri))
+			{
+				return builder.AddBlobServiceClient(serviceUri);
+			}
+			else
+			{
+				return builder.AddBlobServiceClient(serviceUriOrConnectionString);
+			}
+		}
+		public static IAzureClientBuilder<QueueServiceClient, QueueClientOptions> AddQueueServiceClient(this AzureClientFactoryBuilder builder, string serviceUriOrConnectionString, bool preferMsi)
+		{
+			if (preferMsi && Uri.TryCreate(serviceUriOrConnectionString, UriKind.Absolute, out Uri serviceUri))
+			{
+				return builder.AddQueueServiceClient(serviceUri);
+			}
+			else
+			{
+				return builder.AddQueueServiceClient(serviceUriOrConnectionString);
+			}
 		}
 	}
 }

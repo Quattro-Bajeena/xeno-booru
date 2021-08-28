@@ -60,8 +60,26 @@ namespace XenoBooru.Web.Controllers
 				AudioThumbnailFileName = _config.AudioThumbnailFileName,
 				CurrentPage = page,
 				PageCount = pageCount,
-				PostsOnPage = onPage,
+				OnPage = onPage,
 				ShowPending = showPending,
+				Pages = pages
+			};
+			return View(viewModel);
+		}
+
+		public IActionResult Ranking(int page = 1, int onPage = 50)
+		{
+			int postCount = _posts.Count(null, false, true);
+			var posts = _posts.GetMostLikedPaged( page, onPage);
+			int pageCount = onPage > 0 ? (int)Math.Ceiling((double)postCount / onPage) : 0;
+			IEnumerable<object> pages = WebHelpers.Pages(page, pageCount);
+
+			var viewModel = new PostRankingViewModel
+			{
+				Posts = posts,
+				CurrentPage = page,
+				OnPage = onPage,
+				PageCount = pageCount,
 				Pages = pages
 			};
 			return View(viewModel);

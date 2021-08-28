@@ -1,36 +1,22 @@
 # TODO
 ## Important
-- add google analytics tracking?
-- add apporiate tags to posts
 - favicon
-- better names for tags ('weird', 'matte_painting'). tag diferint city map and overworld city map?
 - ranking most liked maps
 
 ## Later
 - export gear models
 - cool backgrounds from screen levels
-
-
-## Less important
-- adding interfaces to services
 - account system
 - adding, updaing, deleting tags
-	- backed
-	- frontend
 - deleting comments
-	- backed
-	- frontend
-- ordering tags by categories
-- unit of work pattern
 
-- error messages when someone tries to add a tag that doesnt exits
-- checking file extesion with the post type
+## Less important
+- add google analytics tracking?
+- better names for tags ('weird', 'matte_painting'). tag diferint city map and overworld city map?
 
-- pools
-	- adding
-	- changing post order in pool
 
 # DONE
+- add apporiate tags to posts
 - featured levels page
 - download page with all maps and map viewer app and ...
 - searchbar suggestions

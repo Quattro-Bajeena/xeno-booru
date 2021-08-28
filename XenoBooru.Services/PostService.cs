@@ -56,6 +56,13 @@ namespace XenoBooru.Services
 			return posts;
 		}
 
+		public ICollection<Post> GetMostLikedPaged(int page, int onPage)
+		{
+			var postsDb = _postRepository.GetMostLikedPaged(page, onPage);
+			var posts = _mapper.Map<ICollection<Post>>(postsDb);
+			return posts;
+		}
+
 		public int Count(string tags, bool includePending, bool includeChildren)
 		{
 			string[] tagsArr;

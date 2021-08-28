@@ -14,7 +14,7 @@
 
 <form class="sidebar-section" id="search" asp-controller="Post" asp-action="Index" method="get">
     <h4>Search</h4>
-    <input type="hidden" name="onPage" value="@Model.PostsOnPage" />
+    <input type="hidden" name="onPage" value="@Model.OnPage" />
     <input type="hidden" name="showPending" value="@Model.ShowPending" />
     <input class="search-bar" type="text" name="tags" autocomplete="off" value="@Model.SearchedTags">
 </form>
@@ -24,7 +24,7 @@
         @foreach (Tag tag in Model.Tags.Take(20))
         {
             <li class="tag" id="tag-@tag.Name">
-                <a class="tag-type-@tag.Type" asp-route-tags="@tag.Name" asp-route-onPage="@Model.PostsOnPage">@tag.ToString()</a>&nbsp;<span class="tag-count">@tag.PostCount</span>
+                <a class="tag-type-@tag.Type" asp-route-tags="@tag.Name" asp-route-onPage="@Model.OnPage">@tag.ToString()</a>&nbsp;<span class="tag-count">@tag.PostCount</span>
             </li>
         }
     </ul>
@@ -34,7 +34,7 @@
     <a asp-action="Upload">Upload</a>
     <form id="post-on-page-form" asp-action="Index" method="get">
         <input type="hidden" name="tags" value="@Model.SearchedTags" />
-        <input type="hidden" name="page" value="@Model.CurrentPage" />
+        @*<input type="hidden" name="page" value="@Model.CurrentPage" />*@
 
         <div>
             <label for="pending-checkbox">Pending</label>
@@ -52,11 +52,14 @@
     </form>
 </div>
 
+<div class="sidebar-section">
+    <a asp-action="Ranking">Post ranking</a>
+</div>
+
 <div id="tag-completion-box" style="display:none">
 	<ul>
 
 	</ul>
-
 </div>
 }
 

@@ -72,6 +72,17 @@ namespace XenoBooru.Data.Repositories
 			return posts;
 		}
 
+		public ICollection<PostEntity> GetMostLikedPaged(int page, int onPage)
+		{
+			var posts = _context.Posts
+				.ByPending(false)
+				.OrderByDescending(post => post.Likes)
+				.Skip((page - 1) * onPage)
+				.Take(onPage)
+				.ToList();
+			return posts;
+		}
+
 		public int Count(ICollection<string> tags, bool includePending, bool includeChildren)
 		{
 			return _context.Posts

@@ -1,0 +1,56 @@
+﻿@model PostRankingViewModel
+@{
+	ViewData["Title"] = "Post Ranking";
+}
+
+@section Stylesheets{
+	<link rel="stylesheet" href="~/css/post_ranking.css" />
+}
+
+
+<table id="post-ranking" class="list-table">
+	<thead>
+		<tr>
+			<th id="posts-col">Likes</th>
+			<th id="name-col">Name</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var post in Model.Posts)
+		{
+			<tr>
+				<td>@post.Likes</td>
+				<td><a asp-controller="Post" asp-route-id="@post.Id">@post.Name</a></td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+
+
+<div id="paginator">
+	@if (Model.CurrentPage > 1)
+	{<a class="page-button" asp-route-page="@(Model.CurrentPage-1)">←Previous</a>}
+	else
+	{<span class="page-button disabled">←Previous</span>}
+
+	@foreach (object pageNum in Model.Pages)
+	{
+		if (pageNum is int)
+		{
+			if ((int)pageNum == Model.CurrentPage)
+			{<span class="current-page">@pageNum</span>}
+		else
+		{<a class="page-button" asp-route-page="@pageNum">@pageNum</a>}
+}
+else if (pageNum is string)
+{<span class="page-skip">@pageNum</span>}
+}
+
+	@if (Model.CurrentPage < Model.PageCount)
+	{<a class="page-button" asp-route-page="@(Model.CurrentPage+1)">Next→</a>}
+	else
+	{ <span class="page-button disabled">Next→</span>}
+
+</div>
+

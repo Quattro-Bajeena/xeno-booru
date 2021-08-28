@@ -31,7 +31,7 @@ namespace XenoBooru.Web.Controllers
 				Pages = WebHelpers.Pages(page, pageCount),
 				CurrentPage = page,
 				PageCount = pageCount,
-				TagsOnPage = onPage,
+				OnPage = onPage,
 				Type = type,
 				Order = order
 			};

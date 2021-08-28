@@ -182,6 +182,33 @@ namespace XenoBooru.DataManipulation
 			db.SaveChanges();
 		}
 
+		static void AddTagsToPost(AppDbContext db)
+		{
+			//var id = 347;
+			var from = 1;
+			var to = 100;
+			var id_range = Enumerable.Range(from, to + 1 - from);
+			var to_add = new string[] {  };
+			var to_remove = new string[] { "outdoors" };
+
+			foreach (var map_id in id_range)
+			{
+				var post = db.Posts.Where(post => post.Id == map_id).Include(post => post.Tags).Single();
+				foreach (var name in to_add)
+				{
+					var tag = db.Tags.Where(tag => tag.Name == name).Single();
+					post.Tags.Add(tag);
+				}
+				foreach (var name in to_remove)
+				{
+					var tag = db.Tags.Where(tag => tag.Name == name).Single();
+					post.Tags.Remove(tag);
+				}
+			}
+			
+			db.SaveChanges();
+		}
+
 		static void Main(string[] args)
 		{
 			StreamReader r = new StreamReader("appsettings.json");
@@ -201,11 +228,12 @@ namespace XenoBooru.DataManipulation
 				//CreateLevelPool(db);
 				//AddLevelTag(db);
 				//AddFeaturedPool(db);
-				AddLevelsToFeaturedPool(db);
+				//AddLevelsToFeaturedPool(db);
+				AddTagsToPost(db);
 			}
 
 			Console.WriteLine("Done");
-			Console.Read();
+			//Console.Read();
 		}
 	}
 }
