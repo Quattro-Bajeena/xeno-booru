@@ -45,5 +45,32 @@ namespace XenoBooru.Core.Models
 		{
 			return containerUrl + "/" + (FileNameDownload ?? FileName);
 		}
+
+		public string ThumbnailUrl(string containerUrl, string audioThumbnailFileName)
+		{
+			string fileUrl = containerUrl + "/";
+			if (ThumbnailFileName == null)
+			{
+				switch (Type)
+				{
+
+					case PostType.Artwork:
+						fileUrl += FileName;
+						break;
+					case PostType.Audio:
+						fileUrl += audioThumbnailFileName;
+						break;
+					default:
+					case PostType.Model:
+						fileUrl = "";
+						break;
+				}
+			}
+			else
+			{
+				fileUrl += ThumbnailFileName;
+			}
+			return fileUrl;
+		}
 	}
 }

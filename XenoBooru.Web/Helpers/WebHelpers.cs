@@ -5,8 +5,15 @@ using System.Threading.Tasks;
 
 namespace XenoBooru.Web.Helpers
 {
+
 	public static class WebHelpers
 	{
+        public struct Page
+		{
+
+		}
+
+
         public static IEnumerable<object> Pages(int current, int pageCount)
         {
             

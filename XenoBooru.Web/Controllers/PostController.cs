@@ -67,7 +67,7 @@ namespace XenoBooru.Web.Controllers
 			return View(viewModel);
 		}
 
-		public IActionResult Ranking(int page = 1, int onPage = 50)
+		public IActionResult Ranking(int page = 1, int onPage = 100)
 		{
 			int postCount = _posts.Count(null, false, true);
 			var posts = _posts.GetMostLikedPaged( page, onPage);

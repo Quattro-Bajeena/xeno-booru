@@ -45,7 +45,7 @@
     {
         <li>
             <a asp-controller="Post" asp-action="Show" asp-route-id="@entry.Post.Id">
-                <img class="entry-preview" src="@PostUtilities.ThumbnailUrl((string)ViewData["ContainerUrl"],(string)ViewData["AudioThumbnailFileName"], entry.Post)">
+                <img class="entry-preview" src="@entry.Post.ThumbnailUrl((string)ViewData["ContainerUrl"],(string)ViewData["AudioThumbnailFileName"])">
             </a>
         </li>
     }

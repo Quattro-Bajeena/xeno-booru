@@ -21,5 +21,6 @@ namespace XenoBooru.Core.Models
 		public int PostCount { get; set; }
 
 		public override string ToString() => Name.Replace('_', ' ');
+
 	}
 }

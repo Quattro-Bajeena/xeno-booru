@@ -2,6 +2,19 @@
 @import 'classes';
 @import 'tag_highlight';
 
-#post-ranking{
-	max-width:1000px;
+#post-ranking {
+	max-width: 80rem;
+
+	#likes-col {
+		//width: 100px;
+		width: 50px;
+	}
+
+	#name-col {
+		width:200px;
+	}
+
+	#description-col{
+
+	}
 }

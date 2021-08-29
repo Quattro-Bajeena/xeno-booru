@@ -11,8 +11,9 @@
 <table id="post-ranking" class="list-table">
 	<thead>
 		<tr>
-			<th id="posts-col">Likes</th>
+			<th id="likes-col">Likes</th>
 			<th id="name-col">Name</th>
+			<th id="description-col">Description</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -21,6 +22,7 @@
 			<tr>
 				<td>@post.Likes</td>
 				<td><a asp-controller="Post" asp-route-id="@post.Id">@post.Name</a></td>
+				<td>@post.Description</td>
 			</tr>
 		}
 	</tbody>
