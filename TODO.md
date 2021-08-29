@@ -1,7 +1,8 @@
 # TODO
 ## Important
-- favicon
-- ranking most liked maps
+- publish on Azure
+- transfering secrets?
+- azure key vault?
 
 ## Later
 - export gear models
@@ -16,6 +17,10 @@
 
 
 # DONE
+- favicon
+- ranking most liked maps
+- 404 page
+- error page
 - add apporiate tags to posts
 - featured levels page
 - download page with all maps and map viewer app and ...

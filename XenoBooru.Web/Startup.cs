@@ -37,7 +37,7 @@ namespace XenoBooru.Web
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			
+			services.AddResponseCaching();
 			services.AddDbContext<Data.AppDbContext>(options =>
 				options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("XenoBooru.Data"))
 			);
@@ -92,28 +92,43 @@ namespace XenoBooru.Web
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
-			if (env.IsDevelopment())
+			if (!env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
 
 			}
 			else
 			{
-				app.UseExceptionHandler("/Home/Error");
+				app.UseExceptionHandler("/Error/Exception");
 				// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 				app.UseHsts();
 			}
+
+
+			app.UseStatusCodePagesWithReExecute("/Error/Handle", "?code={0}");
 			app.UseHttpsRedirection();
 			app.UseStaticFiles();
 			app.UseSession();
 
-			
-
 			app.UseRouting();
-
-			// app.UseResponseCaching(); after cors
-
 			app.UseAuthorization();
+
+			app.UseResponseCaching();
+			app.Use(async (context, next) =>
+			{
+				context.Response.GetTypedHeaders().CacheControl =
+					new Microsoft.Net.Http.Headers.CacheControlHeaderValue()
+					{
+						Public = true,
+						MaxAge = TimeSpan.FromSeconds(60)
+					};
+				context.Response.Headers[Microsoft.Net.Http.Headers.HeaderNames.Vary] =
+					new string[] { "Accept-Encoding" };
+
+				await next();
+			});
+
+			
 
 			app.UseEndpoints(endpoints =>
 			{

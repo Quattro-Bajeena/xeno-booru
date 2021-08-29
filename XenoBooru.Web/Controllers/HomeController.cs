@@ -28,7 +28,9 @@ namespace XenoBooru.Web.Controllers
 		}
 
 		public IActionResult Index() => View();
-	
+
+		public IActionResult Crash() => throw new Exception("oops, crashed");
+
 		
 		public IActionResult Login(bool authorized)
 		{
@@ -59,10 +61,6 @@ namespace XenoBooru.Web.Controllers
 		}
 
 
-		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-		public IActionResult Error()
-		{
-			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-		}
+		
 	}
 }
