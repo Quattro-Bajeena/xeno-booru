@@ -107,7 +107,6 @@ namespace XenoBooru.Web
 				app.UseHsts();
 			}
 
-
 			app.UseStatusCodePagesWithReExecute("/Error/Handle", "?code={0}");
 			app.UseHttpsRedirection();
 			app.UseStaticFiles();
@@ -117,21 +116,6 @@ namespace XenoBooru.Web
 			app.UseAuthorization();
 
 			app.UseResponseCaching();
-			app.Use(async (context, next) =>
-			{
-				context.Response.GetTypedHeaders().CacheControl =
-					new Microsoft.Net.Http.Headers.CacheControlHeaderValue()
-					{
-						Public = true,
-						MaxAge = TimeSpan.FromSeconds(5)
-					};
-				context.Response.Headers[Microsoft.Net.Http.Headers.HeaderNames.Vary] =
-					new string[] { "Accept-Encoding" };
-
-				await next();
-			});
-
-			
 
 			app.UseEndpoints(endpoints =>
 			{

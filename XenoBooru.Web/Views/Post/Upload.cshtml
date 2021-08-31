@@ -70,6 +70,9 @@
 </form>
 
 @section Scripts{
-	<script src="~/js/tag_highlight_input.js" type="module"></script>
+<script>
+const get_tags_url = "@Url.Action("GetAll", "Tag")";
+</script>
+<script src="~/js/tag_highlight_input.js" type="module"></script>
 
 }
