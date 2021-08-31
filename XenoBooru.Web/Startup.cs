@@ -20,6 +20,7 @@ using XenoBooru.Web.Services;
 using Microsoft.Extensions.Azure;
 using Azure.Storage.Queues;
 using Azure.Core.Extensions;
+using XenoBooru.Core.Configuration;
 
 namespace XenoBooru.Web
 {
@@ -37,18 +38,13 @@ namespace XenoBooru.Web
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddResponseCaching();
-			services.AddDbContext<Data.AppDbContext>(options =>
-				options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("XenoBooru.Data"))
-			);
-			//options.UseLazyLoadingProxies(). to enable lazy laoding + make prop virtual
-
-			services.Configure<AppOptions>(Configuration.GetSection("AppConfig"));
+			services.AddAzureClients(builder =>
+			{
+				builder.AddSecretClient(new Uri(Configuration.GetConnectionString("KeyVault")));
+				builder.AddBlobServiceClient(Configuration.GetConnectionString("AzureStorage"), preferMsi: true);
+			});
+			services.Configure<AppOptions>(Configuration.GetSection("AppOptions"));
 			services.AddOptions();
-
-			services.AddScoped(x =>
-				new BlobContainerClient(Configuration.GetConnectionString("AzureStorage"), Configuration.GetSection("AppConfig")["StorageContainer"])
-			);
 
 			services.AddScoped<IPostRepository, SQLPostRepository>();
 			services.AddScoped<ICommentRepository, SQLCommentRepository>();
@@ -59,13 +55,21 @@ namespace XenoBooru.Web
 			services.AddScoped<CommentService>();
 			services.AddScoped<TagService>();
 			services.AddScoped<PoolService>();
+			services.AddScoped<AzurePostClient>();
+
 
 			services.AddAutoMapper(typeof(PostService));
 
-			services.AddControllersWithViews().AddRazorRuntimeCompilation().AddNewtonsoftJson(options => {
-				options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-			});
+			
+			services.AddDbContext<Data.AppDbContext>(options =>
+				options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("XenoBooru.Data"))
+			);
+			//options.UseLazyLoadingProxies(). to enable lazy laoding + make prop virtual
 
+			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+			services.AddScoped<AuthenticationService>();
+
+			services.AddResponseCaching();
 			services.AddDistributedMemoryCache();
 			services.AddSession(options =>
 			{
@@ -74,18 +78,17 @@ namespace XenoBooru.Web
 				options.Cookie.IsEssential = true;
 			});
 
-			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-			services.AddScoped<AuthenticationService>();
-
 			services.Configure<ForwardedHeadersOptions>(options =>
 			{
 				options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
 			});
+
 			services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
-			services.AddAzureClients(builder =>
-			{
-				builder.AddBlobServiceClient(Configuration["ConnectionStrings:AzureStorage:blob"], preferMsi: true);
-				builder.AddQueueServiceClient(Configuration["ConnectionStrings:AzureStorage:queue"], preferMsi: true);
+
+			
+
+			services.AddControllersWithViews().AddRazorRuntimeCompilation().AddNewtonsoftJson(options => {
+				options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
 			});
 		}
 
@@ -120,7 +123,7 @@ namespace XenoBooru.Web
 					new Microsoft.Net.Http.Headers.CacheControlHeaderValue()
 					{
 						Public = true,
-						MaxAge = TimeSpan.FromSeconds(60)
+						MaxAge = TimeSpan.FromSeconds(5)
 					};
 				context.Response.Headers[Microsoft.Net.Http.Headers.HeaderNames.Vary] =
 					new string[] { "Accept-Encoding" };
@@ -150,17 +153,6 @@ namespace XenoBooru.Web
 			else
 			{
 				return builder.AddBlobServiceClient(serviceUriOrConnectionString);
-			}
-		}
-		public static IAzureClientBuilder<QueueServiceClient, QueueClientOptions> AddQueueServiceClient(this AzureClientFactoryBuilder builder, string serviceUriOrConnectionString, bool preferMsi)
-		{
-			if (preferMsi && Uri.TryCreate(serviceUriOrConnectionString, UriKind.Absolute, out Uri serviceUri))
-			{
-				return builder.AddQueueServiceClient(serviceUri);
-			}
-			else
-			{
-				return builder.AddQueueServiceClient(serviceUriOrConnectionString);
 			}
 		}
 	}

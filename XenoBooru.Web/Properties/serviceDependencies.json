@@ -7,13 +7,17 @@
       "type": "appInsights",
       "connectionId": "APPINSIGHTS_CONNECTIONSTRING"
     },
+    "mssql1": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:DefaultConnection"
+    },
     "storage1": {
       "type": "storage",
       "connectionId": "ConnectionStrings:AzureStorage"
     },
-    "mssql1": {
-      "type": "mssql",
-      "connectionId": "ConnectionStrings:DefaultConnection"
+    "secrets2": {
+      "type": "secrets",
+      "connectionId": "ConnectionStrings:KeyVault"
     }
   }
 }

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using XenoBooru.Core.Configuration;
 using XenoBooru.Core.Models;
 using XenoBooru.Services;
 using XenoBooru.Web.Services;
@@ -14,13 +15,13 @@ namespace XenoBooru.Web.Controllers
 	public class PoolController : Controller
 	{
 		private readonly PoolService _pools;
-		private readonly IOptions<AppOptions> _config;
+		private readonly IOptions<AppOptions> _options;
 		private readonly AuthenticationService _authentication;
-		public PoolController(PoolService pools, IOptions<AppOptions> config,
+		public PoolController(PoolService pools, IOptions<AppOptions> options,
 			AuthenticationService authentication)
 		{
 			_pools = pools;
-			_config = config;
+			_options = options;
 			_authentication = authentication;
 		}
 
@@ -40,8 +41,8 @@ namespace XenoBooru.Web.Controllers
 				return NotFound();
 			}
 
-			ViewData["ContainerUrl"] = _config.Value.StorageUrl + "/" + _config.Value.PostContainer;
-			ViewData["AudioThumbnailFileName"] = _config.Value.AudioThumbnailFileName;
+			ViewData["ContainerUrl"] = _options.Value.StorageUrl + "/" + _options.Value.PostContainer;
+			ViewData["AudioThumbnailFileName"] = _options.Value.AudioThumbnailFileName;
 
 			return View(pool);
 		}

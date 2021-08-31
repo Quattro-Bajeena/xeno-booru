@@ -1,8 +1,7 @@
 # TODO
 ## Important
 - publish on Azure
-- transfering secrets?
-- azure key vault?
+
 
 ## Later
 - export gear models
@@ -17,6 +16,8 @@
 
 
 # DONE
+- transfering secrets?
+- azure key vault?
 - favicon
 - ranking most liked maps
 - 404 page

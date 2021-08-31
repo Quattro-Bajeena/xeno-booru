@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using XenoBooru.Core.Configuration;
 using XenoBooru.Web.Services;
 using XenoBooru.Web.ViewModels;
 
@@ -17,13 +18,13 @@ namespace XenoBooru.Web.Controllers
 	public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;
-		private readonly AppOptions _config;
+		private readonly AppOptions _options;
 		private readonly AuthenticationService _authentication;
 
 		public HomeController(ILogger<HomeController> logger, IOptions<AppOptions> config, AuthenticationService authentication)
 		{
 			_logger = logger;
-			_config = config.Value;
+			_options = config.Value;
 			_authentication = authentication;
 		}
 
@@ -42,14 +43,14 @@ namespace XenoBooru.Web.Controllers
 		public IActionResult About() => View();
 		public IActionResult MapViewerApp()
 		{
-			ViewData["MapViewerDownloadUrl"] = _config.GetResourceUrl("XenogearsMapViewer.zip");
+			ViewData["MapViewerDownloadUrl"] = _options.GetResourceUrl("XenogearsMapViewer.zip");
 			return View();
 		}
 
 		public IActionResult Downloads()
 		{
-			ViewData["MapViewerDownloadUrl"] = _config.GetResourceUrl("XenogearsMapViewer.zip");
-			ViewData["AllMapsDownloadUrl"] = _config.GetResourceUrl("XenogearsAllMaps.zip");
+			ViewData["MapViewerDownloadUrl"] = _options.GetResourceUrl("XenogearsMapViewer.zip");
+			ViewData["AllMapsDownloadUrl"] = _options.GetResourceUrl("XenogearsAllMaps.zip");
 			return View();
 		}
 

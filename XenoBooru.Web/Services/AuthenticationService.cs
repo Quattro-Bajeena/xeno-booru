@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using XenoBooru.Core.Configuration;
 
 namespace XenoBooru.Web.Services
 {
@@ -24,19 +25,19 @@ namespace XenoBooru.Web.Services
 
 		private readonly IHttpContextAccessor _httpContextAccessor;
 		private readonly ITempDataDictionaryFactory _tempDataDictionaryFactory;
-		private readonly AppOptions _config;
+		private readonly AppOptions _options;
 
-		public AuthenticationService(IHttpContextAccessor context, ITempDataDictionaryFactory tempDataDictionaryFactory, IOptions<AppOptions> config)
+		public AuthenticationService(IHttpContextAccessor context, ITempDataDictionaryFactory tempDataDictionaryFactory, IOptions<AppOptions> options)
 		{
 			_httpContextAccessor = context;
-			_config = config.Value;
+			_options = options.Value;
 			_tempDataDictionaryFactory = tempDataDictionaryFactory;
 		}
 
 
 		public bool CheckAuthentication(string action)
 		{
-			_config.AuthenticationRequired.TryGetValue(action, out bool authRequired);
+			_options.AuthenticationRequired.TryGetValue(action, out bool authRequired);
 			if (authRequired == false)
             {
 				return true;
@@ -65,7 +66,7 @@ namespace XenoBooru.Web.Services
 			var httpContext = _httpContextAccessor.HttpContext;
 
 			bool authorized = false;
-			if (_config.Passwords.Contains(password))
+			if (_options.Passwords.Contains(password))
 			{
 				httpContext.Session.SetInt32(authentication_key, 1);
 				authorized = true;

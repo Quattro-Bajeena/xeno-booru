@@ -1,7 +1,7 @@
 # My ignores
 XenoBooru.Web/wwwroot/lib/
 three/
-appsettings*.json
+appsettings.*.json
 FeatureTesting/
 XenoBooru.Web/wwwroot/css/*
 StaticSite/css/*

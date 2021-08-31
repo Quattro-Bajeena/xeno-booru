@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using XenoBooru.Core.Models;
 using XenoBooru.Data.Entities;
+using XenoBooru.Data.Repositories;
 using XenoBooru.Data.Repositories.Interfaces;
 
 namespace XenoBooru.Services
@@ -17,14 +18,14 @@ namespace XenoBooru.Services
 		private readonly IPostRepository _postRepository;
 		private readonly ITagRepository _tagRepository;
 		private readonly IMapper _mapper;
-		private readonly BlobContainerClient _blobContainer;
+		private readonly AzurePostClient _azurePostClient;
 
-		public PostService(IPostRepository postRepository, ITagRepository tagRepository, IMapper mapper, BlobContainerClient blobContainer)
+		public PostService(IPostRepository postRepository, ITagRepository tagRepository, IMapper mapper, AzurePostClient azurePostClient)
 		{
 			_postRepository = postRepository;
 			_tagRepository = tagRepository;
 			_mapper = mapper;
-			_blobContainer = blobContainer;
+			_azurePostClient = azurePostClient;
 		}
 
 		public Post Get(int id)
@@ -85,8 +86,7 @@ namespace XenoBooru.Services
 
 			post.FileName = $"{filename}_{Guid.NewGuid()}{extension}";
 
-			BlobClient blobClient = _blobContainer.GetBlobClient(post.FileName);
-			blobClient.Upload(fileStream);
+			_azurePostClient.Upload(post.FileName, fileStream);
 
 			var postDb = _mapper.Map<PostEntity>(post);
 

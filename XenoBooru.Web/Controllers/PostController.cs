@@ -11,6 +11,7 @@ using XenoBooru.Web.Services;
 using Azure.Storage.Blobs;
 using Microsoft.AspNetCore.Http;
 using XenoBooru.Web.Helpers;
+using XenoBooru.Core.Configuration;
 
 namespace XenoBooru.Web.Controllers
 {
@@ -20,10 +21,10 @@ namespace XenoBooru.Web.Controllers
 		private readonly TagService _tags;
 		private readonly CommentService _comments;
 		private readonly PoolService _pools;
-		private readonly AppOptions _config;
+		private readonly AppOptions _options;
 		private readonly AuthenticationService _authentication;
 
-		public PostController(PostService posts, TagService tags, CommentService comments, PoolService pools, IOptions<AppOptions> config,
+		public PostController(PostService posts, TagService tags, CommentService comments, PoolService pools, IOptions<AppOptions> options,
 			AuthenticationService authentication)
 		{
 			_posts = posts;
@@ -31,7 +32,7 @@ namespace XenoBooru.Web.Controllers
 			_comments = comments;
 			_pools = pools;
 
-			_config = config.Value;
+			_options = options.Value;
 			_authentication = authentication;
 		}
 
@@ -56,8 +57,8 @@ namespace XenoBooru.Web.Controllers
 				Posts = posts,
 				Tags = tagsOnPage,
 				SearchedTags = tags,
-				ContainerUrl = _config.PostsContainerUrl,
-				AudioThumbnailFileName = _config.AudioThumbnailFileName,
+				ContainerUrl = _options.PostsContainerUrl,
+				AudioThumbnailFileName = _options.AudioThumbnailFileName,
 				CurrentPage = page,
 				PageCount = pageCount,
 				OnPage = onPage,
@@ -100,8 +101,8 @@ namespace XenoBooru.Web.Controllers
 				Comments = _comments.GetFromPost(post.Id),
 				Tags = _tags.GetFromPost(post.Id).ToList(),
 				PoolEntries = _pools.GetPostEntries(post.Id),
-				DataUrl = _config.PostsContainerUrl + "/" + post.FileName,
-				DownloadUrl = post.DownloadUrl(_config.PostsContainerUrl),
+				DataUrl = _options.PostsContainerUrl + "/" + post.FileName,
+				DownloadUrl = post.DownloadUrl(_options.PostsContainerUrl),
 				Liked = _posts.UserLiked(post.Id, _authentication.GetIp())
 			};
 
