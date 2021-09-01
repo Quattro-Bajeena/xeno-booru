@@ -1,7 +1,8 @@
 # TODO
 ## Important
-- publish on Azure
 
+- buy URL
+- add google treacking
 
 ## Later
 - export gear models
@@ -16,6 +17,8 @@
 
 
 # DONE
+- transfer prod database to local
+- publish on Azure
 - transfering secrets?
 - azure key vault?
 - favicon

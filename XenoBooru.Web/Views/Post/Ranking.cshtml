@@ -21,7 +21,7 @@
 		{
 			<tr>
 				<td>@post.Likes</td>
-				<td><a asp-controller="Post" asp-route-id="@post.Id">@post.Name</a></td>
+				<td><a asp-controller="Post" asp-action="Show" asp-route-id="@post.Id">@post.Name</a></td>
 				<td>@post.Description</td>
 			</tr>
 		}

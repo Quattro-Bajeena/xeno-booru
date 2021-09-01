@@ -1,10 +1,10 @@
 {
   "dependencies": {
-    "appInsights1": {
+    "secrets2": {
       "secretStore": "AzureAppSettings",
-      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/microsoft.insights/components/xenobooru-insights",
-      "type": "appInsights.azure",
-      "connectionId": "APPINSIGHTS_CONNECTIONSTRING"
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.KeyVault/vaults/xenobooru-keyvault",
+      "type": "secrets.keyVault",
+      "connectionId": "KeyVaultUri"
     },
     "mssql1": {
       "secretStore": "AzureKeyVault",
@@ -17,12 +17,6 @@
       "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Storage/storageAccounts/xenoboorustorage",
       "type": "storage.azure",
       "connectionId": "ConnectionStrings:AzureStorage"
-    },
-    "secrets2": {
-      "secretStore": "AzureAppSettings",
-      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.KeyVault/vaults/xenobooru-keyvault",
-      "type": "secrets.keyVault",
-      "connectionId": "ConnectionStrings:KeyVault"
     }
   }
 }

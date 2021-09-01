@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development",
         "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation",
         "AZURE_USERNAME": "matuesz.oleszek@outlook.com",
-        "VaultUri": "https://xenobooru-keyvault.vault.azure.net/"
+        "KeyVaultUri": "https://xenobooru-keyvault.vault.azure.net/"
       }
     },
     "XMV": {
@@ -25,7 +25,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development",
         "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation",
         "AZURE_USERNAME": "matuesz.oleszek@outlook.com",
-        "VaultUri": "https://xenobooru-keyvault.vault.azure.net/"
+        "KeyVaultUri": "https://xenobooru-keyvault.vault.azure.net/"
       },
       "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "dotnetRunMessages": "true"

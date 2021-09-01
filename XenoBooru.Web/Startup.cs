@@ -21,6 +21,7 @@ using Microsoft.Extensions.Azure;
 using Azure.Storage.Queues;
 using Azure.Core.Extensions;
 using XenoBooru.Core.Configuration;
+using Microsoft.Net.Http.Headers;
 
 namespace XenoBooru.Web
 {
@@ -40,7 +41,7 @@ namespace XenoBooru.Web
 		{
 			services.AddAzureClients(builder =>
 			{
-				builder.AddSecretClient(new Uri(Configuration.GetConnectionString("KeyVault")));
+				builder.AddSecretClient(new Uri(Configuration["KeyVaultUri"]));
 				builder.AddBlobServiceClient(Configuration.GetConnectionString("AzureStorage"), preferMsi: true);
 			});
 			services.Configure<AppOptions>(Configuration.GetSection("AppOptions"));
@@ -60,7 +61,8 @@ namespace XenoBooru.Web
 
 			services.AddAutoMapper(typeof(PostService));
 
-			
+			var connection = Configuration.GetConnectionString("DefaultConnection");
+			var connectionStrings = Configuration.GetSection("ConnectionStrings");
 			services.AddDbContext<Data.AppDbContext>(options =>
 				options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("XenoBooru.Data"))
 			);
@@ -83,9 +85,9 @@ namespace XenoBooru.Web
 				options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
 			});
 
+			Console.WriteLine(Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
 			services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
 
-			
 
 			services.AddControllersWithViews().AddRazorRuntimeCompilation().AddNewtonsoftJson(options => {
 				options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
@@ -109,7 +111,16 @@ namespace XenoBooru.Web
 
 			app.UseStatusCodePagesWithReExecute("/Error/Handle", "?code={0}");
 			app.UseHttpsRedirection();
-			app.UseStaticFiles();
+
+			app.UseStaticFiles(new StaticFileOptions
+			{
+				OnPrepareResponse = context => context.Context.Response.GetTypedHeaders()
+					.CacheControl = new CacheControlHeaderValue
+					{
+						Public = true,
+						MaxAge = TimeSpan.FromDays(365) // 1 year
+					}
+			});
 			app.UseSession();
 
 			app.UseRouting();

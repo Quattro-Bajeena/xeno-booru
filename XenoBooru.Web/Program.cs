@@ -10,6 +10,7 @@ using Microsoft.Azure.KeyVault;
 using Microsoft.Azure.Services.AppAuthentication;
 using Microsoft.Extensions.Configuration.AzureKeyVault;
 using Azure.Identity;
+using Microsoft.Extensions.Logging.ApplicationInsights;
 
 namespace XenoBooru.Web
 {
@@ -24,24 +25,29 @@ namespace XenoBooru.Web
 			Host.CreateDefaultBuilder(args)
 				.ConfigureAppConfiguration((ctx, builder) =>
 				{
-					var builtConfig = builder.Build();
-					var keyVaultEndpoint = builtConfig.GetConnectionString("KeyVault");
-					if (!string.IsNullOrEmpty(keyVaultEndpoint))
+					if (ctx.HostingEnvironment.IsProduction())
 					{
-						var azureServiceTokenProvider = new AzureServiceTokenProvider();
-						var keyVaultClient = new KeyVaultClient(
-							new KeyVaultClient.AuthenticationCallback(
-								azureServiceTokenProvider.KeyVaultTokenCallback));
-						builder.AddAzureKeyVault(
-							keyVaultEndpoint, keyVaultClient, new DefaultKeyVaultSecretManager());
+						var builtConfig = builder.Build();
+						var keyVaultEndpoint = builtConfig["KeyVaultUri"];
+						if (!string.IsNullOrEmpty(keyVaultEndpoint))
+						{
+							var azureServiceTokenProvider = new AzureServiceTokenProvider();
+							var keyVaultClient = new KeyVaultClient(
+								new KeyVaultClient.AuthenticationCallback(
+									azureServiceTokenProvider.KeyVaultTokenCallback));
+							builder.AddAzureKeyVault(
+								keyVaultEndpoint, keyVaultClient, new DefaultKeyVaultSecretManager());
+						}
 					}
-
+				})
+				.ConfigureLogging((ctx, logging) =>
+				{
+					logging.AddApplicationInsights(ctx.Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
+					logging.AddFilter<ApplicationInsightsLoggerProvider>("", LogLevel.Trace);
 				})
 				.ConfigureWebHostDefaults(webBuilder =>
 				{
 					webBuilder.UseStartup<Startup>();
 				});
-
-		public static string GetKeyVaultEndpoint() => "https://xenobooru-keyvault.vault.azure.net/";
 	}
 }

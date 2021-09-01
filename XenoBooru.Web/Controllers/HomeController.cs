@@ -28,13 +28,18 @@ namespace XenoBooru.Web.Controllers
 			_authentication = authentication;
 		}
 
-		public IActionResult Index() => View();
+		public IActionResult Index()
+		{
+			_logger.LogInformation("Index");
+			return View();
+		}
 
 		public IActionResult Crash() => throw new Exception("oops, crashed");
 
 		
 		public IActionResult Login(bool authorized)
 		{
+			_logger.LogInformation("Login");
 			ViewData["authorized"] = authorized;
 			return View();
 		}
@@ -43,12 +48,14 @@ namespace XenoBooru.Web.Controllers
 		public IActionResult About() => View();
 		public IActionResult MapViewerApp()
 		{
+			_logger.LogError("MapViewerApp");
 			ViewData["MapViewerDownloadUrl"] = _options.GetResourceUrl("XenogearsMapViewer.zip");
 			return View();
 		}
 
 		public IActionResult Downloads()
 		{
+			_logger.LogWarning("Downloads");
 			ViewData["MapViewerDownloadUrl"] = _options.GetResourceUrl("XenogearsMapViewer.zip");
 			ViewData["AllMapsDownloadUrl"] = _options.GetResourceUrl("XenogearsAllMaps.zip");
 			return View();

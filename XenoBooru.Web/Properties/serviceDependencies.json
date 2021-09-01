@@ -3,9 +3,9 @@
     "secrets1": {
       "type": "secrets"
     },
-    "appInsights1": {
-      "type": "appInsights",
-      "connectionId": "APPINSIGHTS_CONNECTIONSTRING"
+    "secrets2": {
+      "type": "secrets",
+      "connectionId": "KeyVaultUri"
     },
     "mssql1": {
       "type": "mssql",
@@ -15,9 +15,9 @@
       "type": "storage",
       "connectionId": "ConnectionStrings:AzureStorage"
     },
-    "secrets2": {
-      "type": "secrets",
-      "connectionId": "ConnectionStrings:KeyVault"
+    "appInsights1": {
+      "type": "appInsights",
+      "connectionId": "APPINSIGHTS_CONNECTIONSTRING"
     }
   }
 }

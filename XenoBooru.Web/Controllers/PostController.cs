@@ -38,6 +38,7 @@ namespace XenoBooru.Web.Controllers
 
 		public IActionResult Index(string tags, string showPending, int page = 1, int onPage = 50)
 		{
+
 			bool incldePending = showPending == "on";
 			bool includeChildren = tags != null;
 

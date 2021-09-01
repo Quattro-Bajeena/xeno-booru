@@ -3,12 +3,6 @@
     "secrets1": {
       "type": "secrets.user"
     },
-    "secrets2": {
-      "secretStore": null,
-      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.KeyVault/vaults/xenobooru-keyvault",
-      "type": "secrets.keyVault",
-      "connectionId": "VaultUri"
-    },
     "mssql1": {
       "secretStore": "AzureKeyVault",
       "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/xenobooru-server/databases/xenobooru-prod",
@@ -20,6 +14,12 @@
       "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Storage/storageAccounts/xenoboorustorage",
       "type": "storage.azure",
       "connectionId": "ConnectionStrings:AzureStorage"
+    },
+    "secrets2": {
+      "secretStore": null,
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.KeyVault/vaults/xenobooru-keyvault",
+      "type": "secrets.keyVault",
+      "connectionId": "KeyVaultUri"
     },
     "appInsights1": {
       "secretStore": "LocalSecretsFile",
