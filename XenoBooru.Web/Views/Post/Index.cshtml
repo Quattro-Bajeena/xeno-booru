@@ -21,7 +21,7 @@
 <div class="sidebar-section" id="tags">
     <h4>Tags</h4>
     <ul>
-        @foreach (Tag tag in Model.Tags.Take(20))
+        @foreach (Tag tag in Model.Tags)
         {
             <li class="tag" id="tag-@tag.Name">
                 <a class="tag-type-@tag.Type" asp-route-tags="@tag.Name" asp-route-onPage="@Model.OnPage">@tag.ToString()</a>&nbsp;<span class="tag-count">@tag.PostCount</span>

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Threading;
 using XenoBooru.Data;
 using XenoBooru.Data.Entities;
 
@@ -209,6 +210,20 @@ namespace XenoBooru.DataManipulation
 			db.SaveChanges();
 		}
 
+		static void SetPostDates(AppDbContext db)
+		{
+			var posts = db.Posts.OrderBy(post => post.Id).ToList();
+			foreach (var post in posts)
+			{
+				Console.WriteLine(post.Id);
+				post.Created = DateTime.Now;
+				Thread.Sleep(10);
+				
+			}
+			db.Posts.UpdateRange(posts);
+			db.SaveChanges();
+		}
+
 		static void Main(string[] args)
 		{
 			StreamReader r = new StreamReader("appsettings.json");
@@ -229,7 +244,8 @@ namespace XenoBooru.DataManipulation
 				//AddLevelTag(db);
 				//AddFeaturedPool(db);
 				//AddLevelsToFeaturedPool(db);
-				AddTagsToPost(db);
+				//AddTagsToPost(db);
+				SetPostDates(db);
 			}
 
 			Console.WriteLine("Done");

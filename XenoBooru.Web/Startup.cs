@@ -85,7 +85,6 @@ namespace XenoBooru.Web
 				options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
 			});
 
-			Console.WriteLine(Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
 			services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
 
 

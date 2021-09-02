@@ -13,7 +13,7 @@ namespace XenoBooru.Data.Repositories.Interfaces
 		int Add(PostEntity post);
 		void Remove(int id);
 		void Update(PostEntity updatedPost);
-		ICollection<PostEntity> GetByTagsPaged(ICollection<string> tags, bool includePending, bool includeChildren, int page, int onPage);
+		ICollection<PostEntity> GetByTagsPaged(ICollection<string> tags, bool includePending, bool includeChildren, bool fromNewest, int page, int onPage);
 		ICollection<PostEntity> GetMostLikedPaged(int page, int onPage);
 		int Count(ICollection<string> tags, bool includePending, bool includeChildren);
 		IEnumerable<PostEntity> GetFromPool(int poolId);
@@ -21,5 +21,6 @@ namespace XenoBooru.Data.Repositories.Interfaces
 		bool UserLiked(int id, string ip_adress);
 		void AddChild(PostEntity parent, PostEntity child);
 		ICollection<PostEntity> GetChildren(int id);
+		
 	}
 }

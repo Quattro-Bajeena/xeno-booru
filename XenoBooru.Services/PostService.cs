@@ -35,7 +35,7 @@ namespace XenoBooru.Services
 			return post;
 		}
 
-		public ICollection<Post> GetByTagsPaged(string tags, int page, int onPage, bool includePending, bool includeChildren)
+		public ICollection<Post> GetByTagsPaged(string tags, bool includePending, bool includeChildren, bool fromNewest, int page, int onPage)
 		{
 			if(onPage == 0)
 			{
@@ -51,7 +51,7 @@ namespace XenoBooru.Services
 				tagsArr = Array.Empty<string>();
 			}
 
-			var postsDb = _postRepository.GetByTagsPaged(tagsArr, includePending, includeChildren, page, onPage);
+			var postsDb = _postRepository.GetByTagsPaged(tagsArr, includePending, includeChildren, fromNewest, page, onPage);
 			var posts = _mapper.Map<ICollection<Post>>(postsDb);
 
 			return posts;

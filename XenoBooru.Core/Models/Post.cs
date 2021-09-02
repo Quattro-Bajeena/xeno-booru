@@ -17,6 +17,7 @@ namespace XenoBooru.Core.Models
 
 		public Post()
 		{
+			Created = DateTime.Now;
 			Pending = true;
 			Likes = 0;
 		}
@@ -32,6 +33,7 @@ namespace XenoBooru.Core.Models
 		public string Credits { get; set; }
 		public int Likes { get; set; }
 		public bool Pending { get; set; }
+		public DateTime Created { get; set; }
 		public int? ParentId { get; set; }
 		public Post Parent { get; set; }
 		public ICollection<Post> Children { get; set; }

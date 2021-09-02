@@ -32,5 +32,18 @@ namespace XenoBooru.Data
 				return posts.Where(post => post.ParentId == null);
 			}
 		}
+
+		public static IQueryable<T> PostOrdering<T>(this IQueryable<T> posts, bool fromNewest ) where T : PostEntity
+		{
+
+			if (fromNewest)
+			{
+				return posts.OrderByDescending(post => post.Created);
+			}
+			else
+			{
+				return posts.OrderBy(post => post.Created);
+			}
+		}
 	}
 }

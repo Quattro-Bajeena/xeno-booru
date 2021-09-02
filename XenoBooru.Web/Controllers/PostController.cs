@@ -41,11 +41,12 @@ namespace XenoBooru.Web.Controllers
 
 			bool incldePending = showPending == "on";
 			bool includeChildren = tags != null;
+			const bool fromNewest = false;
 
 			// get accurete count
 			int postCount = _posts.Count(tags, incldePending, includeChildren);
 			onPage = onPage == -1 ? postCount : onPage;
-			var posts = _posts.GetByTagsPaged(tags, page, onPage, incldePending, includeChildren);
+			var posts = _posts.GetByTagsPaged(tags, incldePending, includeChildren, fromNewest, page, onPage);
 
 
 			int pageCount = onPage > 0 ? (int)Math.Ceiling((double)postCount / onPage) : 0;

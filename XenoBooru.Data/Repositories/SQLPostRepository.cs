@@ -58,13 +58,14 @@ namespace XenoBooru.Data.Repositories
 			_context.SaveChanges();
 		}
 
-		public ICollection<PostEntity> GetByTagsPaged(ICollection<string> tags, bool includePending, bool includeChildren, int page, int onPage)
+		public ICollection<PostEntity> GetByTagsPaged(ICollection<string> tags, bool includePending, bool includeChildren, bool fromNewest, int page, int onPage)
 		{
 			var posts = _context.Posts
 				.ByPending(includePending)
 				.IncludeChildren(includeChildren)
 				.Include(post => post.Tags).Include(post => post.Parent)
 				.Where(post => post.Tags.Where(tag => tags.Contains(tag.Name)).Count() == tags.Count)
+				.PostOrdering(fromNewest)
 				.Skip( (page - 1) * onPage)
 				.Take(onPage)
 				.ToList();

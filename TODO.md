@@ -1,10 +1,9 @@
 # TODO
 ## Important
-
-- buy URL
-- add google treacking
+- add google trecking
 
 ## Later
+- figure out the order of posts, by date, newewest oldest, make level posts have dates newest 729, so from newset will show from 1?
 - export gear models
 - cool backgrounds from screen levels
 - account system
@@ -17,6 +16,7 @@
 
 
 # DONE
+- buy URL
 - transfer prod database to local
 - publish on Azure
 - transfering secrets?

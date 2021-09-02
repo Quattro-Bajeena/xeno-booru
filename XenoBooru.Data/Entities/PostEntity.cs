@@ -23,6 +23,7 @@ namespace XenoBooru.Data.Entities
 		public string Credits { get; set; }
 		public int Likes { get; set; }
 		public bool Pending { get; set; }
+		public DateTime Created { get; set; }
 		public int? ParentId { get; set; }
 		//[InverseProperty("Children")]
 		public PostEntity Parent { get; set; }
