@@ -23,6 +23,7 @@ namespace XenoBooru.Data
 		public DbSet<PoolEntity> Pools { get; set; }
 		public DbSet<PoolEntryEntity> PoolEntries { get; set; }
 		public DbSet<UserLikeEntity> UserLikes { get; set; }
+		public DbSet<FileDownloadEntity> FileDownloads { get; set;  }
 
 		//protected override void OnModelCreating(ModelBuilder modelBuilder)
 		//{

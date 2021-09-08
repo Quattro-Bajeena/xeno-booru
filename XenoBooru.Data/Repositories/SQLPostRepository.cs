@@ -39,14 +39,14 @@ namespace XenoBooru.Data.Repositories
 
 		public void Remove(int id)
 		{
-			var post = _context.Posts.Include(post => post.Comments).Where(post => post.Id == id).FirstOrDefault();
+			var post = _context.Posts.Include(post => post.Comments).FirstOrDefault(post => post.Id == id);
 			_context.Posts.Remove(post);
 			_context.SaveChanges();
 		}
 
 		public void Update(PostEntity updatedPost)
 		{
-			var originalPost = _context.Posts.Where( post => post.Id == updatedPost.Id).Include(post => post.Tags).Single();
+			var originalPost = _context.Posts.Include(post => post.Tags).FirstOrDefault(post => post.Id == updatedPost.Id);
 
 			originalPost.Name = updatedPost.Name;
 			originalPost.Source = updatedPost.Source;
@@ -103,7 +103,7 @@ namespace XenoBooru.Data.Repositories
 
 		public void GiveLike(int id, string ip_adress)
 		{
-			var post = _context.Posts.Where(post => post.Id == id).FirstOrDefault();
+			var post = _context.Posts.FirstOrDefault(post => post.Id == id);
 			var user_like = _context.UserLikes
 				.Where(like => like.PostId == id)
 				.Where(like => like.IpAdress == ip_adress)

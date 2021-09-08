@@ -31,8 +31,7 @@ namespace XenoBooru.Data.Repositories
 			return _context.Pools
 				.Include(pool => pool.Entires)
 				.ThenInclude(entry => entry.Post)
-				.Where(pool => pool.Id == id)
-				.FirstOrDefault();
+				.FirstOrDefault(pool => pool.Id == id);
 		}
 
 		public IEnumerable<PoolEntity> GetAll()
@@ -59,8 +58,8 @@ namespace XenoBooru.Data.Repositories
 
 		public void AddPoolEntry(int poolId, int postId)
 		{
-			var pool = _context.Pools.Where(pool => pool.Id == poolId).Include(pool => pool.Entires).FirstOrDefault();
-			var post = _context.Posts.Where(post => post.Id == postId).FirstOrDefault();
+			var pool = _context.Pools.Include(pool => pool.Entires).FirstOrDefault(pool => pool.Id == poolId);
+			var post = _context.Posts.FirstOrDefault(post => post.Id == postId);
 
 			if(pool != null && post != null)
 			{
@@ -78,8 +77,8 @@ namespace XenoBooru.Data.Repositories
 		}
 		public void RemovePost(int id, int postId)
 		{
-			var pool = _context.Pools.Where(pool => pool.Id == id).Include(pool => pool.Entires).Single();
-			var entry = _context.PoolEntries.Where(entry => entry.PoolId == id).Where(entry => entry.PostId == postId).Single();
+			var pool = _context.Pools.Where(pool => pool.Id == id).Include(pool => pool.Entires).FirstOrDefault();
+			var entry = _context.PoolEntries.Where(entry => entry.PoolId == id).Where(entry => entry.PostId == postId).FirstOrDefault();
 
 			pool.Entires.Remove(entry);
 
@@ -91,10 +90,9 @@ namespace XenoBooru.Data.Repositories
 		public IEnumerable<PoolEntryEntity> GetByPost(int postId)
 		{
 			var post = _context.Posts
-				.Where(post => post.Id == postId)
 				.Include(post => post.PoolsEntries)
 				.ThenInclude(entry => entry.Pool)
-				.FirstOrDefault();
+				.FirstOrDefault(post => post.Id == postId);
 
 			var poolEntries = post.PoolsEntries.Where(entry => entry.Pool.Hidden == false);
 

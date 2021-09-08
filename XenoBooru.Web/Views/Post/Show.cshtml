@@ -70,6 +70,7 @@
 			<li>Id: @Model.Post.Id</li>
 			<li>Type: @Model.Post.Type</li>
 			<li>Credits: @Model.Post.Credits</li>
+			<li>Created: @Model.Post.Created.ToShortDateString()</li>
 			@if (Model.Post.Pending == false)
 			{
 			<li>

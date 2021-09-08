@@ -1,1 +1,1 @@
-DBCC CHECKIDENT ('[Pools]', RESEED, 0);
+DBCC CHECKIDENT ('[FileDownloads]', RESEED, 0);

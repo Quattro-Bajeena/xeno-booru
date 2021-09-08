@@ -224,6 +224,30 @@ namespace XenoBooru.DataManipulation
 			db.SaveChanges();
 		}
 
+		static void CreateFileDownloads(AppDbContext db)
+		{
+			var names = new string[] { "AllMaps", "MapViewer" };
+			foreach (var name in names)
+			{
+				var downloads = db.FileDownloads.FirstOrDefault(download => download.Name == "AllMaps");
+				if (downloads == null)
+				{
+					downloads = new FileDownloadEntity
+					{
+						Name = name,
+						Count = 0
+					};
+					db.FileDownloads.Add(downloads);
+					Console.WriteLine("File Download tracking added: " + name);
+				}
+				else
+				{
+					Console.WriteLine("File Download tracking already exists: " + name);
+				}
+			}
+			db.SaveChanges();
+		}
+
 		static void Main(string[] args)
 		{
 			StreamReader r = new StreamReader("appsettings.json");
@@ -245,7 +269,8 @@ namespace XenoBooru.DataManipulation
 				//AddFeaturedPool(db);
 				//AddLevelsToFeaturedPool(db);
 				//AddTagsToPost(db);
-				SetPostDates(db);
+				//SetPostDates(db);
+				CreateFileDownloads(db);
 			}
 
 			Console.WriteLine("Done");

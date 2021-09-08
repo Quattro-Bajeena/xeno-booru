@@ -51,12 +51,14 @@ namespace XenoBooru.Web
 			services.AddScoped<ICommentRepository, SQLCommentRepository>();
 			services.AddScoped<ITagRepository, SQLTagRepository>();
 			services.AddScoped<IPoolRepository, SQLPoolRepository>();
+			services.AddScoped<IFileDownloadTrackingRepository, SQLFileDownloadTrackingRepository>();
 
 			services.AddScoped<PostService>();
 			services.AddScoped<CommentService>();
 			services.AddScoped<TagService>();
 			services.AddScoped<PoolService>();
 			services.AddScoped<AzurePostClient>();
+			services.AddScoped<FileDownloadTrackingService>();
 
 
 			services.AddAutoMapper(typeof(PostService));

@@ -20,7 +20,7 @@ namespace XenoBooru.Data.Repositories
 
 		public TagEntity Get(string name)
 		{
-			return _context.Tags.Where(tag => tag.Name == name).FirstOrDefault();
+			return _context.Tags.FirstOrDefault(tag => tag.Name == name);
 		}
 
 		public IEnumerable<TagEntity> GetAll()
@@ -70,7 +70,7 @@ namespace XenoBooru.Data.Repositories
 
 		public IEnumerable<TagEntity> GetFromPost(int postId)
 		{
-			var postDb = _context.Posts.Include(post => post.Tags).SingleOrDefault(post => post.Id == postId);
+			var postDb = _context.Posts.Include(post => post.Tags).FirstOrDefault(post => post.Id == postId);
 			return postDb.Tags;
 		}
 
@@ -95,7 +95,7 @@ namespace XenoBooru.Data.Repositories
 
 		public int GetTagPostCount(int tagId)
 		{
-			var posts = _context.Tags.Include(tag => tag.Posts).Single(tag => tag.Id == tagId).Posts;
+			var posts = _context.Tags.Include(tag => tag.Posts).FirstOrDefault(tag => tag.Id == tagId).Posts;
 			return posts.Count;
 		}
 

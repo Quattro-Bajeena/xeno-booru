@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using XenoBooru.Core.Configuration;
+using XenoBooru.Services;
 using XenoBooru.Web.Services;
 using XenoBooru.Web.ViewModels;
 
@@ -20,17 +21,20 @@ namespace XenoBooru.Web.Controllers
 		private readonly ILogger<HomeController> _logger;
 		private readonly AppOptions _options;
 		private readonly AuthenticationService _authentication;
+		private readonly FileDownloadTrackingService _fileDownloads;
 
-		public HomeController(ILogger<HomeController> logger, IOptions<AppOptions> config, AuthenticationService authentication)
+		public HomeController(
+			ILogger<HomeController> logger, IOptions<AppOptions> config, 
+			AuthenticationService authentication, FileDownloadTrackingService fileDownloads)
 		{
 			_logger = logger;
 			_options = config.Value;
 			_authentication = authentication;
+			_fileDownloads = fileDownloads;
 		}
 
 		public IActionResult Index()
 		{
-			_logger.LogInformation("Index");
 			return View();
 		}
 
@@ -39,7 +43,6 @@ namespace XenoBooru.Web.Controllers
 		
 		public IActionResult Login(bool authorized)
 		{
-			_logger.LogInformation("Login");
 			ViewData["authorized"] = authorized;
 			return View();
 		}
@@ -48,17 +51,33 @@ namespace XenoBooru.Web.Controllers
 		public IActionResult About() => View();
 		public IActionResult MapViewerApp()
 		{
-			_logger.LogError("MapViewerApp");
 			ViewData["MapViewerDownloadUrl"] = _options.GetResourceUrl("XenogearsMapViewer.zip");
 			return View();
 		}
 
 		public IActionResult Downloads()
 		{
-			_logger.LogWarning("Downloads");
-			ViewData["MapViewerDownloadUrl"] = _options.GetResourceUrl("XenogearsMapViewer.zip");
-			ViewData["AllMapsDownloadUrl"] = _options.GetResourceUrl("XenogearsAllMaps.zip");
-			return View();
+			var fileUrls = new Dictionary<string, string>
+			{
+				{ "MapViewer", _options.GetResourceUrl("XenogearsMapViewer.zip") },
+				{ "AllMaps",  _options.GetResourceUrl("XenogearsAllMaps.zip") }
+
+			};
+
+			var fileDownloads = new Dictionary<string, int>
+			{
+				{ "MapViewer", _fileDownloads.GetCount("MapViewer") },
+				{ "AllMaps",  _fileDownloads.GetCount("AllMaps") }
+			};
+
+
+			var viewModel = new DownloadsViewModel
+			{
+				Urls = fileUrls,
+				Downloads = fileDownloads
+			};
+
+			return View(viewModel);
 		}
 
 		[HttpPost]
@@ -66,6 +85,17 @@ namespace XenoBooru.Web.Controllers
 		{
 			bool authorized = _authentication.Authenticate(password);
 			return RedirectToAction("Login", new { authorized });
+		}
+
+		[HttpPost]
+		public JsonResult RegisterFileDownload(string name)
+		{
+			var succes = _fileDownloads.Register(name);
+			var result = new
+			{
+				RegisteredDownload = succes
+			};
+			return new JsonResult(result);
 		}
 
 

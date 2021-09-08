@@ -1,4 +1,5 @@
-﻿@{
+﻿@model DownloadsViewModel
+@{
 	ViewData["Title"] = "Download Resources";
 }
 
@@ -13,17 +14,24 @@
 	
 	<p>
 		<h2>All Maps</h2>
-		<a href="@ViewData["AllMapsDownloadUrl"]" download="XenogearsAllMaps.zip">DOWNLOAD</a> <br />
+		<h4>Downloads: @Model.Downloads["AllMaps"]</h4>
+		<a href="" download="XenogearsAllMaps.zip" class="download-link" id="AllMaps" >DOWNLOAD</a> <br />
 		All extracted map files in COLLADA format, with textures in TIFF format in separate files.
 		Import the file with your 3D software and everything should load properly. Tested with Blender. 
 
 	</p>
 	<p>
 		<h2>Map Viewer Desktop Appliaction</h2>
-		<a href="@ViewData["MapViewerDownloadUrl"]" download="XenogearsMapViewer.zip">DOWNLOAD</a> <br />
+		<h4>Downloads: @Model.Downloads["MapViewer"]</h4>
+		<a href="@Model.Urls["MapViewer"]" download="XenogearsMapViewer.zip" class="download-link" id="MapViewer" >DOWNLOAD</a> <br />
 		<a href="https://github.com/Quattro-Bajeena/xenogears-map-viewer" target="_blank">SOURCE CODE</a> <br />
 		More information about it <a asp-action="MapViewerApp">here</a>.
 	</p>
 
 </article>
+
+@section Scripts{
+	<script src="~/js/file_downloads.js" type="module"></script>
+}
+
 

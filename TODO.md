@@ -1,8 +1,10 @@
 # TODO
+
 ## Important
-- add google trecking
+- update README
 
 ## Later
+- make it more mobile friendly
 - figure out the order of posts, by date, newewest oldest, make level posts have dates newest 729, so from newset will show from 1?
 - export gear models
 - cool backgrounds from screen levels
@@ -11,11 +13,12 @@
 - deleting comments
 
 ## Less important
-- add google analytics tracking?
 - better names for tags ('weird', 'matte_painting'). tag diferint city map and overworld city map?
 
 
 # DONE
+- add google trecking
+- buy xenogears map viewer
 - buy URL
 - transfer prod database to local
 - publish on Azure
