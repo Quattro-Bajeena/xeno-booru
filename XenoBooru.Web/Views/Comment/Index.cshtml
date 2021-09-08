@@ -25,7 +25,7 @@
 		<tr>
 			<td>@comment.Author</td>
 			<td><p>@comment.Content</p></td>
-			<td><a asp-controller="Index" asp-action="Show" asp-route-id="@comment.PostId">@comment.Post.Name</a></td>
+			<td><a asp-controller="Post" asp-action="Show" asp-route-id="@comment.PostId">@comment.Post.Name</a></td>
 			<td>@comment.Date.ToString("g")</td>
 		</tr>
 		}
