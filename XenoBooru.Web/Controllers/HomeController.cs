@@ -59,7 +59,7 @@ namespace XenoBooru.Web.Controllers
 		{
 			var fileUrls = new Dictionary<string, string>
 			{
-				{ "MapViewer", _options.GetResourceUrl("XenogearsMapViewer.zip") },
+				{ "MapViewer", _options.GetResourceUrl("XenogearsMapViewerApp.zip") },
 				{ "AllMaps",  _options.GetResourceUrl("XenogearsAllMaps.zip") }
 
 			};
