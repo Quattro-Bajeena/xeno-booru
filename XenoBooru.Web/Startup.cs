@@ -22,6 +22,7 @@ using Azure.Storage.Queues;
 using Azure.Core.Extensions;
 using XenoBooru.Core.Configuration;
 using Microsoft.Net.Http.Headers;
+using Microsoft.ApplicationInsights.Extensibility.Implementation;
 
 namespace XenoBooru.Web
 {
@@ -87,7 +88,8 @@ namespace XenoBooru.Web
 				options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
 			});
 
-			services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
+			//services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
+			TelemetryDebugWriter.IsTracingDisabled = true;
 
 
 			services.AddControllersWithViews().AddRazorRuntimeCompilation().AddNewtonsoftJson(options => {

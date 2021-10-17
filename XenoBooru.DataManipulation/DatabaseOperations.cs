@@ -226,10 +226,10 @@ namespace XenoBooru.DataManipulation
 
 		static void CreateFileDownloads(AppDbContext db)
 		{
-			var names = new string[] { "AllMaps", "MapViewer" };
+			var names = new string[] { "AllMaps", "MapViewer", "SceneModels", "HeadsSlides" };
 			foreach (var name in names)
 			{
-				var downloads = db.FileDownloads.FirstOrDefault(download => download.Name == "AllMaps");
+				var downloads = db.FileDownloads.FirstOrDefault(download => download.Name == name);
 				if (downloads == null)
 				{
 					downloads = new FileDownloadEntity
@@ -246,6 +246,123 @@ namespace XenoBooru.DataManipulation
 				}
 			}
 			db.SaveChanges();
+		}
+
+		static void AddSceneModelPosts(AppDbContext db)
+		{
+			var sceneModelTag = db.Tags.Where(tag => tag.Name == "scene_model").FirstOrDefault();
+
+			for (int i = 0; i <= 71; i++)
+			{
+				var post = db.Posts.FirstOrDefault(post => post.Name == "Scene Model " + i.ToString());
+				if(post != null)
+				{
+					post.Created = DateTime.Now;
+					db.SaveChanges();
+					Console.WriteLine("Updated time scene model " + i);
+					continue;
+				}
+
+				post = new PostEntity
+				{
+					Type = "Model",
+					FileName = "scenemodel" + i.ToString() + ".glb",
+					Name = "Scene Model " + i.ToString(),
+					Description = "Scene Model " + i.ToString(),
+					Likes = 0,
+					Source = "In-game files",
+					Pending = false,
+					Created = DateTime.Now,
+					ThumbnailFileName = "SceneModelThumbnail_" + i.ToString() + ".webp",
+					FileNameDownload = "scenemodel" + i.ToString() + ".zip",
+					Tags = new List<TagEntity>()
+				};
+
+				post.Tags.Add(sceneModelTag);
+				db.Posts.Add(post);
+				db.SaveChanges();
+				Console.WriteLine("Added scene model " + i);
+			}
+			
+		}
+
+		static void AddStagePosts(AppDbContext db)
+		{
+			var stageTag = db.Tags.Where(tag => tag.Name == "stage").FirstOrDefault();
+
+			for (int i = 0; i <= 74; i++)
+			{
+				var post = new PostEntity
+				{
+					Type = "Model",
+					FileName = "stage" + i.ToString() + ".glb",
+					Name = "Battle Stage " + i.ToString(),
+					Description = "Battle Stage " + i.ToString(),
+					Likes = 0,
+					Source = "In-game files",
+					Pending = false,
+					Created = DateTime.Now,
+					ThumbnailFileName = "StageThumbnail_" + i.ToString() + ".webp",
+					FileNameDownload = "stage" + i.ToString() + ".zip",
+					Tags = new List<TagEntity>()
+				};
+
+				post.Tags.Add(stageTag);
+				db.Posts.Add(post);
+				db.SaveChanges();
+				Console.WriteLine("Added stage " + i);
+			}
+		}
+
+		static void AddSlidesHeads(AppDbContext db)
+		{
+			var portraitTag = db.Tags.Where(tag => tag.Name == "portrait").Single();
+			var slideTag = db.Tags.Where(tag => tag.Name == "slide").Single();
+
+			// slides
+			for (int i = 0; i<=87; i++)
+			{
+				var post = new PostEntity
+				{
+					Type = "Image",
+					FileName = "slide" + i.ToString() + ".png",
+					Name = "Slide " + i.ToString(),
+					Description = "Slide " + i.ToString(),
+					Likes = 0,
+					Source = "In-game files",
+					Pending = false,
+					Created = DateTime.Now,
+					Tags = new List<TagEntity>()
+				};
+
+				post.Tags.Add(slideTag);
+				db.Posts.Add(post);
+				db.SaveChanges();
+				Console.WriteLine("Added slide " + i);
+			}
+
+			// portaits
+			for (int i = 0; i <= 90; i++)
+			{
+				var post = new PostEntity
+				{
+					Type = "Image",
+					FileName = "head" + i.ToString() + ".png",
+					Name = "Portrait " + i.ToString(),
+					Description = "Portrait " + i.ToString(),
+					Likes = 0,
+					Source = "In-game files",
+					Pending = false,
+					Created = DateTime.Now,
+					ThumbnailFileName = "HeadThumbnail_" + i.ToString() + ".webp",
+					Tags = new List<TagEntity>()
+				};
+
+				post.Tags.Add(portraitTag);
+				db.Posts.Add(post);
+				db.SaveChanges();
+				Console.WriteLine("Added portrait " + i);
+			}
 		}
 
 		static void Main(string[] args)
@@ -270,7 +387,10 @@ namespace XenoBooru.DataManipulation
 				//AddLevelsToFeaturedPool(db);
 				//AddTagsToPost(db);
 				//SetPostDates(db);
-				CreateFileDownloads(db);
+				//CreateFileDownloads(db);
+				//AddSceneModelPosts(db);
+				//AddStagePosts(db);
+				//AddSlidesHeads(db);
 			}
 
 			Console.WriteLine("Done");

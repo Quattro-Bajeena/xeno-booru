@@ -108,8 +108,8 @@
 	case PostType.Model:
 		@await Html.PartialAsync("_ModelPartial.cshtml", Model.DataUrl);
 		break;
-	case PostType.Artwork:
-		@await Html.PartialAsync("_ArtworkPartial.cshtml", Model.DataUrl);
+	case PostType.Image:
+		@await Html.PartialAsync("_ImagePartial.cshtml", Model.DataUrl);
 		break;
 	case PostType.Audio:
 		@await Html.PartialAsync("_MusicPartial.cshtml", Model.DataUrl);

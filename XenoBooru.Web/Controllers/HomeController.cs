@@ -60,14 +60,17 @@ namespace XenoBooru.Web.Controllers
 			var fileUrls = new Dictionary<string, string>
 			{
 				{ "MapViewer", _options.GetResourceUrl("XenogearsMapViewerApp.zip") },
-				{ "AllMaps",  _options.GetResourceUrl("XenogearsAllMaps.zip") }
-
+				{ "Maps",  _options.GetResourceUrl("XenogearsAllMaps.zip") },
+				{ "SceneModels", _options.GetResourceUrl("SceneModels.zip") },
+				{ "HeadsSlides", _options.GetResourceUrl("HeadsSlides.zip") }
 			};
 
 			var fileDownloads = new Dictionary<string, int>
 			{
 				{ "MapViewer", _fileDownloads.GetCount("MapViewer") },
-				{ "AllMaps",  _fileDownloads.GetCount("AllMaps") }
+				{ "Maps",  _fileDownloads.GetCount("AllMaps") },
+				{ "SceneModels", _fileDownloads.GetCount("SceneModels") },
+				{ "HeadsSlides", _fileDownloads.GetCount("HeadsSlides") }
 			};
 
 

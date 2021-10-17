@@ -13,7 +13,7 @@ $thumbnail-border-thickness: 3px;
     flex-wrap: wrap;
 
     img {
-        
+        //image-rendering: crisp-edges;
         box-sizing: border-box;
         width: 100%;
         height: 100%;

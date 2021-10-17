@@ -9,7 +9,7 @@ namespace XenoBooru.Core.Models
 
 	public enum PostType
 	{
-		Artwork, Audio, Model
+		Image, Audio, Model
 	}
 
 	public class Post
@@ -56,7 +56,7 @@ namespace XenoBooru.Core.Models
 				switch (Type)
 				{
 
-					case PostType.Artwork:
+					case PostType.Image:
 						fileUrl += FileName;
 						break;
 					case PostType.Audio:

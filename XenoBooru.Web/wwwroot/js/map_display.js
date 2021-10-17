@@ -46,7 +46,8 @@ function init(){
 
     camera = new THREE.PerspectiveCamera( 60, width / height, 10, 20000 );
     camera.position.set( 2500, 500, 400 );
-    camera.lookAt( 0, 0, 0 );
+    //camera.lookAt( 0, 0, 0 );
+    console.log("set up camera");
 
     scene = new THREE.Scene();
 
@@ -54,9 +55,9 @@ function init(){
         scene.add(map);
     })
 
+    
     const loader = new GLTFLoader( loadingManager);
     loader.load(map_url, function(gltf){
-        //console.log(gltf);
         
         for(const object of gltf.scene.children){
             
@@ -72,14 +73,33 @@ function init(){
             });
         }
         map = gltf.scene;
+
+        let bbox = new THREE.Box3().setFromObject(map);
+        let height = bbox.max.z - bbox.min.z;
+        let width = bbox.max.x - bbox.min.x;
+        let depth = bbox.max.y - bbox.min.y;
+        
+        //console.log(Math.round(height), Math.round(width), Math.round(depth));
+        if(height < 1000 || width < 1000){
+            camera.position.set( 1000, 250, 200 );
+            controls.target.set( 0, depth/2, 0 );
+        }
+        if(height < 500 || width < 500){
+            camera.position.set( 0, depth/2 + 100, 400 );
+            controls.target.set( 0, depth/2, 0 );
+        }
+        
         render();
     });
 
+
+    
 
     controls= new OrbitControls( camera, renderer.domElement );
     controls.minDistance = minDistance;
     controls.maxDistance = maxDistance;
     controls.target.set( 0, 0, 0 );
+    
     controls.update();
 
    
@@ -135,10 +155,10 @@ function resizeCanvasToDisplaySize() {
 }
 
 function changeControls(event){
-    if(event.target.value == "orbit"){
+    if (event.target.value == "orbit") {
         setUpOrbitContols(minDistance, maxDistance);
     }
-    else if(event.target.value == "map"){
+    else if (event.target.value == "map") {
         setUpMapControls(minDistance, maxDistance);
     }
 }
@@ -176,10 +196,6 @@ function setUpMapControls(min_distance, max_distance){
     controls = mapControls;
     controls.update();
 }
-
-
-
-
 
 function toggleTextureFiltering(event){
     for(const object of map.children){  
