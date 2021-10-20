@@ -1,9 +1,9 @@
 # TODO
 
 ## Important
-- add idfent level of initial zoom to gear 3D models 
+
 - make website mobile friendly
-- centrtize gears 3d models
+
 
 ## Later
 - figure out the order of posts, by date, newewest oldest, make level posts have dates newest 729, so from newset will show from 1?
@@ -18,6 +18,8 @@
 
 
 # DONE
+- add idfent level of initial zoom to gear 3D models 
+- centrtize gears 3d models
 - update README
 - add google trecking
 - buy xenogears map viewer

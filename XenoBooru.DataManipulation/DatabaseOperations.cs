@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -186,11 +187,11 @@ namespace XenoBooru.DataManipulation
 		static void AddTagsToPost(AppDbContext db)
 		{
 			//var id = 347;
-			var from = 1;
-			var to = 100;
+			var from = 800;
+			var to = 801;
 			var id_range = Enumerable.Range(from, to + 1 - from);
-			var to_add = new string[] {  };
-			var to_remove = new string[] { "outdoors" };
+			var to_add = new string[] { "gear" };
+			var to_remove = new string[] {  };
 
 			foreach (var map_id in id_range)
 			{
@@ -365,6 +366,60 @@ namespace XenoBooru.DataManipulation
 			}
 		}
 
+		static void AddCharacterTags(AppDbContext db)
+		{
+			var character_tags = new string[] {
+				"fei", "fei", "kim", "kim", "fei", "fei",
+				"elly", "elly", "elly", "elly", "unknown", "sophia",
+				"sophia", "elly", "myyah", "elly", "hammer", "citan",
+				"ramsus","bart", "bart", "billy", "sigurd", "rico",
+				"emeralda", "emeralda","margie", "maria","chuu_chuu","id", 
+				"bishop_stone", "sophia", "gazel", "big_joe", "dominia", "seraphita", 
+				"tolone", "kelvena","karellen","karellen", "hammer", "grahf", 
+				"myyah", "ramsus", "executioner", "cain", "gazel", "khan", 
+				"karen", "wiseman","sigurd", "sigurd", "maison","jessie", 
+				"primera", "gazel", "roni", "rene","bishop_stone", "vanderkam", 
+				"shakhan", "renk", "broyer", "stratski", "vance", "helmholz",
+				"erich","medena", "zephyr","gaspar", "isaac", "taura", 
+				"sigmund", "nikolai", "hammer", "franz", "thames_captain","yui", 
+				"midori", "chief_lee", "gazel", "aruru", "dan", "timothy",
+				"gazel", "gazel","gazel","gazel","ramsus", "myyah", 
+				"unknown"
+			};
+
+			Console.WriteLine(character_tags.Length);
+			TextInfo myTI = new CultureInfo("en-US", false).TextInfo;
+			for (int i = 0; i < character_tags.Length; i++)
+			{
+				var name = character_tags[i];
+
+				/*var tag = db.Tags.FirstOrDefault(tag => tag.Name == name);
+				if (tag == null)
+				{
+					tag = new TagEntity
+					{
+						Name = name,
+						Type = "Character"
+					};
+
+					db.Tags.Add(tag);
+					Console.WriteLine("Added tag " + tag.Name);
+				}
+				else
+				{
+					Console.WriteLine("Tag already existed " + name);
+				}*/
+				
+				var portrait_post = db.Posts.Include(post => post.Tags).FirstOrDefault(post => post.Id == 965 + i);
+				portrait_post.Name = myTI.ToTitleCase(name).Replace('_', ' ')  + " portrait";
+				//portrait_post.Tags.Add(tag);
+
+
+				
+			}
+			db.SaveChanges();
+		}
+
 		static void Main(string[] args)
 		{
 			StreamReader r = new StreamReader("appsettings.json");
@@ -391,6 +446,7 @@ namespace XenoBooru.DataManipulation
 				//AddSceneModelPosts(db);
 				//AddStagePosts(db);
 				//AddSlidesHeads(db);
+				AddCharacterTags(db);
 			}
 
 			Console.WriteLine("Done");
