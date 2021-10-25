@@ -446,7 +446,7 @@ namespace XenoBooru.DataManipulation
 				//AddSceneModelPosts(db);
 				//AddStagePosts(db);
 				//AddSlidesHeads(db);
-				AddCharacterTags(db);
+				//AddCharacterTags(db);
 			}
 
 			Console.WriteLine("Done");

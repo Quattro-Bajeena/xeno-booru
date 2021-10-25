@@ -16,9 +16,14 @@ const texture_filtering_checkbox = document.getElementById("texture-filtering-ch
 const fullscreen_checkbox = document.getElementById("fullscreen-checkbox");
 const wireframe_checkbox = document.getElementById("wireframe-checkbox");
 const controls_list = document.getElementById("controls-list");
+const render_controls_toggle = document.getElementById("render-controls-toggle");
 
 
-//console.log(map_url);
+window.addEventListener('resize', onWindowResize);
+fullscreen_checkbox.addEventListener('change', fullScreenToggle);
+document.addEventListener("keydown", fullScreenToggle);
+render_controls_toggle.addEventListener('click', mapControlToggle);
+
 
 let minDistance = 100;
 let maxDistance = 7000;
@@ -30,7 +35,6 @@ try {
     console.error(error);
     console.log("Couldn't initialize 3D viewer");
 }
-
 
 
 function init(){
@@ -46,8 +50,6 @@ function init(){
 
     camera = new THREE.PerspectiveCamera( 60, width / height, 10, 20000 );
     camera.position.set( 2500, 500, 400 );
-    //camera.lookAt( 0, 0, 0 );
-    console.log("set up camera");
 
     scene = new THREE.Scene();
 
@@ -93,24 +95,18 @@ function init(){
     });
 
 
-    
-
     controls= new OrbitControls( camera, renderer.domElement );
     controls.minDistance = minDistance;
     controls.maxDistance = maxDistance;
     controls.target.set( 0, 0, 0 );
-    
     controls.update();
 
    
-
-    window.addEventListener( 'resize', onWindowResize );
+    
     texture_filtering_checkbox.addEventListener('change', toggleTextureFiltering);
-    fullscreen_checkbox.addEventListener('change', fullScreenToggle);
     wireframe_checkbox.addEventListener("change", toggleWireframe);
-    document.addEventListener("keydown", fullScreenToggle);
     controls_list.addEventListener("change", changeControls);
-
+    
 
     render();
     return true;
@@ -269,7 +265,7 @@ function fullScreenToggle(event) {
         ){
 
         parent.removeAttribute("style");
-        render_controls.removeAttribute("style");
+        render_controls.style.fontSize = null;
         fullscreen_checkbox.checked = false;
 
         resizeCanvasToDisplaySize();
@@ -277,4 +273,14 @@ function fullScreenToggle(event) {
     
     
 };
+
+function mapControlToggle(event) {
+    if (render_controls.style["display"] == "none") {
+        render_controls.style.removeProperty("display");
+    }
+    else {
+        render_controls.style.removeProperty("display");
+        render_controls.style["display"] = "none";
+    } 
+}
 
