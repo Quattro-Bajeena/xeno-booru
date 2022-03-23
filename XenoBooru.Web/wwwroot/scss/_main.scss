@@ -5,6 +5,11 @@
 	src:url("/fonts/Xenogears.woff") format("woff");
 }
 
+@font-face {
+	font-family: Crillee-Bold;
+	src: url("/fonts/Crillee Bold Italic Std Regular.woff") format('woff');
+}
+
 $main-text-color: #ffffff;
 $link-color: #f84848;
 $hover-link-color: #ffcdcd;
@@ -110,19 +115,20 @@ header {
 
 	#title {
 		font-size: 1.5em;
-		font-family: Xenogears;
+		font-family: Crillee-Bold, Xenogears, 'Roboto', Arial, Helvetica, sans-serif;
 
 		a {
 			color: $main-text-color;
 		}
 
-		h2{
+		h2 {
 			font-size: 1.3em;
 			line-height: 0.5;
 		}
 
-		#alpha{
-			font-size:1.3em;
+		#alpha {
+			font-family: Xenogears;
+			font-size: 1.3em;
 		}
 	}
 
