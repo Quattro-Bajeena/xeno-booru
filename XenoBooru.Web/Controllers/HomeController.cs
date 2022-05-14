@@ -62,7 +62,8 @@ namespace XenoBooru.Web.Controllers
 				{ "MapViewer", _options.GetResourceUrl("XenogearsMapViewerApp.zip") },
 				{ "Maps",  _options.GetResourceUrl("XenogearsAllMaps.zip") },
 				{ "SceneModels", _options.GetResourceUrl("SceneModels.zip") },
-				{ "HeadsSlides", _options.GetResourceUrl("HeadsSlides.zip") }
+				{ "HeadsSlides", _options.GetResourceUrl("HeadsSlides.zip") },
+				{ "WorldMaps", _options.GetResourceUrl("WorldMaps.zip") }
 			};
 
 			var fileDownloads = new Dictionary<string, int>
@@ -70,7 +71,8 @@ namespace XenoBooru.Web.Controllers
 				{ "MapViewer", _fileDownloads.GetCount("MapViewer") },
 				{ "Maps",  _fileDownloads.GetCount("AllMaps") },
 				{ "SceneModels", _fileDownloads.GetCount("SceneModels") },
-				{ "HeadsSlides", _fileDownloads.GetCount("HeadsSlides") }
+				{ "HeadsSlides", _fileDownloads.GetCount("HeadsSlides") },
+				{ "WorldMaps", _fileDownloads.GetCount("WorldMaps") }
 			};
 
 

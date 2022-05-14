@@ -420,6 +420,28 @@ namespace XenoBooru.DataManipulation
 			db.SaveChanges();
 		}
 
+		static void AddWorldMap(AppDbContext db)
+		{
+			var post = new PostEntity
+			{
+				Type = "Model",
+				FileName = "WorldMap.glb",
+				Name = "World Map",
+				Description = "The map of the world",
+				Likes = 0,
+				Source = "In-game files",
+				Pending = false,
+				Created = DateTime.Now,
+				ThumbnailFileName = "WorldMapThumbnail.webp",
+				FileNameDownload = "WorldMap.zip",
+				Tags = new List<TagEntity>()
+			};
+
+			db.Posts.Add(post);
+			db.SaveChanges();
+			Console.WriteLine("Added world map");
+		}
+
 		static void Main(string[] args)
 		{
 			StreamReader r = new StreamReader("appsettings.json");
@@ -447,6 +469,7 @@ namespace XenoBooru.DataManipulation
 				//AddStagePosts(db);
 				//AddSlidesHeads(db);
 				//AddCharacterTags(db);
+				AddWorldMap(db);
 			}
 
 			Console.WriteLine("Done");
