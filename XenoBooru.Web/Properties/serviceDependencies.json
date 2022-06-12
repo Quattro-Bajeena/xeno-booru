@@ -1,19 +1,27 @@
 {
   "dependencies": {
-    "secrets1": {
-      "type": "secrets"
-    },
     "secrets2": {
       "type": "secrets",
       "connectionId": "KeyVaultUri"
     },
     "mssql1": {
       "type": "mssql",
-      "connectionId": "ConnectionStrings:DefaultConnection"
+      "connectionId": "ConnectionStrings:DefaultConnection",
+      "dynamicId": null
     },
     "storage1": {
       "type": "storage",
-      "connectionId": "ConnectionStrings:AzureStorage"
+      "connectionId": "ConnectionStrings:AzureStorage",
+      "dynamicId": null
+    },
+    "secrets1": {
+      "type": "secrets",
+      "connectionId": "KeyVaultUri"
+    },
+    "appInsights1": {
+      "type": "appInsights",
+      "connectionId": "APPLICATIONINSIGHTS_CONNECTION_STRING",
+      "dynamicId": null
     }
   }
 }

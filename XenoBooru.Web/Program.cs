@@ -40,11 +40,11 @@ namespace XenoBooru.Web
 						}
 					}
 				})
-				.ConfigureLogging((ctx, logging) =>
-				{
-					logging.AddApplicationInsights(ctx.Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
-					logging.AddFilter<ApplicationInsightsLoggerProvider>("", LogLevel.Trace);
-				})
+				//.ConfigureLogging((ctx, logging) =>
+				//{
+				//	logging.AddApplicationInsights(ctx.Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
+				//	logging.AddFilter<ApplicationInsightsLoggerProvider>("", LogLevel.Trace);
+				//})
 				.ConfigureWebHostDefaults(webBuilder =>
 				{
 					webBuilder.UseStartup<Startup>();

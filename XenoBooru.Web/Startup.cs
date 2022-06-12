@@ -95,6 +95,7 @@ namespace XenoBooru.Web
 			services.AddControllersWithViews().AddRazorRuntimeCompilation().AddNewtonsoftJson(options => {
 				options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
 			});
+			//services.AddApplicationInsightsTelemetry(Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
 		}
 
 
